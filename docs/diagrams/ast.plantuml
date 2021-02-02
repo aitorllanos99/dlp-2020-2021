@@ -19,7 +19,8 @@ class Void
 class Char
 class Double
 class Array
-class Struct
+class RecordType
+class FuncType
 
 ' Statements
 class Assignment
@@ -46,6 +47,23 @@ Program *-- Definition
 Definition <|-- FuncDefinition
 Definition <|-- VarDefinition
 
+
+
+'Relation to Type
+Type <|-- Int
+Type <|-- Void
+Type <|-- Char
+Type <|-- Double
+Type <|-- Array
+Type <|-- RecordType
+Type <|-- FuncType
+Type --* RecordField
+RecordField --|> VarDefinition
+
+'Relation of Type
+Type <-- VarDefinition
+Type --* Definition
+
 ' Relations of Statement
 Statement --o FuncDefinition
 Statement --o VarDefinition
@@ -58,6 +76,7 @@ Statement <|--  Put
 Statement <|--  In
 Statement <|--  While
 Statement <|--  Return
+Statement <|--  VarDefinition
 
 ' Relations of Expression
 Expression --o IfElse
@@ -77,18 +96,4 @@ Expression <|-- Negation
 Expression <|-- ArrayAccess
 Expression <|-- Variable
 Expression <|-- As
-
-'Relation to Type
-Type <|-- Int
-Type <|-- Void
-Type <|-- Char
-Type <|-- Double
-Type <|-- Array
-Type <|-- Struct
-Type --* RecordField
-RecordField --|> VarDefinition
-
-'Relation of Type
-Type <-- VarDefinition
-Type --* Definition
 @enduml
