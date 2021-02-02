@@ -1,0 +1,44 @@
+@startuml ASTBase
+
+interface ASTNode
+
+class Program
+
+interface Definition
+abstract class VarDefinition
+class FuncDefinition
+
+class RecordField
+interface Type
+
+interface Statement
+interface Expression
+
+class IntType
+
+
+ASTNode <|-- Program
+ASTNode <|-- RecordField
+
+
+Definition <|-- VarDefinition
+Definition <|-- FuncDefinition
+Definition *-- "1" Type
+
+Program *-- "1..n" Definition
+
+VarDefinition <|-- RecordField
+
+FuncDefinition *-- Statement
+
+Statement <|-- VarDefinition
+
+Type <|-- IntType
+Type <|-- CharType
+Type <|-- RealType
+Type <|-- ArrayType
+Type <|-- RecordType
+Type <|-- VoidType
+Type <|-- FuncType
+
+@enduml
