@@ -1,26 +1,94 @@
 @startuml AST
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+interface ASTNode
+interface Statement
+abstract class Program
+interface Definition
+interface Expression
+interface Type
+class RecordField
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
 
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
+' Definitions
+class VarDefinition
+class FuncDefinition
 
-class ArrayList {
-  Object[] elementData
-  size()
-}
+' Types
+class Int
+class Void
+class Char
+class Double
+class Array
+class Struct
 
-enum TimeUnit {
-  DAYS
-  HOURS
-  MINUTES
-}
+' Statements
+class Assignment
+class IfElse
+class Return
+class In
+class Put
+class While
 
+' Expressions
+class Cast
+class UnitaryMinus
+class Arithmetic
+class Logic
+class Relational
+class Negation
+class ArrayAccess
+class Variable
+class As
+
+'Main Relations
+Program --|> ASTNode
+Program *-- Definition
+Definition <|-- FuncDefinition
+Definition <|-- VarDefinition
+
+' Relations of Statement
+Statement --o FuncDefinition
+Statement --o VarDefinition
+
+' Relations to Statement
+Statement <|-- Return
+Statement <|-- IfElse
+Statement <|--  Assignment
+Statement <|--  Put
+Statement <|--  In
+Statement <|--  While
+Statement <|--  Return
+
+' Relations of Expression
+Expression --o IfElse
+Expression --o Assignment
+Expression --o Put
+Expression --o In
+Expression --o While
+Expression --o Return
+
+' Relations to Expression
+Expression <|-- Cast
+Expression <|-- UnitaryMinus
+Expression <|-- Arithmetic
+Expression <|-- Logic
+Expression <|-- Relational
+Expression <|-- Negation
+Expression <|-- ArrayAccess
+Expression <|-- Variable
+Expression <|-- As
+
+'Relation to Type
+Type <|-- Int
+Type <|-- Void
+Type <|-- Char
+Type <|-- Double
+Type <|-- Array
+Type <|-- Struct
+Type --* RecordField
+RecordField --|> VarDefinition
+
+'Relation of Type
+Type <-- VarDefinition
+Type --* Definition
 @enduml
