@@ -4,7 +4,7 @@
 
 La tarea principal de este laboratorio es diseñar un AST, mediante UML, del lenguaje descrito en el fichero [`docs/specification.md`](../specification.md).
 
-Se puede ver un ejemplo del programa en el fichero [`examples/basic.xana`].
+Se puede ver un ejemplo del programa en el fichero [`examples/basic.xana`](../../examples/basic.xana).
 
 ## Herramientas
 
