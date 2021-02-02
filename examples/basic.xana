@@ -10,7 +10,7 @@ Funcion vacia
 def vacia() :: void do
 end
 
-def suma(int a, double b) :: int do
+def suma(a :: int, b :: double) :: int do
   real :: double
   c1, c2 :: char
 
