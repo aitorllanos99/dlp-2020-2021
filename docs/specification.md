@@ -2,7 +2,7 @@
 
 ## Descripción del lenguaje
 
-Un programa está compuesto por una secuencia de definiciones de variables y deficiniciones de funciones.
+Un programa está compuesto por una secuencia de definiciones de variables y definiciones de funciones.
 
 ### Variables
 
@@ -20,7 +20,7 @@ variable_1, variable_2, variable_3 :: char
 
 #### Definición
 
-Una función se define usando la palabra `def`, el identificador de la función, seguido de una lista de parámetros comprendidos por `(` y `)`, después de los parámetros, y separado por `::`, se debe especificar el tipo de retorno de dicha función.
+Una función se define usando la palabra `def`, el identificador de la función, seguido de una lista de parámetros comprendidos por `(` y `)` y separados por `,`, después de los parámetros, y separado por `::`, se debe especificar el tipo de retorno de dicha función.
 
 > El tipo de retorno de la función y los tipos de los parámetros deben ser de tipo simple (no se permiten arrays, ni registros).
 

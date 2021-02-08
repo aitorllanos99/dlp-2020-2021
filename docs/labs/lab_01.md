@@ -10,7 +10,7 @@ Se puede ver un ejemplo del programa en el fichero [`examples/basic.xana`](../..
 
 Para modelar el AST, este proyecto cuenta con una integración con [PlantUML](https://plantuml.com/) y el diagrama base [`docs/diagrams/ast.plantuml`](../diagrams/ast.plantuml).
 
-Una vez modificado el fichero `ast.plantuml`, el diagrama se regenaría usando ejecutando el siguiente comando en la raíz:
+Una vez modificado el fichero `ast.plantuml`, el diagrama se regeneraría usando ejecutando el siguiente comando en la raíz:
 
 ```
 mvn clean com.github.jeluard:plantuml-maven-plugin:generate

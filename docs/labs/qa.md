@@ -23,11 +23,11 @@ Más información sobre la instalación [aquí](https://maven.apache.org/install
 
 Si al generar el diagrama te da fallos, puede ser porque no tengas Graphviz instalado. Prueba a descargarlo [aquí](https://graphviz.org/download/).
 
-> Si tienes macOS installa primero [Homebrew](https://brew.sh/) y luego [graphviz](https://formulae.brew.sh/formula/graphviz)
+> Si tienes macOS instala primero [Homebrew](https://brew.sh/) y luego [graphviz](https://formulae.brew.sh/formula/graphviz)
 
 ## Dónde puedo descargar IntelliJ
 
-Puedes descargalo desde [aquí](https://www.jetbrains.com/idea/download). Ahí podrás descargar la versión gratuita.
+Puedes descárgalo desde [aquí](https://www.jetbrains.com/idea/download). Ahí podrás descargar la versión gratuita.
 
 > Pro tip: Como eres estudiante, puedes registrarte usando tu correo de la universidad y usar cualquier programa de pago de JetBrains de manera gratuita, mientras sigas teniendo acceso al correo.
 
