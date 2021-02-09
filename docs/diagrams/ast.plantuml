@@ -2,7 +2,7 @@
 
 interface ASTNode
 interface Statement
-abstract class Program
+class Program
 interface Definition
 interface Expression
 interface Type
