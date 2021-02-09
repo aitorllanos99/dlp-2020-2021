@@ -1,4 +1,48 @@
 @startuml ASTBase
 skinparam style strictuml
 skinparam monochrome true
+
+interface ASTNode {
+    getLine(): int
+    getColumn(): int
+}
+interface Statement
+class While {
+    condition: Expression
+    body: List<Statement>
+}
+class If {
+    condition: Expression
+    ifBody: List<Statement>
+    elseBody: List<Statement>
+}
+class Return
+class Invocation {
+    name: Variable
+    parameters: Expression
+}
+class Assignment
+class Read
+class Write
+
+ASTNode <|-- Statement
+
+Statement <|.. Invocation
+Statement <|.. While
+Statement <|.. If
+Statement <|.. Return
+Statement <|.. Assignment
+Statement <|.. Read
+Statement <|.. Write
+
+
+Assignment <-- Expression
+Assignment <-- Expression
+Read o-- Expression
+Write o-- Expression
+Return o-- Expression
+If o-- Expression
+While o-- Expression
+Invocation o-- Expression
+
 @enduml

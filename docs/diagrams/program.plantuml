@@ -1,4 +1,27 @@
 @startuml ASTBase
 skinparam style strictuml
 skinparam monochrome true
+interface ASTNode {
+    getLine(): int
+    getColumn(): int
+}
+
+class Program
+
+interface Definition
+class VarDefinition
+class FuncDefinition{
+    name:String
+    parameters: List<VarDefinition>
+    varDefinition: List<VarDefinition>
+    statements: List<VarDefinition>
+}
+
+ASTNode <|.. Program
+
+Definition <|.. VarDefinition
+Definition <|.. FuncDefinition
+Definition o-- "1" Type
+FuncDefinition o-- VarDefinition
+Program o-- "1..n" Definition
 @enduml

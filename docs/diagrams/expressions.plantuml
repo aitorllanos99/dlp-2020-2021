@@ -1,4 +1,74 @@
 @startuml ASTBase
 skinparam style strictuml
 skinparam monochrome true
+interface ASTNode {
+    getLine(): int
+    getColumn(): int
+}
+
+
+class Cast {
+    castType: Type
+}
+class UnaryMinus
+class UnaryNot
+class Logical {
+    operation: String
+}
+class Arithmetic {
+    operation: char
+}
+class CharLiteral {
+    value: char
+}
+class IntLiteral {
+    value: int
+}
+class RealLiteral {
+    value: double
+}
+class FieldAccess {
+    field: String
+}
+class Indexing {
+    array: Expression
+    index: Expression
+}
+class Comparison {
+    operation: String
+}
+class Variable {
+    name: String
+}
+
+
+ASTNode <|-- Expression
+Expression <|.. Cast
+Expression <|.. UnaryMinus
+Expression <|.. UnaryNot
+Expression <|.. Variable
+Expression <|.. Logical
+Expression <|.. Arithmetic
+Expression <|.. Comparison
+Expression <|.. CharLiteral
+Expression <|.. IntLiteral
+Expression <|.. RealLiteral
+Expression <|.. FieldAccess
+Expression <|.. Indexing
+Expression <|.. Invocation
+
+
+Cast o-- Expression
+Cast o-- "1" Type
+UnaryMinus o-- "1" Expression
+UnaryNot o-- "1" Expression
+Logical o-- "2" Expression
+Arithmetic o-- "2" Expression
+Comparison o-- "2" Expression
+FieldAccess o-- "1" Expression
+Indexing o-- "2" Expression
+
+
+
+
 @enduml

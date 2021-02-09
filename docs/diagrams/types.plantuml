@@ -1,4 +1,44 @@
 @startuml Types
 skinparam style strictuml
 skinparam monochrome true
+interface ASTNode {
+    getLine(): int
+    getColumn(): int
+}
+
+class RecordField
+interface Type
+
+class IntType
+class CharType
+class RealType
+class VoidType
+class ArrayType {
+    arrayOf: Type
+}
+class RecordType {
+    fields: List<RecordField>
+}
+
+class FuncType {
+    parameters: List<VarDefinition>
+    returnType: Type
+}
+
+ASTNode <|-- Type
+
+
+Type <|.. IntType
+Type <|.. CharType
+Type <|.. RealType
+Type <|.. ArrayType
+Type <|.. RecordType
+Type <|.. VoidType
+Type <|.. FuncType
+
+
+ArrayType o-- "1" Type
+RecordType o-- "1..n" RecordField
+FuncType o-- "1" Type
+FuncType o-- "0..n" VarDefinition
 @enduml
