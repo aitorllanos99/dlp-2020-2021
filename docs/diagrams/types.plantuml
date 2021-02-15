@@ -39,7 +39,6 @@ FuncType o-- "1" Type
 FuncType o-- "0..n" VarDefinition
 
 RecordType o-- "0..n" RecordField
-VarDefinition <|-- RecordField
 
 ArrayType o-- "1" Type
 
