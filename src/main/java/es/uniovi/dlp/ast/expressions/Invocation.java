@@ -1,11 +1,10 @@
-package es.uniovi.dlp.ast.statements;
+package es.uniovi.dlp.ast.expressions;
 
-import es.uniovi.dlp.ast.expressions.Expression;
-import es.uniovi.dlp.ast.expressions.Variable;
+import es.uniovi.dlp.ast.statements.Statement;
 
 import java.util.List;
 
-public class Invocation extends AbstractStatement {
+public class Invocation extends AbstractExpression implements Statement {
     private Variable name;
     private List<Expression> arguments;
 
