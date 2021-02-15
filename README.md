@@ -8,8 +8,8 @@ Este es el proyecto base que servirá para implementar un compilador durante el 
 
 ## Guión del proyecto
 
-- [ ] [Laboratorio 1 - Diagrama del AST](docs/labs/lab_01.md)
-- [ ] Laboratorio 2
+- [x] [Laboratorio 1 - Diagrama del AST](docs/labs/lab_01.md)
+- [x] [Laboratorio 2 - Implementación del AST](docs/labs/lab_02.md)
 - [ ] Laboratorio 3
 - [ ] Laboratorio 4
 - [ ] Laboratorio 5
