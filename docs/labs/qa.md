@@ -38,7 +38,7 @@ Se han hecho cambios en el repositorio principal y quiero actualizarlos en mi re
 Añade el repositorio como un remoto:
 
 ```
-git remote add upstream https://github.com/emibloque/dlp-compiler.git
+git remote add upstream https://github.com/dlp-luis/dlp-compiler.git
 ```
 
 Cuando se suban cambios al repositorio principal, actualiza tus cambios en local:
@@ -51,4 +51,27 @@ Para incluir los cambios en tu rama, solo debes hacer un `merge`:
 
 ```
 git merge upstream/main
+```
+
+## Actualizar el remoto
+
+Como se ha cambiado el repositorio principal de `https://github.com/emibloque/dlp-compiler` a `https://github.com/dlp-luis/dlp-compiler`, debes ejecutar lo siguiente:
+
+```
+git remote set-url upstream https://github.com/dlp-luis/dlp-compiler.git
+```
+
+## Tengo conflictos en los ficheros de PlantUML
+
+Si después de ejecutar `git merge upstream/main` se crean conflictos en los ficheros `.png`, vuelve a ejecutar:
+
+```
+mvn clean com.github.jeluard:plantuml-maven-plugin:generate
+```
+
+Y añade y haz commit de las imágenes nuevas creadas:
+
+```
+git add .
+git commit
 ```
