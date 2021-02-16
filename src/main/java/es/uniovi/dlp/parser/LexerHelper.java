@@ -11,11 +11,36 @@ public class LexerHelper {
     }
 
     public static double lexemeToReal(String lexeme) {
-        return -1;
+        try {
+            return Double.parseDouble(lexeme);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }return -1;
     }
 
-    public static char lexemeToChar(String lexeme) {
-        return Character.MIN_VALUE;
+    public static char lexemeToChar(String str) {
+        if (str.length() == 3) return str.charAt(1);
+        else {
+            String cad = str.split("'")[1].substring(0);
+            if (cad.charAt(1) == 'n')
+                return '\n';
+            else if (cad.charAt(1) == 't')
+                return '\t';
+            else if (isNum(cad.substring(1)))
+                return (char) Integer.parseInt(cad.substring(1));
+            else if (! isNum(cad.substring(1)))
+                return cad.charAt(1);
+        }
+        return ' ';
+    }
+
+    private static boolean isNum(String str) {
+        try {
+            Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 
 }
