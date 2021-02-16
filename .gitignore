@@ -2,5 +2,6 @@
 .vscode/
 target/
 out/
+gen/
 
 dlp-compiler.iml

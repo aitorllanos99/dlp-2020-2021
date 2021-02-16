@@ -4,15 +4,13 @@ import es.uniovi.dlp.ast.expressions.Expressions;
 
 import java.util.List;
 
-public class If extends AbstractStatement {
+public class While extends AbstractStatement {
 
-    private List<Statements> statementsIf;
-    private List<Statements> statementsElse;
+    private List<Statements> statements;
     private Expressions condition;
-    public If(int line, int column,List<Statements> statementsIf,List<Statements> statementsElse, Expressions condition) {
+    public While(int line, int column, List<Statements> statements,  Expressions condition) {
         super(line, column);
-        this.statementsIf = statementsIf;
-        this.statementsElse = statementsElse;
+        this.statements = statements;
         this.condition = condition;
     }
 }

@@ -1,6 +1,10 @@
-@startuml ASTBase
+@startuml Program
 skinparam style strictuml
 skinparam monochrome true
+
+
+
+
 interface ASTNode {
     getLine(): int
     getColumn(): int
@@ -9,12 +13,24 @@ interface ASTNode {
 class Program
 
 interface Definition
+
 class VarDefinition
 class FuncDefinition{
     name:String
     parameters: List<VarDefinition>
     varDefinition: List<VarDefinition>
     statements: List<VarDefinition>
+
+class VarDefinition {
+    name: String
+    type: Type
+}
+class FuncDefinition {
+    name: String
+    parameters: List<VarDefinition>
+    varDefinitions: List<VarDefinition>
+    statements: List<Statement>
+
 }
 
 ASTNode <|.. Program
@@ -22,6 +38,16 @@ ASTNode <|.. Program
 Definition <|.. VarDefinition
 Definition <|.. FuncDefinition
 Definition o-- "1" Type
+
 FuncDefinition o-- VarDefinition
 Program o-- "1..n" Definition
+
+
+
+Program o-- "1..n" Definition
+
+FuncDefinition o-- "0..n" Statement
+FuncDefinition o-- "0..n" VarDefinition
+
+
 @enduml

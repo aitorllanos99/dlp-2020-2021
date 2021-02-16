@@ -4,11 +4,11 @@ import es.uniovi.dlp.ast.expressions.Expressions;
 
 import java.util.List;
 
-public class Read extends  AbstractStatement {
+public class Return extends  AbstractStatement {
 
-    private List<Expressions> readExpression;
-    public Read(int line, int column, List<Expressions> readExpression) {
+    private Expressions expression;
+    public Return(int line, int column, Expressions expression) {
         super(line, column);
-        this.readExpression = readExpression;
+        this.expression = expression;
     }
 }

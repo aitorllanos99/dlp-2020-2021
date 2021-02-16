@@ -1,4 +1,7 @@
 package es.uniovi.dlp.ast.types;
 
-public class CharType implements Type{
+import java.util.List;
+
+public class ArrayType implements Type{
+    private List<Type> list;
 }

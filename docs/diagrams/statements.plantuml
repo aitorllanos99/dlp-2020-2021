@@ -1,12 +1,18 @@
-@startuml ASTBase
+@startuml Statements
 skinparam style strictuml
 skinparam monochrome true
+
+
 
 interface ASTNode {
     getLine(): int
     getColumn(): int
 }
+
+
 interface Statement
+
+
 class While {
     condition: Expression
     body: List<Statement>
@@ -21,9 +27,14 @@ class Invocation {
     name: Variable
     parameters: Expression
 }
+
+
+
 class Assignment
 class Read
 class Write
+
+
 
 ASTNode <|-- Statement
 
@@ -36,6 +47,7 @@ Statement <|.. Read
 Statement <|.. Write
 
 
+
 Assignment <-- Expression
 Assignment <-- Expression
 Read o-- Expression
@@ -44,5 +56,19 @@ Return o-- Expression
 If o-- Expression
 While o-- Expression
 Invocation o-- Expression
+
+Invocation o-- "1" Variable
+Invocation o-- "0..n" Expression
+Return o-- "1" Expression
+Assignment o-- "2" Expression
+Read o-- "1" Expression
+Write o-- "1" Expression
+
+If o-- "1" Expression
+If o-- "0..n" Statement
+While o-- "1" Expression
+While o-- "0..n" Statement
+
+
 
 @enduml

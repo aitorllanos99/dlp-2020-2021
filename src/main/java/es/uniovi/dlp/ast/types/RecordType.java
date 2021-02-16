@@ -1,4 +1,7 @@
 package es.uniovi.dlp.ast.types;
 
-public class CharType implements Type{
+import java.util.List;
+
+public class RecordType implements Type{
+    private List<RecordField> list;
 }

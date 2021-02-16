@@ -1,12 +1,12 @@
 package es.uniovi.dlp.ast.expressions;
 
-public class CharLiteral extends AbstractExpression{
+public class Variable extends AbstractExpression{
 
-    private Character value;
+    private String ident;
 
 
-    public CharLiteral(int line, int column, Character value) {
+    public Variable(int line, int column, String value) {
         super(line, column);
-        this.value = value;
+        this.ident = value;
     }
 }

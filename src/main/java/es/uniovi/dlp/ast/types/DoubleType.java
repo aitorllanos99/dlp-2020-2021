@@ -1,4 +1,4 @@
 package es.uniovi.dlp.ast.types;
 
-public class CharType implements Type{
+public class DoubleType implements Type{
 }

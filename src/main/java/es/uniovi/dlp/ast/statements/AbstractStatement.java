@@ -1,4 +1,9 @@
 package es.uniovi.dlp.ast.statements;
 
-public class AbstractStatement {
+import es.uniovi.dlp.ast.AbstractASTNode;
+
+public abstract class AbstractStatement extends AbstractASTNode implements Statements {
+    public AbstractStatement(int line, int column) {
+        super(line, column);
+    }
 }

@@ -61,9 +61,9 @@ def main() do
     i = i + 1
   end
 
-  puts suma(i, i as double); # Invocacion como expresion
+  puts suma(i, i as double) # Invocacion como expresion
 
-  vector[9][4.3 as int] = 5;
+  vector[9][4.3 as int] = 5
 
   suma(1, 2.2) # Invocacion como sentencia
 end

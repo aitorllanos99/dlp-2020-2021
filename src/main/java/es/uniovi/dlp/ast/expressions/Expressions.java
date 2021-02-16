@@ -1,4 +1,6 @@
 package es.uniovi.dlp.ast.expressions;
 
-public interface Expressions {
+import es.uniovi.dlp.ast.ASTNode;
+
+public interface Expressions extends ASTNode {
 }

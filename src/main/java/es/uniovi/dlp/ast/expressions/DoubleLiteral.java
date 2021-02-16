@@ -1,11 +1,11 @@
 package es.uniovi.dlp.ast.expressions;
 
-public class CharLiteral extends AbstractExpression{
+public class DoubleLiteral extends AbstractExpression{
 
-    private Character value;
+    private Double value;
 
 
-    public CharLiteral(int line, int column, Character value) {
+    public DoubleLiteral(int line, int column, Double  value) {
         super(line, column);
         this.value = value;
     }
