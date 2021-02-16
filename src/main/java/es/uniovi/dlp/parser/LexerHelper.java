@@ -17,5 +17,4 @@ public class LexerHelper {
     public static char lexemeToChar(String lexeme) {
         return Character.MIN_VALUE;
     }
-
 }
