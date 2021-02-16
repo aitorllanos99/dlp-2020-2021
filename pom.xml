@@ -36,6 +36,11 @@
       <artifactId>junit-jupiter</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.antlr</groupId>
+      <artifactId>antlr4-runtime</artifactId>
+      <version>4.9.1</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -78,6 +83,15 @@
             <version>1.2021.0</version>
           </dependency>
         </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.antlr</groupId>
+        <artifactId>antlr4-maven-plugin</artifactId>
+        <version>4.3</version>
+        <configuration>
+          <listener>false</listener>
+          <outputDirectory>src/main/java/es/uniovi/dlp/parser/</outputDirectory>
+        </configuration>
       </plugin>
     </plugins>
   </build>
