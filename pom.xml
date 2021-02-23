@@ -38,7 +38,7 @@
     </dependency>
     <dependency>
       <groupId>org.antlr</groupId>
-      <artifactId>antlr4-runtime</artifactId>
+      <artifactId>antlr4</artifactId>
       <version>4.9.1</version>
     </dependency>
   </dependencies>
@@ -87,7 +87,7 @@
       <plugin>
         <groupId>org.antlr</groupId>
         <artifactId>antlr4-maven-plugin</artifactId>
-        <version>4.3</version>
+        <version>4.9.1</version>
         <configuration>
           <listener>false</listener>
           <outputDirectory>src/main/java/es/uniovi/dlp/parser/</outputDirectory>

@@ -75,3 +75,16 @@ Y añade y haz commit de las imágenes nuevas creadas:
 git add .
 git commit
 ```
+
+## Recibo el error de que las Preview features no están habilitadas
+
+Si recibes un error similar a este:
+
+```
+java.lang.UnsupportedClassVersionError: Preview features are not enabled for es/uniovi/dlp/parser/XanaLexer (class file version 59.65535). Try running with '--enable-preview'
+```
+
+Debes añadir a la variable de entorno `MAVEN_OPTS` el siguiente valor:
+
+- En Windows: `set MAVEN_OPTS=--enable-preview`
+- En Linux/macOS: `export MAVEN_OPTS=--enable-preview`
