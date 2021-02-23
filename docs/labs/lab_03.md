@@ -12,7 +12,7 @@ Para ello será necesario:
 2. Generar los nuevos ficheros de ANTLR, como se menciona en la sección de herramientas.
 3. Descomentar el contenido de `testSimpleLexer` dentro de `LexerTest.java`.
 4. Implementar, dentro de [`LexerHelper`](../../src/main/java/es/uniovi/dlp/parser/LexerHelper.java), las funciones `lexemeToReal` y `lexemeToChar`.
-5. Implementar, dentro de [`LexerInfo`](../../src/test/java/es/uniovi/dlp/parser/LexerInfo.java), los tipos restantes dentro del método `getSemanticValue`.
+5. Implementar, dentro de [`LexicalInfo`](../../src/test/java/es/uniovi/dlp/parser/LexicalInfo.java), los tipos restantes dentro del método `getSemanticValue`.
 6. Ejecutar `mvn clean test` y comprobar que todo funciona correctamente.
 
 > **Super Pro tip:** Si quieres inspirarte por Lexers y Parsers de lenguajes reales (como JavaScript, Java, C++, etc), échale un ojo al repositorio [antlr/grammars-v4](https://github.com/antlr/grammars-v4).
