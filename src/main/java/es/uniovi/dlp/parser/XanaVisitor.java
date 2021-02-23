@@ -18,4 +18,46 @@ public interface XanaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitProgram(XanaParser.ProgramContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#definitions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefinitions(XanaParser.DefinitionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#funcDefinition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFuncDefinition(XanaParser.FuncDefinitionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#mainFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMainFunction(XanaParser.MainFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#varDefinition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarDefinition(XanaParser.VarDefinitionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#statements}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatements(XanaParser.StatementsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpression(XanaParser.ExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitType(XanaParser.TypeContext ctx);
 }
