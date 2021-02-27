@@ -66,4 +66,38 @@ public class ParserTest {
     void testMainWithBody() {
         parserForProgram("parser/main_with_body").program();
     }
+
+    /**
+     * Variable identifiers cannot use reserved keywords as id
+     */
+    @Test
+    void testInvalidVarDefinitions() {
+        assertThrows(RuntimeException.class,
+                () -> silentParserForProgram("parser/invalid/keyword_var_definitions").program());
+    }
+
+    /**
+     * Array variable definitions cannot use expressions as array size
+     */
+    @Test
+    void testInvalidArrayVarDefinitions() {
+        assertThrows(RuntimeException.class,
+                () -> silentParserForProgram("parser/invalid/var_definitions_array_index").program());
+    }
+
+    /**
+     * List of simple variable definitions
+     */
+    @Test
+    void testSimpleVarDefinitions() {
+        parserForProgram("parser/simple_var_definitions").program();
+    }
+
+    /**
+     * All the variable definitions in this test should be valid
+     */
+    @Test
+    void testComplexVarDefinitions() {
+        parserForProgram("parser/complex_var_definitions").program();
+    }
 }
