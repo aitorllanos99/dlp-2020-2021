@@ -1,11 +1,9 @@
 package es.uniovi.dlp.ast.expressions;
 
-public class IntLiteral extends AbstractExpression{
+public class IntLiteral extends AbstractExpression {
+    private int value;
 
-    private Integer value;
-
-
-    public IntLiteral(int line, int column, Integer value) {
+    public IntLiteral(int line, int column, int value) {
         super(line, column);
         this.value = value;
     }

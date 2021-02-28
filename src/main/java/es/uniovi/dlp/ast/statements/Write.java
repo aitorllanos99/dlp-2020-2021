@@ -1,14 +1,15 @@
 package es.uniovi.dlp.ast.statements;
 
-import es.uniovi.dlp.ast.expressions.Expressions;
+import es.uniovi.dlp.ast.expressions.Expression;
+import es.uniovi.dlp.ast.expressions.Variable;
 
 import java.util.List;
 
-public class Write extends  AbstractStatement {
+public class Write extends AbstractStatement {
+    private Expression expression;
 
-    private List<Expressions> writeExpression;
-    public Write(int line, int column, List<Expressions> writeExpression) {
+    public Write(int line, int column, Expression expression) {
         super(line, column);
-        this.writeExpression = writeExpression;
+        this.expression = expression;
     }
 }

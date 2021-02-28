@@ -1,7 +1,12 @@
 package es.uniovi.dlp.ast.types;
 
-import java.util.List;
+public class ArrayType extends AbstractType {
+    private Type arrayOf;
+    private int size;
 
-public class ArrayType implements Type{
-    private List<Type> list;
+    public ArrayType(int line, int column, Type arrayOf, int size) {
+        super(line, column);
+        this.arrayOf = arrayOf;
+        this.size = size;
+    }
 }

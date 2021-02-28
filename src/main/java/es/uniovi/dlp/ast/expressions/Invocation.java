@@ -1,17 +1,16 @@
 package es.uniovi.dlp.ast.expressions;
 
-import es.uniovi.dlp.ast.types.Type;
+import es.uniovi.dlp.ast.statements.Statement;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Invocation extends AbstractExpression {
+public class Invocation extends AbstractExpression implements Statement {
+    private Variable name;
+    private List<Expression> arguments;
 
-    private List<Expressions> expressionsList = new ArrayList<Expressions>();
-    private Variable variable; //Do we need to put the variable or not???
-    private Type type;
-    public Invocation(int line, int column, List<Expressions> expressions) {
+    public Invocation(int line, int column, Variable name, List<Expression> arguments) {
         super(line, column);
-        this.expressionsList = expressions;
+        this.name = name;
+        this.arguments = arguments;
     }
 }

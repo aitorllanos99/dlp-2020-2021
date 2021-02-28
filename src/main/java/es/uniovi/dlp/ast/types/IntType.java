@@ -1,4 +1,7 @@
 package es.uniovi.dlp.ast.types;
 
-public class IntType implements Type{
+public class IntType extends AbstractType {
+    public IntType(int line, int column) {
+        super(line, column);
+    }
 }

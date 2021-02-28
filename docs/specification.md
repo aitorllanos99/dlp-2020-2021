@@ -31,11 +31,40 @@ El cuerpo de la función está delimitado por la palabra clave `do` y la palabra
 El cuerpo de una función son secuencias de definiciones de variables, seguidas por secuencias de sentencias, cada una de ellas delimitadas por una nueva línea.
 
 Existe una función especial, con el identificador `main`, la cual debe ser la última en el programa.
-El tipo de retorno de esta función es `void` y no recibe ningún parámetro.
+Esta función no tiene tipo de retorno y no recibe ningún parámetro. Por ejemplo:
+
+```
+def main() do
+end
+```
 
 #### Retorno
 
-Cuando una función tenga un tipo de retorno distinto de `void`, la invocación a esa función será una expresión. En el caso contrario, será una sentencia.
+Cuando una función tenga un tipo de retorno distinto de `void`, deberá devolver el tipo indicado en el tipo de retorno.
+
+#### Invocación
+
+Para invocar una función, se debe usar el identificador de la función y con una lista de expresiones como argumentos, por ejemplo: `suma(1,1)`.
+
+Una invocación se puede interpretar como una expresión:
+```
+def suma(a :: int, b :: int) :: int do
+    return a + b
+end
+
+def main() do
+    total :: int
+    total = suma(1,1)
+end
+```
+
+Las invocaciones a funciones también pueden ser sentencias si se usan por si solas, por ejemplo:
+
+```
+def main() do
+    suma(1,1) # Esto es una sentencia, no una expresión
+end
+```
 
 ### Tipos
 
@@ -193,7 +222,7 @@ Los operadores soportados son los siguientes, por orden de precedencia de manera
 | `*`, `/` y `%` | Asociatividad de izquierda a derecha |
 | `+` y `-` | Asociatividad de izquierda a derecha |
 | `>`, `>=`, `<`, `<=`, `!=` y `==` | Asociatividad de izquierda a derecha |
-| `&&` y `||` | Asociatividad de izquierda a derecha |
+| `&&` y <code>&#124;&#124;</code> | Asociatividad de izquierda a derecha |
 | `=` | Asociatividad de derecha a izquierda |
 
 ### Comentarios
