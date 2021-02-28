@@ -152,4 +152,12 @@ public class ParserTest {
         assertThrows(RuntimeException.class,
                 () -> silentParserForProgram("parser/invalid/var_definition_inside_while").program());
     }
+
+    /**
+     * Function invocations
+     */
+    @Test
+    void testFunctionInvocations() {
+        parserForProgram("parser/function_invocations").program();
+    }
 }
