@@ -88,3 +88,13 @@ Debes añadir a la variable de entorno `MAVEN_OPTS` el siguiente valor:
 
 - En Windows: `set MAVEN_OPTS=--enable-preview`
 - En Linux/macOS: `export MAVEN_OPTS=--enable-preview`
+
+## Ejecutar un solo test
+
+Si quieres ejecutar solo un método con maven, después de regenerar el parser, puedes lanzar el comando:
+
+```
+ mvn clean antlr4:antlr4 test -Dtest=ParserTest#testFunctionInvalidReturnType
+```
+
+La parte importante es `-Dtest=ParserTest#testFunctionInvalidReturnType`, donde `ParserTest` es la clase del test a ejecutar y `testFunctionInvalidReturnType` el test en específico. 

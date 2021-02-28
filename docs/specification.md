@@ -193,7 +193,7 @@ Los operadores soportados son los siguientes, por orden de precedencia de manera
 | `*`, `/` y `%` | Asociatividad de izquierda a derecha |
 | `+` y `-` | Asociatividad de izquierda a derecha |
 | `>`, `>=`, `<`, `<=`, `!=` y `==` | Asociatividad de izquierda a derecha |
-| `&&` y `||` | Asociatividad de izquierda a derecha |
+| `&&` y <code>&#124;&#124;</code> | Asociatividad de izquierda a derecha |
 | `=` | Asociatividad de derecha a izquierda |
 
 ### Comentarios
