@@ -117,4 +117,12 @@ public class ParserTest {
         assertThrows(RuntimeException.class,
                 () -> silentParserForProgram("parser/invalid/function_non_primitive_return_type").program());
     }
+
+    /**
+     * Some expressions
+     */
+    @Test
+    void testExpressions() {
+        parserForProgram("parser/expressions").program();
+    }
 }
