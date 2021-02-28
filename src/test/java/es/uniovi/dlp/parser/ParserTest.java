@@ -125,4 +125,31 @@ public class ParserTest {
     void testExpressions() {
         parserForProgram("parser/expressions").program();
     }
+
+    /**
+     * Some statements
+     */
+    @Test
+    void testStatements() {
+        parserForProgram("parser/statements").program();
+    }
+
+
+    /**
+     * An if block cannot have var definitions
+     */
+    @Test
+    void testVarDefinitionsInsideIf() {
+        assertThrows(RuntimeException.class,
+                () -> silentParserForProgram("parser/invalid/var_definition_inside_if").program());
+    }
+
+    /**
+     * A while block cannot have var definitions
+     */
+    @Test
+    void testVarDefinitionsInsideWhile() {
+        assertThrows(RuntimeException.class,
+                () -> silentParserForProgram("parser/invalid/var_definition_inside_while").program());
+    }
 }
