@@ -100,4 +100,21 @@ public class ParserTest {
     void testComplexVarDefinitions() {
         parserForProgram("parser/complex_var_definitions").program();
     }
+
+    /**
+     * Some function definitions
+     */
+    @Test
+    void testFunctionDefinitions() {
+        parserForProgram("parser/function_definitions").program();
+    }
+
+    /**
+     * Only primitive return types are allowed
+     */
+    @Test
+    void testFunctionInvalidReturnType() {
+        assertThrows(RuntimeException.class,
+                () -> silentParserForProgram("parser/invalid/function_non_primitive_return_type").program());
+    }
 }
