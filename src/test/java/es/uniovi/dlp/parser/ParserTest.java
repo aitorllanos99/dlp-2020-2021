@@ -160,4 +160,24 @@ public class ParserTest {
     void testFunctionInvocations() {
         parserForProgram("parser/function_invocations").program();
     }
+
+    @Test
+    void testBasicProgram() {
+        parserForProgram("basic").program();
+    }
+
+    @Test
+    void testFibonacci() {
+        parserForProgram("real_examples/fibonacci").program();
+    }
+
+    @Test
+    void testFizzbuzz() {
+        parserForProgram("real_examples/fizzbuzz").program();
+    }
+
+    @Test
+    void testInsertSort() {
+        parserForProgram("real_examples/insert_sort").program();
+    }
 }
