@@ -86,6 +86,15 @@ public class ParserTest {
     }
 
     /**
+     * A variable cannot be of type void
+     */
+    @Test
+    void testInvalidVarType() {
+        assertThrows(RuntimeException.class,
+                () -> silentParserForProgram("parser/invalid/var_definition_void").program());
+    }
+
+    /**
      * List of simple variable definitions
      */
     @Test
