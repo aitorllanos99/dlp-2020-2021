@@ -1,14 +1,16 @@
 package es.uniovi.dlp.parser;
 
 import org.antlr.v4.runtime.*;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import static es.uniovi.dlp.TestHelpers.lexerForProgram;
 import static org.junit.jupiter.api.Assertions.fail;
 
+@Disabled("As we implemented the Parser, this test is no longer valid")
 public class LexerTest {
 
     @Test
@@ -70,19 +72,6 @@ public class LexerTest {
         if (lexer.nextToken().getType() != XanaLexer.EOF) {
             fail("There are tokens at the end of the file that weren't expected");
         }
-    }
-
-    private static XanaLexer lexerForProgram(String programName) {
-        try {
-            CharStream input = CharStreams.fromFileName(pathFor(programName));
-            return new XanaLexer(input);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static String pathFor(String programName) {
-        return "examples/" + programName + ".xana";
     }
 
     private static void failIfLexerHasErrors(XanaLexer lexer) {
