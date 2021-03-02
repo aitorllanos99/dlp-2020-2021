@@ -6,8 +6,8 @@ package es.uniovi.dlp.parser;
 import es.uniovi.dlp.ast.*;
 }
 
-program
-       : definitions* mainFunction
+program returns [Program ast]
+       : d=definitions* mf=mainFunction {$d.ast.add($mf.ast); $ast = new Program($d.start.getLine(), $d.start.getCharPositionInLine() +1, $d.ast);}
        ;
 
 definitions returns [List<Definition> ast]
@@ -16,17 +16,28 @@ definitions returns [List<Definition> ast]
            ;
 
 funcDefinition returns [FuncDefinition ast]
-        : 'def ' ID '('(ID '::' type(',' ID '::' type)*)?')''::'functionTypes  'do' (statements | varDefinition)* 'end'
+        : 'def ' id = ID '('fp = funcParameters?')''::' ft = functionTypes  'do' (statements | varDefinition)* 'end'
         ;
-mainFunction : 'def ' 'main' '('')''do' (statements | varDefinition)* 'end'
-;
+funcParameters returns [List<VarDefinition> ast = new ArrayList<VarDefinition>()]
+        : (id1 = ID '::' t1 = type {$ast.add($id1.getLine(), $id1.getCharPositionInLine() +1, $id1.text, $t1.t);}(',' id2 = ID '::' t2 = type{$ast.add($id2.getLine(), $id2.getCharPositionInLine() +1, $id2.text, $t2.t);})*)
+        ;
+funcBody:; //COMO PONER EL STATEMENTS O VARDEFINITION EN COMUN AQUI?¿?¿?
+mainFunction returns [FuncDefinition ast]
+        : 'def ' 'main' '('')''do' (statements | varDefinition)* 'end'
+        ;
 
 varDefinition returns [VarDefinition ast]
-            : ID  (',' ID)* '::' (primitiveType | complexType)
+            : mid = moreIdentDefinitions '::' t = varTypes {for(String s: $mid.ast) $ast.add(new VarDefinition($mid.start.getLine(), $mid.start.getCharPositionInLine() +1 , s, $t.t}
             ;
-
+varTypes returns [Type t]
+            : p = primitiveType {$t = p.t}
+            | c = complexType {$t = c.t}
+            ;
+moreIdentDefinitions returns[List<VarDefinition> ast = new ArrayList<VarDefinition>()]:
+            id1 = ID {$ast.add($id1.text);} (',' id2 = ID {$ast.add($id2.text);} )*
+            ;
 statements returns [Statement st]
-        : ID '(' mp = moreParameters ')'{$ast = new Invocation($ID.getLine(), $ID.getCharPositionInLine(), $ID, $mp.ast);}
+        : ID '(' mp = moreParameters ')'{$st = new Invocation($ID.getLine(), $ID.getCharPositionInLine(), $ID, $mp.ast);}
         | 'return' expression {$st = new Return ($expression.start.getLine(), $expression.start.getCharPositionInLine() +1 , $expression.ast);}
         | 'if' ex = expression+ 'do' ms = moreStatements ('else' ms2 = moreStatements)? 'end' {$st = new IfElse($ex.start.getLine(), $ex.start.getCharPositionInLine()+1, $ms.ast,$ms2.ast, $ex.ast);}
         | 'while' ex=expression+ 'do' ms = moreStatements 'end' {$st = new While($ex.start.getLine(), $ex.start.getCharPositionInLine()+1, $ms.ast, $ex.ast);}
@@ -38,7 +49,7 @@ moreExpressions returns[List<Expression> ast = new ArrayList<Expression>()]
         : e1 = expression {$ast.add($e1.ast);} (',' e2 = expression{$ast.add($e2.ast);})*
         ;
 moreStatements returns [List<Statement> ast = new ArrayList<Statement>()]
-        : st=statements* {for(Statement s: $st.ast) $ast.add(s);}
+        : stat=statements* {for(Statement s: $stat.st) $ast.add(s);}
         ;
 moreParameters returns[List<Expression> ast = new ArrayList<Expression>()]
         :(e1 = expression {$ast.add($e1.ast);} (',' e2 = expression{$ast.add($e2.ast);})*)?
@@ -66,7 +77,7 @@ expression returns [Expression ast]
 
 type returns [Type t]
     : p = primitiveType {$t = p.t}
-    | complexType {$t = c.t}
+    | c = complexType {$t = c.t}
     | v = voidType {$t = v.t}
 ;
 
