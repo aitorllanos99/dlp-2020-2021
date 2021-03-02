@@ -26,19 +26,25 @@ varDefinition returns [VarDefinition ast]
             ;
 
 statements returns [Statement st]
-        : ID '(' (moreExpressions)? ')'
+        : ID '(' mp = moreParameters ')'{$ast = new Invocation($ID.getLine(), $ID.getCharPositionInLine(), $ID, $mp.ast);}
         | 'return' expression {$st = new Return ($expression.start.getLine(), $expression.start.getCharPositionInLine() +1 , $expression.ast);}
-        | 'if' expression+ 'do' statements* ('else' statements*)? 'end'
-        | 'while' expression+ 'do' statements* 'end'
+        | 'if' ex = expression+ 'do' ms = moreStatements ('else' ms2 = moreStatements)? 'end' {$st = new IfElse($ex.start.getLine(), $ex.start.getCharPositionInLine()+1, $ms.ast,$ms2.ast, $ex.ast);}
+        | 'while' ex=expression+ 'do' ms = moreStatements 'end' {$st = new While($ex.start.getLine(), $ex.start.getCharPositionInLine()+1, $ms.ast, $ex.ast);}
         | 'in' me = moreExpressions {$st = new Print($me.start.getLine(), $me.start.getCharPositionInLine() +1, $me.ast)}
         | 'puts' me = moreExpressions {$st = new Print($me.start.getLine(), $me.start.getCharPositionInLine() +1, $me.ast)}
         | left = expression '=' right=expression {$st = new Assignment($left.start.getLine(), $left.start.getCharPositionInLine() +1 , $left.ast ,  $right.ast);}
         ;
-moreExpressions returns[List<Expression> ast = new ArrayList<Exrpession>()]
+moreExpressions returns[List<Expression> ast = new ArrayList<Expression>()]
         : e1 = expression {$ast.add($e1.ast);} (',' e2 = expression{$ast.add($e2.ast);})*
         ;
+moreStatements returns [List<Statement> ast = new ArrayList<Statement>()]
+        : st=statements* {for(Statement s: $st.ast) $ast.add(s);}
+        ;
+moreParameters returns[List<Expression> ast = new ArrayList<Expression>()]
+        :(e1 = expression {$ast.add($e1.ast);} (',' e2 = expression{$ast.add($e2.ast);})*)?
+        ;
 expression returns [Expression ast]
-        : ID '(' (moreExpressions)? ')'
+        : ID '(' mp = moreParameters ')' {$ast = new Invocation($ID.getLine(), $ID.getCharPositionInLine(), $ID, $mp.ast);}
         | i = INT_CONSTANT {$ast = new IntLiteral($i.getLine(), $i.getCharPositionInLine() + 1, LexerHelper.lexemeToInt($i.text));}
         | c = CHAR_CONSTANT {$ast = new CharLiteral($c.getLine(), $c.getCharPositionInLine() + 1, LexerHelper.lexemeToChar($c.text));}
         | r = REAL_CONSTANT {$ast = new DoubleLiteral($r.getLine(), $r.getCharPositionInLine() + 1, LexerHelper.lexemeToReal($r.text));}
