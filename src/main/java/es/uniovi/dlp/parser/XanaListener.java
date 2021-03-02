@@ -89,4 +89,14 @@ public interface XanaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitType(XanaParser.TypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link XanaParser#prueba}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrueba(XanaParser.PruebaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link XanaParser#prueba}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrueba(XanaParser.PruebaContext ctx);
 }

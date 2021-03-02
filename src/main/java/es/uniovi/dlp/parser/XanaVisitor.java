@@ -60,4 +60,10 @@ public interface XanaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitType(XanaParser.TypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#prueba}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrueba(XanaParser.PruebaContext ctx);
 }

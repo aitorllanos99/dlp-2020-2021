@@ -56,9 +56,6 @@ type: 'int'
 ;
 
 
-
-
-
 //*******LEXER******
 WHITESPACE: [ \n\t\r]+ -> skip
         ;

@@ -109,6 +109,18 @@ public class XanaBaseListener implements XanaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitType(XanaParser.TypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPrueba(XanaParser.PruebaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrueba(XanaParser.PruebaContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
