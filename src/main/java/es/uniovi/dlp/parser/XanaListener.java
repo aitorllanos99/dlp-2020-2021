@@ -1,6 +1,7 @@
 // Generated from D:/1Escritorio/Informatica/Uni/Cuarto Curso/Segundo Cuatrimestre/DLP/Compiler/src/main/antlr4\Xana.g4 by ANTLR 4.9.1
 
 package es.uniovi.dlp.parser;
+import es.uniovi.dlp.ast.*;
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -90,13 +91,23 @@ public interface XanaListener extends ParseTreeListener {
 	 */
 	void exitType(XanaParser.TypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link XanaParser#prueba}.
+	 * Enter a parse tree produced by {@link XanaParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
-	void enterPrueba(XanaParser.PruebaContext ctx);
+	void enterPrimitiveType(XanaParser.PrimitiveTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link XanaParser#prueba}.
+	 * Exit a parse tree produced by {@link XanaParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
-	void exitPrueba(XanaParser.PruebaContext ctx);
+	void exitPrimitiveType(XanaParser.PrimitiveTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link XanaParser#complexType}.
+	 * @param ctx the parse tree
+	 */
+	void enterComplexType(XanaParser.ComplexTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link XanaParser#complexType}.
+	 * @param ctx the parse tree
+	 */
+	void exitComplexType(XanaParser.ComplexTypeContext ctx);
 }

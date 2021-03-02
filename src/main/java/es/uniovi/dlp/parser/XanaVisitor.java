@@ -1,6 +1,7 @@
 // Generated from D:/1Escritorio/Informatica/Uni/Cuarto Curso/Segundo Cuatrimestre/DLP/Compiler/src/main/antlr4\Xana.g4 by ANTLR 4.9.1
 
 package es.uniovi.dlp.parser;
+import es.uniovi.dlp.ast.*;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -61,9 +62,15 @@ public interface XanaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitType(XanaParser.TypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link XanaParser#prueba}.
+	 * Visit a parse tree produced by {@link XanaParser#primitiveType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPrueba(XanaParser.PruebaContext ctx);
+	T visitPrimitiveType(XanaParser.PrimitiveTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#complexType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComplexType(XanaParser.ComplexTypeContext ctx);
 }

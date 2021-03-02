@@ -1,7 +1,5 @@
 package es.uniovi.dlp.ast.program;
 
-import es.uniovi.dlp.ast.expressions.Expressions;
-import es.uniovi.dlp.ast.statements.Statements;
 import es.uniovi.dlp.ast.types.Type;
 
 public class VarDefinition extends DefinitionAbstract {

@@ -1,6 +1,7 @@
 // Generated from D:/1Escritorio/Informatica/Uni/Cuarto Curso/Segundo Cuatrimestre/DLP/Compiler/src/main/antlr4\Xana.g4 by ANTLR 4.9.1
 
 package es.uniovi.dlp.parser;
+import es.uniovi.dlp.ast.*;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -114,13 +115,25 @@ public class XanaBaseListener implements XanaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPrueba(XanaParser.PruebaContext ctx) { }
+	@Override public void enterPrimitiveType(XanaParser.PrimitiveTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPrueba(XanaParser.PruebaContext ctx) { }
+	@Override public void exitPrimitiveType(XanaParser.PrimitiveTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterComplexType(XanaParser.ComplexTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComplexType(XanaParser.ComplexTypeContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

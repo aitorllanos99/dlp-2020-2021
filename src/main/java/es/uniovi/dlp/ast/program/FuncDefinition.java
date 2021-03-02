@@ -1,9 +1,7 @@
 package es.uniovi.dlp.ast.program;
 
-import es.uniovi.dlp.ast.statements.Statements;
 import es.uniovi.dlp.ast.types.Type;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FuncDefinition extends DefinitionAbstract {

@@ -3,6 +3,7 @@ grammar Xana;
 
 @header {
 package es.uniovi.dlp.parser;
+import es.uniovi.dlp.ast.*;
 }
 
 program: definitions* mainFunction
@@ -11,7 +12,7 @@ program: definitions* mainFunction
 definitions: varDefinition | funcDefinition
     ;
 
-funcDefinition: 'def ' ID '('(ID '::' type(',' ID '::' type)*)?')''::'type  'do' statements* 'end'
+funcDefinition: 'def ' ID '('(ID '::' type(',' ID '::' type)*)?')''::'primitiveType  'do' statements* 'end'
 ;
 mainFunction: 'def ' 'main' '('')''do' statements* 'end'
 ;
@@ -47,13 +48,18 @@ expression: ID '(' (expression (',' expression)*)? ')'
 
 
 
-type: 'int'
-    |'char'
-    |'double'
-    |'defstruct' 'do' varDefinition* 'end'
-    |'['expression+ '::' type ']'
-    | 'void'
+type: primitiveType
+    | complexType
 ;
+
+primitiveType: 'int'
+             |'char'
+             |'double'
+             | 'void'
+             ;
+complexType: 'defstruct' 'do' varDefinition* 'end'
+             |'['expression+ '::' type ']'
+             ;
 
 
 //*******LEXER******

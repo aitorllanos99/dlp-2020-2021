@@ -1,6 +1,7 @@
 // Generated from D:/1Escritorio/Informatica/Uni/Cuarto Curso/Segundo Cuatrimestre/DLP/Compiler/src/main/antlr4\Xana.g4 by ANTLR 4.9.1
 
 package es.uniovi.dlp.parser;
+import es.uniovi.dlp.ast.*;
 
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -75,5 +76,12 @@ public class XanaBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements X
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPrueba(XanaParser.PruebaContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPrimitiveType(XanaParser.PrimitiveTypeContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitComplexType(XanaParser.ComplexTypeContext ctx) { return visitChildren(ctx); }
 }
