@@ -78,8 +78,8 @@ CHAR_CONSTANT=47
 '=='=31
 '&&'=32
 '||'=33
-'int'=34
-'char'=35
-'double'=36
-'void'=37
+'void'=34
+'int'=35
+'char'=36
+'double'=37
 'defstruct'=38
