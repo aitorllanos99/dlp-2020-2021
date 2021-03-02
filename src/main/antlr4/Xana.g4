@@ -26,16 +26,19 @@ varDefinition returns [VarDefinition ast]
             ;
 
 statements returns [Statement st]
-        : ID '(' (expression (',' expression)*)? ')'
-        | 'return' expression
-        | 'if' expression* 'do' statements* ('else' statements*)? 'end'
-        | 'while' expression* 'do' statements* 'end'
-        | 'in' (expression  (',' expression)*)
-        | 'puts' (expression (',' expression)*)
-        | left = expression '=' right=expression { $st = new Assignment($left.start.getLine(), $left.start.getCharPositionInLine() +1 , $left.ast ,  $right.ast);}
+        : ID '(' (moreExpressions)? ')'
+        | 'return' expression {$st = new Return ($expression.start.getLine(), $expression.start.getCharPositionInLine() +1 , $expression.ast);}
+        | 'if' expression+ 'do' statements* ('else' statements*)? 'end'
+        | 'while' expression+ 'do' statements* 'end'
+        | 'in' me = moreExpressions {$st = new Print($me.start.getLine(), $me.start.getCharPositionInLine() +1, $me.ast)}
+        | 'puts' me = moreExpressions {$st = new Print($me.start.getLine(), $me.start.getCharPositionInLine() +1, $me.ast)}
+        | left = expression '=' right=expression {$st = new Assignment($left.start.getLine(), $left.start.getCharPositionInLine() +1 , $left.ast ,  $right.ast);}
+        ;
+moreExpressions returns[List<Expression> ast = new ArrayList<Exrpession>()]
+        : e1 = expression {$ast.add($e1.ast);} (',' e2 = expression{$ast.add($e2.ast);})*
         ;
 expression returns [Expression ast]
-        : ID '(' (expression (',' expression)*)? ')'
+        : ID '(' (moreExpressions)? ')'
         | i = INT_CONSTANT {$ast = new IntLiteral($i.getLine(), $i.getCharPositionInLine() + 1, LexerHelper.lexemeToInt($i.text));}
         | c = CHAR_CONSTANT {$ast = new CharLiteral($c.getLine(), $c.getCharPositionInLine() + 1, LexerHelper.lexemeToChar($c.text));}
         | r = REAL_CONSTANT {$ast = new DoubleLiteral($r.getLine(), $r.getCharPositionInLine() + 1, LexerHelper.lexemeToReal($r.text));}

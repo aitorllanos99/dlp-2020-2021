@@ -1,4 +1,4 @@
-package es.uniovi.dlp.ast.program;
+package es.uniovi.dlp.ast.definitions;
 
 import es.uniovi.dlp.ast.definitions.AbstractDefinition;
 import es.uniovi.dlp.ast.definitions.VarDefinition;
