@@ -2,7 +2,7 @@ package es.uniovi.dlp.ast.expressions;
 
 public class Variable extends AbstractExpression implements Expression{
 
-    private String ident;
+    public String ident;
 
 
     public Variable(int line, int column, String value) {

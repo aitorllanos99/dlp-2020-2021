@@ -3,8 +3,8 @@ package es.uniovi.dlp.ast.types;
 import es.uniovi.dlp.ast.AbstractASTNode;
 
 public class RecordField extends AbstractASTNode implements Type{
-    private String name;
-    private Type type;
+    public String name;
+    public Type type;
 
     public RecordField(int line, int column, String name, Type type) {
         super(line, column);

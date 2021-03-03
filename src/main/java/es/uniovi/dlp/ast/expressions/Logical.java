@@ -1,9 +1,9 @@
 package es.uniovi.dlp.ast.expressions;
 
 public class Logical extends AbstractExpression implements Expression{
-    private String operation;
-    private Expression leftExpression;
-    private Expression rightExpression;
+    public String operation;
+    public Expression leftExpression;
+    public Expression rightExpression;
 
     public Logical(int line, int column, Expression rightExpression , Expression leftExpression,String operation) {
         super(line, column);

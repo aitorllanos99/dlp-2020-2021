@@ -24,9 +24,9 @@ public class RunIntrospector {
         XanaParser parser = new XanaParser(tokens);
 
         // Uncomment this after implementing actions
-        // Program ast = parser.program().ast;
+        Program ast = parser.program().ast;
 
-        // IntrospectorModel model = new IntrospectorModel("Program", ast);
-        // new IntrospectorTree("Introspector", model);
+        IntrospectorModel model = new IntrospectorModel("Program", ast);
+        new IntrospectorTree("Introspector", model);
     }
 }

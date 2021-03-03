@@ -6,8 +6,8 @@ import java.util.List;
 
 public class While extends AbstractStatement implements Statement{
 
-    private List<Statement> statements;
-    private Expression condition;
+    public List<Statement> statements;
+    public Expression condition;
     public While(int line, int column, List<Statement> statements,  Expression condition) {
         super(line, column);
         this.statements = statements;

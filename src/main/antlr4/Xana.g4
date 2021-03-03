@@ -101,8 +101,8 @@ primitiveType returns [Type t]
              |c='char' {$t = new CharType($c.getLine(), $c.getCharPositionInLine() + 1);}
              |d='double' {$t = new DoubleType($d.getLine(), $d.getCharPositionInLine() +1) ;}
              ;
-complexType returns [Type t]: 'defstruct' 'do' varDefinition* 'end'
-             |'['INT_CONSTANT '::' type ']'
+complexType returns [Type t]: id = 'defstruct' 'do' vd = varDefinition* 'end' {List<RecordField> rec = new ArrayList<RecordField>();$vd.ast.stream().map(v-> rec.add(new RecordField(v.line,v.column,v.name,v.type))); $t = new RecordType($id.getLine(), $id.getCharPositionInLine()+1, rec);}
+             |'['i = INT_CONSTANT '::' tp = type ']' {$t = new ArrayType($i.getLine(), $i.getCharPositionInLine()+1,$tp.t,LexerHelper.lexemeToInt($i.text));}
              ;
 
 //*******LEXER******

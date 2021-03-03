@@ -2,7 +2,7 @@ package es.uniovi.dlp.ast.expressions;
 
 public class DoubleLiteral extends AbstractExpression implements Expression{
 
-    private Double value;
+    public Double value;
 
 
     public DoubleLiteral(int line, int column, Double  value) {
