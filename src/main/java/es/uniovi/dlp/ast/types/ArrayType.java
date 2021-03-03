@@ -1,6 +1,6 @@
 package es.uniovi.dlp.ast.types;
 
-public class ArrayType extends AbstractType {
+public class ArrayType extends AbstractType implements Type{
     private Type arrayOf;
     private int size;
 

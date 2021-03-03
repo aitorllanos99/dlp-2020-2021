@@ -1,6 +1,6 @@
 package es.uniovi.dlp.ast.expressions;
 
-public class CharLiteral extends AbstractExpression{
+public class CharLiteral extends AbstractExpression implements Expression{
 
     private Character value;
 

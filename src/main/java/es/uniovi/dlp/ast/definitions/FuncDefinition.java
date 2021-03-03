@@ -7,7 +7,7 @@ import es.uniovi.dlp.ast.types.Type;
 
 import java.util.List;
 
-public class FuncDefinition extends AbstractDefinition {
+public class FuncDefinition extends AbstractDefinition  implements Definition{
     private List<Statement> statementsList;
     private List<VarDefinition> parameters;
     private String name;

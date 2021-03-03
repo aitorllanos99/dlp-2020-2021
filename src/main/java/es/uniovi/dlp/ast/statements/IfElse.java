@@ -4,7 +4,7 @@ import es.uniovi.dlp.ast.expressions.Expression;
 
 import java.util.List;
 
-public class IfElse extends AbstractStatement {
+public class IfElse extends AbstractStatement implements Statement{
     private Expression condition;
     private List<Statement> ifStatements;
     private List<Statement> elseStatements;

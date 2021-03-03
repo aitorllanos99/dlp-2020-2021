@@ -3,6 +3,10 @@ grammar Xana;
 
 @header {
 package es.uniovi.dlp.parser;
+import es.uniovi.dlp.ast.definitions.*;
+import es.uniovi.dlp.ast.expressions.*;
+import es.uniovi.dlp.ast.statements.*;
+import es.uniovi.dlp.ast.types.*;
 import es.uniovi.dlp.ast.*;
 }
 
@@ -10,40 +14,42 @@ program returns [Program ast]
        : d=definitions* mf=mainFunction {$d.ast.add($mf.ast); $ast = new Program($d.start.getLine(), $d.start.getCharPositionInLine() +1, $d.ast);}
        ;
 
-definitions returns [List<Definition> ast]
+definitions returns [List<Definition> ast = new ArrayList<Definition>()]
            : varDefinition {$ast.addAll($varDefinition.ast);}
-           | funcDefinition {$ast.addAll($funcDefinition.ast);}
+           | funcDefinition {$ast.add($funcDefinition.ast);}
            ;
 
 funcDefinition returns [FuncDefinition ast]
-        : 'def ' id = ID '('fp = funcParameters?')''::' ft = functionTypes  'do' (statements | varDefinition)* 'end'
+        : 'def ' id = ID '('fp = funcParameters?')''::' ft = functionTypes  'do' fb = funcBody 'end' {$ast = new FuncDefinition($id.getLine(), $id.getCharPositionInLine()+1, $fb.stat, $fb.varDef, $ft.t,$id.text);}
         ;
 funcParameters returns [List<VarDefinition> ast = new ArrayList<VarDefinition>()]
-        : (id1 = ID '::' t1 = type {$ast.add($id1.getLine(), $id1.getCharPositionInLine() +1, $id1.text, $t1.t);}(',' id2 = ID '::' t2 = type{$ast.add($id2.getLine(), $id2.getCharPositionInLine() +1, $id2.text, $t2.t);})*)
+        : (id1 = ID '::' t1 = type {$ast.add(new VarDefinition($id1.getLine(), $id1.getCharPositionInLine() +1, $id1.text, $t1.t));}(',' id2 = ID '::' t2 = type{$ast.add(new VarDefinition($id2.getLine(), $id2.getCharPositionInLine() +1, $id2.text, $t2.t));})*)
         ;
-funcBody:; //COMO PONER EL STATEMENTS O VARDEFINITION EN COMUN AQUI?¿?¿?
+funcBody returns[List<Statement> stat = new ArrayList<Statement>() ,List<VarDefinition> varDef = new ArrayList<VarDefinition>()]
+        :(s = statements {$stat.addAll($s.st);} | v = varDefinition {$varDef.addAll($v.ast);})*
+        ;
 mainFunction returns [FuncDefinition ast]
-        : 'def ' 'main' '('')''do' (statements | varDefinition)* 'end'
+        : 'def ' id = 'main' '('')''do' fb = funcBody 'end' {$ast = new FuncDefinition($id.getLine(), $id.getCharPositionInLine()+1, $fb.stat, $fb.varDef, new VoidType($id.getLine(), $id.getCharPositionInLine()+1),$id.text);}
         ;
 
-varDefinition returns [VarDefinition ast]
-            : mid = moreIdentDefinitions '::' t = varTypes {for(String s: $mid.ast) $ast.add(new VarDefinition($mid.start.getLine(), $mid.start.getCharPositionInLine() +1 , s, $t.t}
+varDefinition returns [List<VarDefinition> ast = new ArrayList<VarDefinition>()]
+            : mid = moreIdentDefinitions '::' t = varTypes {for(String s: $mid.ast) $ast.add(new VarDefinition($mid.start.getLine(), $mid.start.getCharPositionInLine() +1 , s, $t.t));}
             ;
 varTypes returns [Type t]
-            : p = primitiveType {$t = p.t}
-            | c = complexType {$t = c.t}
+            : p = primitiveType {$t = $p.t;}
+            | c = complexType {$t = $c.t;}
             ;
-moreIdentDefinitions returns[List<VarDefinition> ast = new ArrayList<VarDefinition>()]:
+moreIdentDefinitions returns[List<String> ast = new ArrayList<String>()]:
             id1 = ID {$ast.add($id1.text);} (',' id2 = ID {$ast.add($id2.text);} )*
             ;
-statements returns [Statement st]
-        : ID '(' mp = moreParameters ')'{$st = new Invocation($ID.getLine(), $ID.getCharPositionInLine(), $ID, $mp.ast);}
-        | 'return' expression {$st = new Return ($expression.start.getLine(), $expression.start.getCharPositionInLine() +1 , $expression.ast);}
-        | 'if' ex = expression+ 'do' ms = moreStatements ('else' ms2 = moreStatements)? 'end' {$st = new IfElse($ex.start.getLine(), $ex.start.getCharPositionInLine()+1, $ms.ast,$ms2.ast, $ex.ast);}
-        | 'while' ex=expression+ 'do' ms = moreStatements 'end' {$st = new While($ex.start.getLine(), $ex.start.getCharPositionInLine()+1, $ms.ast, $ex.ast);}
-        | 'in' me = moreExpressions {$st = new Print($me.start.getLine(), $me.start.getCharPositionInLine() +1, $me.ast)}
-        | 'puts' me = moreExpressions {$st = new Print($me.start.getLine(), $me.start.getCharPositionInLine() +1, $me.ast)}
-        | left = expression '=' right=expression {$st = new Assignment($left.start.getLine(), $left.start.getCharPositionInLine() +1 , $left.ast ,  $right.ast);}
+statements returns [List<Statement> st = new ArrayList<Statement>()]
+        : ID '(' mp = moreParameters ')'{$st.add(new Invocation($ID.getLine(), $ID.getCharPositionInLine(), new Variable($ID.getLine(), $ID.getCharPositionInLine() + 1, $ID.text), $mp.ast));}
+        | 'return' expression {$st.add(new Return ($expression.start.getLine(), $expression.start.getCharPositionInLine() +1 , $expression.ast));}
+        | 'if' ex = expression+ 'do' ms = moreStatements ('else' ms2 = moreStatements)? 'end' {$st.add(new IfElse($ex.start.getLine(), $ex.start.getCharPositionInLine()+1, $ex.ast, $ms.ast,$ms2.ast));}
+        | 'while' ex=expression+ 'do' ms = moreStatements 'end' {$st.add(new While($ex.start.getLine(), $ex.start.getCharPositionInLine()+1, $ms.ast, $ex.ast));}
+        | 'in' me = moreExpressions {$me.ast.stream().map(e-> $st.add(new Read($me.start.getLine(), $me.start.getCharPositionInLine() +1, e)));}
+        | 'puts' me = moreExpressions {$me.ast.stream().map(e-> $st.add(new Write($me.start.getLine(), $me.start.getCharPositionInLine() +1, e)));}
+        | left = expression '=' right=expression {$st.add(new Assignment($left.start.getLine(), $left.start.getCharPositionInLine() +1 , $left.ast ,  $right.ast));}
         ;
 moreExpressions returns[List<Expression> ast = new ArrayList<Expression>()]
         : e1 = expression {$ast.add($e1.ast);} (',' e2 = expression{$ast.add($e2.ast);})*
@@ -55,7 +61,7 @@ moreParameters returns[List<Expression> ast = new ArrayList<Expression>()]
         :(e1 = expression {$ast.add($e1.ast);} (',' e2 = expression{$ast.add($e2.ast);})*)?
         ;
 expression returns [Expression ast]
-        : ID '(' mp = moreParameters ')' {$ast = new Invocation($ID.getLine(), $ID.getCharPositionInLine(), $ID, $mp.ast);}
+        : ID '(' mp = moreParameters ')' {$ast = new Invocation($ID.getLine(), $ID.getCharPositionInLine(), new Variable($ID.getLine(), $ID.getCharPositionInLine() + 1, $ID.text), $mp.ast);}
         | i = INT_CONSTANT {$ast = new IntLiteral($i.getLine(), $i.getCharPositionInLine() + 1, LexerHelper.lexemeToInt($i.text));}
         | c = CHAR_CONSTANT {$ast = new CharLiteral($c.getLine(), $c.getCharPositionInLine() + 1, LexerHelper.lexemeToChar($c.text));}
         | r = REAL_CONSTANT {$ast = new DoubleLiteral($r.getLine(), $r.getCharPositionInLine() + 1, LexerHelper.lexemeToReal($r.text));}
@@ -64,7 +70,7 @@ expression returns [Expression ast]
         | '[' expression ']' {$ast = $expression.ast;}
         | left = expression '[' right = expression ']'{$ast = new Indexing($left.start.getLine(), $left.start.getCharPositionInLine()+1, $left.ast, $right.ast);}
         | left = expression '.' right = expression {$ast = new FieldAccess($left.start.getLine(), $left.start.getCharPositionInLine() +1, $left.ast, $right.ast);}
-        | exp = expression 'as' tc = type {$ast = new Cast($exp.start.getLine(), $exp.start.getCharPositionInLine()+1, $tc.t. $exp.ast);}
+        | exp = expression 'as' tc = type {$ast = new Cast($exp.start.getLine(), $exp.start.getCharPositionInLine()+1, $tc.t, $exp.ast);}
         | '-' exp = expression {$ast = new UnaryMinus($exp.start.getLine(), $exp.start.getCharPositionInLine() + 1, $exp.ast);}
         | '!' exp = expression {$ast = new UnaryNot($exp.start.getLine(), $exp.start.getCharPositionInLine() + 1, $exp.ast);}
         | left = expression op = ('*'| '/' | '%') right = expression {$ast = new Arithmetic($left.start.getLine(), $left.start.getCharPositionInLine() + 1, $left.ast, $right.ast, $op.text);}
@@ -76,14 +82,14 @@ expression returns [Expression ast]
 
 
 type returns [Type t]
-    : p = primitiveType {$t = p.t}
-    | c = complexType {$t = c.t}
-    | v = voidType {$t = v.t}
+    : p = primitiveType {$t = $p.t;}
+    | c = complexType {$t = $c.t;}
+    | v = voidType {$t = $v.t;}
 ;
 
 functionTypes returns [Type t]
-        : p = primitiveType {$t = p.t}
-        | v = voidType {$t = v.t}
+        : p = primitiveType {$t = $p.t;}
+        | v = voidType {$t = $v.t;}
         ;
 
 voidType returns [Type t]
@@ -95,8 +101,8 @@ primitiveType returns [Type t]
              |c='char' {$t = new CharType($c.getLine(), $c.getCharPositionInLine() + 1);}
              |d='double' {$t = new DoubleType($d.getLine(), $d.getCharPositionInLine() +1) ;}
              ;
-complexType: 'defstruct' 'do' varDefinition* 'end'
-             |'['(INT_CONSTANT | CHAR_CONSTANT | REAL_CONSTANT)+ '::' type ']'
+complexType returns [Type t]: 'defstruct' 'do' varDefinition* 'end'
+             |'['INT_CONSTANT '::' type ']'
              ;
 
 //*******LEXER******

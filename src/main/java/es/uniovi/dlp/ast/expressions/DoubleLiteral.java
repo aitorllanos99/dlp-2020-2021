@@ -1,6 +1,6 @@
 package es.uniovi.dlp.ast.expressions;
 
-public class DoubleLiteral extends AbstractExpression{
+public class DoubleLiteral extends AbstractExpression implements Expression{
 
     private Double value;
 

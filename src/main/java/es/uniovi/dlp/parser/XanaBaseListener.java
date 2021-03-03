@@ -1,6 +1,10 @@
 // Generated from D:/1Escritorio/Informatica/Uni/Cuarto Curso/Segundo Cuatrimestre/DLP/Compiler/src/main/antlr4\Xana.g4 by ANTLR 4.9.1
 
 package es.uniovi.dlp.parser;
+import es.uniovi.dlp.ast.definitions.*;
+import es.uniovi.dlp.ast.expressions.*;
+import es.uniovi.dlp.ast.statements.*;
+import es.uniovi.dlp.ast.types.*;
 import es.uniovi.dlp.ast.*;
 
 
@@ -55,6 +59,30 @@ public class XanaBaseListener implements XanaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFuncParameters(XanaParser.FuncParametersContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFuncParameters(XanaParser.FuncParametersContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFuncBody(XanaParser.FuncBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFuncBody(XanaParser.FuncBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterMainFunction(XanaParser.MainFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -79,6 +107,30 @@ public class XanaBaseListener implements XanaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterVarTypes(XanaParser.VarTypesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVarTypes(XanaParser.VarTypesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMoreIdentDefinitions(XanaParser.MoreIdentDefinitionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMoreIdentDefinitions(XanaParser.MoreIdentDefinitionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterStatements(XanaParser.StatementsContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -86,6 +138,42 @@ public class XanaBaseListener implements XanaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStatements(XanaParser.StatementsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMoreExpressions(XanaParser.MoreExpressionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMoreExpressions(XanaParser.MoreExpressionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMoreStatements(XanaParser.MoreStatementsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMoreStatements(XanaParser.MoreStatementsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMoreParameters(XanaParser.MoreParametersContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMoreParameters(XanaParser.MoreParametersContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -110,6 +198,30 @@ public class XanaBaseListener implements XanaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitType(XanaParser.TypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionTypes(XanaParser.FunctionTypesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionTypes(XanaParser.FunctionTypesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVoidType(XanaParser.VoidTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVoidType(XanaParser.VoidTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -1,6 +1,6 @@
 package es.uniovi.dlp.ast.expressions;
 
-public class UnaryNot extends AbstractExpression {
+public class UnaryNot extends AbstractExpression implements Expression{
     private Expression expression;
 
     public UnaryNot(int line, int column, Expression expressions) {

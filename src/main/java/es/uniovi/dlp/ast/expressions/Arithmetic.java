@@ -2,7 +2,7 @@ package es.uniovi.dlp.ast.expressions;
 
 
 
-public class Arithmetic extends AbstractExpression {
+public class Arithmetic extends AbstractExpression implements Expression{
     private Expression expression1;
     private Expression expression2;
     private String operator;

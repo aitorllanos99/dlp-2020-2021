@@ -1,6 +1,6 @@
 package es.uniovi.dlp.ast.expressions;
 
-public class Comparison extends AbstractExpression {
+public class Comparison extends AbstractExpression implements Expression{
     private Expression expression1;
     private Expression expression2;
     private String operator;

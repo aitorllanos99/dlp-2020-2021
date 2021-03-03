@@ -2,7 +2,7 @@ package es.uniovi.dlp.ast.statements;
 
 import es.uniovi.dlp.ast.expressions.Expression;
 
-public class Assignment extends AbstractStatement {
+public class Assignment extends AbstractStatement implements Statement{
 
     private Expression expression1;
     private Expression expression2;

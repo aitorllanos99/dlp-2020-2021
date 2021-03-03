@@ -4,7 +4,7 @@ import es.uniovi.dlp.ast.statements.Statement;
 
 import java.util.List;
 
-public class Invocation extends AbstractExpression implements Statement {
+public class Invocation extends AbstractExpression implements Statement,Expression {
     private Variable name;
     private List<Expression> arguments;
 

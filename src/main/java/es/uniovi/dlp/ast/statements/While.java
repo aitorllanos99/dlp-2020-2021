@@ -4,7 +4,7 @@ import es.uniovi.dlp.ast.expressions.Expression;
 
 import java.util.List;
 
-public class While extends AbstractStatement {
+public class While extends AbstractStatement implements Statement{
 
     private List<Statement> statements;
     private Expression condition;

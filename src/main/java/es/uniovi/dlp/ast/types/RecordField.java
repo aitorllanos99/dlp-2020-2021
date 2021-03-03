@@ -2,7 +2,7 @@ package es.uniovi.dlp.ast.types;
 
 import es.uniovi.dlp.ast.AbstractASTNode;
 
-public class RecordField extends AbstractASTNode {
+public class RecordField extends AbstractASTNode implements Type{
     private String name;
     private Type type;
 

@@ -1,6 +1,6 @@
 package es.uniovi.dlp.ast.expressions;
 
-public class Variable extends AbstractExpression{
+public class Variable extends AbstractExpression implements Expression{
 
     private String ident;
 

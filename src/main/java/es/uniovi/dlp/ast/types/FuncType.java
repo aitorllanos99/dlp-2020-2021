@@ -4,7 +4,7 @@ import es.uniovi.dlp.ast.definitions.VarDefinition;
 
 import java.util.List;
 
-public class FuncType extends AbstractType {
+public class FuncType extends AbstractType implements Type{
     private List<VarDefinition> parameters;
     private Type returnType;
 

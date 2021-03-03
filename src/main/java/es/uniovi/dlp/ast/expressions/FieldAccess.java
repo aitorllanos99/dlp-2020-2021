@@ -2,7 +2,7 @@ package es.uniovi.dlp.ast.expressions;
 
 
 
-public class FieldAccess extends AbstractExpression {
+public class FieldAccess extends AbstractExpression implements Expression{
     private Expression expression1;
     private Expression property;
 

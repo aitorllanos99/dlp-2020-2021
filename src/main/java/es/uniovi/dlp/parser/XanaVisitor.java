@@ -1,6 +1,10 @@
 // Generated from D:/1Escritorio/Informatica/Uni/Cuarto Curso/Segundo Cuatrimestre/DLP/Compiler/src/main/antlr4\Xana.g4 by ANTLR 4.9.1
 
 package es.uniovi.dlp.parser;
+import es.uniovi.dlp.ast.definitions.*;
+import es.uniovi.dlp.ast.expressions.*;
+import es.uniovi.dlp.ast.statements.*;
+import es.uniovi.dlp.ast.types.*;
 import es.uniovi.dlp.ast.*;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
@@ -32,6 +36,18 @@ public interface XanaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFuncDefinition(XanaParser.FuncDefinitionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link XanaParser#funcParameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFuncParameters(XanaParser.FuncParametersContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#funcBody}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFuncBody(XanaParser.FuncBodyContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link XanaParser#mainFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -44,11 +60,41 @@ public interface XanaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVarDefinition(XanaParser.VarDefinitionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link XanaParser#varTypes}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarTypes(XanaParser.VarTypesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#moreIdentDefinitions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMoreIdentDefinitions(XanaParser.MoreIdentDefinitionsContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link XanaParser#statements}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitStatements(XanaParser.StatementsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#moreExpressions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMoreExpressions(XanaParser.MoreExpressionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#moreStatements}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMoreStatements(XanaParser.MoreStatementsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#moreParameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMoreParameters(XanaParser.MoreParametersContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link XanaParser#expression}.
 	 * @param ctx the parse tree
@@ -61,6 +107,18 @@ public interface XanaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitType(XanaParser.TypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#functionTypes}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionTypes(XanaParser.FunctionTypesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XanaParser#voidType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVoidType(XanaParser.VoidTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link XanaParser#primitiveType}.
 	 * @param ctx the parse tree

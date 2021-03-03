@@ -1,6 +1,6 @@
 package es.uniovi.dlp.ast.expressions;
 
-public class Indexing extends AbstractExpression {
+public class Indexing extends AbstractExpression implements Expression{
     private Expression array;
     private Expression index;
 
