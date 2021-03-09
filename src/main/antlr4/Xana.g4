@@ -11,12 +11,12 @@ import es.uniovi.dlp.ast.*;
 }
 
 program returns [Program ast]
-       : d=definitions* mf=mainFunction {$d.ast.add($mf.ast); $ast = new Program($d.start.getLine(), $d.start.getCharPositionInLine() +1, $d.ast);}
+       : d=definitions mf=mainFunction {$d.ast.add($mf.ast); $ast = new Program($d.start.getLine(), $d.start.getCharPositionInLine() +1, $d.ast);}
        ;
 
 definitions returns [List<Definition> ast = new ArrayList<Definition>()]
-           : varDefinition {$ast.addAll($varDefinition.ast);}
-           | funcDefinition {$ast.add($funcDefinition.ast);}
+           : (varDefinition {$ast.addAll($varDefinition.ast);}
+           | funcDefinition {$ast.add($funcDefinition.ast);})*
            ;
 
 funcDefinition returns [FuncDefinition ast]
@@ -45,8 +45,13 @@ moreIdentDefinitions returns[List<String> ast = new ArrayList<String>()]:
 statements returns [List<Statement> st = new ArrayList<Statement>()]
         : ID '(' mp = moreParameters ')'{$st.add(new Invocation($ID.getLine(), $ID.getCharPositionInLine(), new Variable($ID.getLine(), $ID.getCharPositionInLine() + 1, $ID.text), $mp.ast));}
         | 'return' expression {$st.add(new Return ($expression.start.getLine(), $expression.start.getCharPositionInLine() +1 , $expression.ast));}
-        | 'if' ex = expression+ 'do' ms = moreStatements ('else' ms2 = moreStatements)? 'end' {$st.add(new IfElse($ex.start.getLine(), $ex.start.getCharPositionInLine()+1, $ex.ast, $ms.ast,$ms2.ast));}
-        | 'while' ex=expression+ 'do' ms = moreStatements 'end' {$st.add(new While($ex.start.getLine(), $ex.start.getCharPositionInLine()+1, $ms.ast, $ex.ast));}
+        | 'if' ex = expression+ 'do' ms += statements* ('else' ms2 += statements*)? 'end' {List<Statement> ifs = new ArrayList<Statement>();
+                                                                                               for(var s: $ms) ifs.addAll(s.st);
+                                                                                               List<Statement> elses = new ArrayList<Statement>();
+                                                                                               for(var s: $ms2) elses.addAll(s.st);
+                                                                                               $st.add(new IfElse($ex.start.getLine(), $ex.start.getCharPositionInLine()+1, $ex.ast, ifs,elses));}
+        | 'while' ex=expression+ 'do' ms += statements* 'end' {List<Statement> sts = new ArrayList<Statement>();
+                                                                   for(var s: $ms) sts.addAll(s.st);$st.add(new While($ex.start.getLine(), $ex.start.getCharPositionInLine()+1, sts, $ex.ast));}
         | 'in' me = moreExpressions {$me.ast.stream().map(e-> $st.add(new Read($me.start.getLine(), $me.start.getCharPositionInLine() +1, e)));}
         | 'puts' me = moreExpressions {$me.ast.stream().map(e-> $st.add(new Write($me.start.getLine(), $me.start.getCharPositionInLine() +1, e)));}
         | left = expression '=' right=expression {$st.add(new Assignment($left.start.getLine(), $left.start.getCharPositionInLine() +1 , $left.ast ,  $right.ast));}
@@ -101,9 +106,17 @@ primitiveType returns [Type t]
              |c='char' {$t = new CharType($c.getLine(), $c.getCharPositionInLine() + 1);}
              |d='double' {$t = new DoubleType($d.getLine(), $d.getCharPositionInLine() +1) ;}
              ;
-complexType returns [Type t]: id = 'defstruct' 'do' vd = varDefinition* 'end' {List<RecordField> rec = new ArrayList<RecordField>();$vd.ast.stream().map(v-> rec.add(new RecordField(v.line,v.column,v.name,v.type))); $t = new RecordType($id.getLine(), $id.getCharPositionInLine()+1, rec);}
+complexType returns [Type t]: id = 'defstruct' 'do' vd += varDefinition* 'end' {List<RecordField> rec = new ArrayList<RecordField>();
+                                                                                List<VarDefinition> vds = new ArrayList<VarDefinition>();
+                                                                                for(var v: $vd) vds.addAll(v.ast);
+                                                                                for(var v: vds) rec.add(new RecordField(v.getLine(),v.getColumn(),v.getName(),v.getType()));
+                                                                                $t = new RecordType($id.getLine(), $id.getCharPositionInLine()+1, rec);}
              |'['i = INT_CONSTANT '::' tp = type ']' {$t = new ArrayType($i.getLine(), $i.getCharPositionInLine()+1,$tp.t,LexerHelper.lexemeToInt($i.text));}
              ;
+
+/*structFieldsDefinition returns[List <VarDefinition> ast  = new ArrayList<VarDefinition>();]:
+             (id1=ID '::' t1=type)* {$ast.add(new VarDefinition($id1.getLine(), $id1.getCharPositionInLine() +1, $id1.text, $t1.t));}
+            ;*/
 
 //*******LEXER******
 WHITESPACE: [ \n\t\r]+ -> skip

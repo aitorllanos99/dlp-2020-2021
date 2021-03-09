@@ -8,6 +8,7 @@ public class RecordType extends AbstractType implements Type {
     public RecordType(int line, int column, List<RecordField> fields) {
         super(line, column);
         this.fields = fields;
+        //fields.stream().forEach(System.out::println);
         fields.stream().forEach(f ->
         {
             if (fields.stream().filter(f2 -> f2.equals(f.name)).count() > 1)

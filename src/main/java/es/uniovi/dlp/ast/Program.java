@@ -17,6 +17,7 @@ public class Program implements ASTNode {
         this.column = column;
         this.definitions = definitions;
         ErrorManager.getInstance().print();
+
     }
 
     @Override

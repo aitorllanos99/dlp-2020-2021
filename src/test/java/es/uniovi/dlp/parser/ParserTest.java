@@ -189,4 +189,8 @@ public class ParserTest {
     void testInsertSort() {
         parserForProgram("real_examples/insert_sort").program();
     }
+    @Test
+    void testError() {
+        parserForProgram("errors/duplicate_record_field").program();
+    }
 }
