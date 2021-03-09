@@ -11,10 +11,12 @@ public class Program implements ASTNode {
     int line;
     int column;
     List<Definition> definitions = new ArrayList<Definition>();
-    public Program(int line, int column, List<Definition> definitions ) {
-       this.line = line;
-       this.column = column;
+
+    public Program(int line, int column, List<Definition> definitions) {
+        this.line = line;
+        this.column = column;
         this.definitions = definitions;
+        ErrorManager.getInstance().print();
     }
 
     @Override
