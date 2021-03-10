@@ -327,7 +327,7 @@ public class XanaParser extends Parser {
 			((FuncDefinitionContext)_localctx).fb = funcBody();
 			setState(62);
 			match(T__5);
-			((FuncDefinitionContext)_localctx).ast =  new FuncDefinition(((FuncDefinitionContext)_localctx).id.getLine(), ((FuncDefinitionContext)_localctx).id.getCharPositionInLine()+1, ((FuncDefinitionContext)_localctx).fb.stat, ((FuncDefinitionContext)_localctx).fb.varDef, new FuncType(((FuncDefinitionContext)_localctx).id.getLine(), ((FuncDefinitionContext)_localctx).id.getCharPositionInLine()+1,((FuncDefinitionContext)_localctx).fb.varDef,((FuncDefinitionContext)_localctx).ft.t),(((FuncDefinitionContext)_localctx).id!=null?((FuncDefinitionContext)_localctx).id.getText():null));
+			((FuncDefinitionContext)_localctx).ast =  new FuncDefinition(((FuncDefinitionContext)_localctx).id.getLine(), ((FuncDefinitionContext)_localctx).id.getCharPositionInLine()+1, ((FuncDefinitionContext)_localctx).fb.stat, ((FuncDefinitionContext)_localctx).fb.varDef, new FuncType(((FuncDefinitionContext)_localctx).id.getLine(), ((FuncDefinitionContext)_localctx).id.getCharPositionInLine()+1,((FuncDefinitionContext)_localctx).fp.ast,((FuncDefinitionContext)_localctx).ft.t),(((FuncDefinitionContext)_localctx).id!=null?((FuncDefinitionContext)_localctx).id.getText():null));
 			}
 		}
 		catch (RecognitionException re) {
@@ -556,7 +556,7 @@ public class XanaParser extends Parser {
 			((MainFunctionContext)_localctx).fb = funcBody();
 			setState(97);
 			match(T__5);
-			((MainFunctionContext)_localctx).ast =  new FuncDefinition(((MainFunctionContext)_localctx).id.getLine(), ((MainFunctionContext)_localctx).id.getCharPositionInLine()+1, ((MainFunctionContext)_localctx).fb.stat, ((MainFunctionContext)_localctx).fb.varDef, new FuncType(((MainFunctionContext)_localctx).id.getLine(), ((MainFunctionContext)_localctx).id.getCharPositionInLine()+1,((MainFunctionContext)_localctx).fb.varDef,new VoidType(((MainFunctionContext)_localctx).id.getLine(), ((MainFunctionContext)_localctx).id.getCharPositionInLine()+1)),(((MainFunctionContext)_localctx).id!=null?((MainFunctionContext)_localctx).id.getText():null));
+			((MainFunctionContext)_localctx).ast =  new FuncDefinition(((MainFunctionContext)_localctx).id.getLine(), ((MainFunctionContext)_localctx).id.getCharPositionInLine()+1, ((MainFunctionContext)_localctx).fb.stat, ((MainFunctionContext)_localctx).fb.varDef, new FuncType(((MainFunctionContext)_localctx).id.getLine(), ((MainFunctionContext)_localctx).id.getCharPositionInLine()+1,new ArrayList<VarDefinition>(),new VoidType(((MainFunctionContext)_localctx).id.getLine(), ((MainFunctionContext)_localctx).id.getCharPositionInLine()+1)),(((MainFunctionContext)_localctx).id!=null?((MainFunctionContext)_localctx).id.getText():null));
 			}
 		}
 		catch (RecognitionException re) {
