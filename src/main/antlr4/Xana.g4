@@ -122,22 +122,20 @@ WHITESPACE: [ \n\t\r]+ -> skip
 INT_CONSTANT: [0-9]+
             ;
 
-REAL_CONSTANT: INT_CONSTANT?'.'INT_CONSTANT
-            | INT_CONSTANT'.'INT_CONSTANT?
+REAL_CONSTANT: DECIMALPOINT
             | ELEVATION
             | EXPONENTIAL
             ;
-
+DECIMALPOINT: INT_CONSTANT?'.'INT_CONSTANT
+            | INT_CONSTANT'.'INT_CONSTANT?
+            | INT_CONSTANT'.'INT_CONSTANT
+            ;
 ELEVATION: INT_CONSTANT'e'INT_CONSTANT
             | INT_CONSTANT?'e'INT_CONSTANT
             | INT_CONSTANT'e'INT_CONSTANT?
             ;
-EXPONENTIAL: INT_CONSTANT'.'INT_CONSTANT'E'('+'|'-')?INT_CONSTANT
-            | INT_CONSTANT?'.'INT_CONSTANT'E'('+'|'-')?INT_CONSTANT
-            | INT_CONSTANT'.'INT_CONSTANT?'E'('+'|'-')?INT_CONSTANT
-            | INT_CONSTANT'.'INT_CONSTANT'E'('+'|'-')?REAL_CONSTANT
-            | INT_CONSTANT?'.'INT_CONSTANT'E'('+'|'-')?REAL_CONSTANT
-            | INT_CONSTANT'.'INT_CONSTANT?'E'('+'|'-')?REAL_CONSTANT
+EXPONENTIAL: DECIMALPOINT'E'('+'|'-')?INT_CONSTANT
+            | DECIMALPOINT'E'('+'|'-')?REAL_CONSTANT
             ;
 COMMENTS: '#'.*?('\n'|EOF)-> skip
                     ;
