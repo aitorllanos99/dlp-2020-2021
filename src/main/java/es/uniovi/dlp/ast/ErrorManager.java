@@ -9,8 +9,9 @@ public class ErrorManager {
     private static ErrorManager instance;
     private List<ErrorType> errors = new ArrayList<>();
     public static ErrorManager getInstance(){
-        if(instance == null)
-            return new ErrorManager();
+        if(instance == null) {
+            instance = new ErrorManager();
+        }
         return instance;
     }
 

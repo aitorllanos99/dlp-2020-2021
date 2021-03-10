@@ -328,7 +328,7 @@ public class XanaParser extends Parser {
 			((FuncDefinitionContext)_localctx).fb = funcBody();
 			setState(64);
 			match(T__5);
-			((FuncDefinitionContext)_localctx).ast =  new FuncDefinition(((FuncDefinitionContext)_localctx).id.getLine(), ((FuncDefinitionContext)_localctx).id.getCharPositionInLine()+1, ((FuncDefinitionContext)_localctx).fb.stat, ((FuncDefinitionContext)_localctx).fb.varDef, ((FuncDefinitionContext)_localctx).ft.t,(((FuncDefinitionContext)_localctx).id!=null?((FuncDefinitionContext)_localctx).id.getText():null));
+			((FuncDefinitionContext)_localctx).ast =  new FuncDefinition(((FuncDefinitionContext)_localctx).id.getLine(), ((FuncDefinitionContext)_localctx).id.getCharPositionInLine()+1, ((FuncDefinitionContext)_localctx).fb.stat, ((FuncDefinitionContext)_localctx).fb.varDef, new FuncType(((FuncDefinitionContext)_localctx).id.getLine(), ((FuncDefinitionContext)_localctx).id.getCharPositionInLine()+1,((FuncDefinitionContext)_localctx).fb.varDef,((FuncDefinitionContext)_localctx).ft.t),(((FuncDefinitionContext)_localctx).id!=null?((FuncDefinitionContext)_localctx).id.getText():null));
 			}
 		}
 		catch (RecognitionException re) {
