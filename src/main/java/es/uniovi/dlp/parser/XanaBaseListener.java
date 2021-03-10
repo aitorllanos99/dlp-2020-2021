@@ -155,18 +155,6 @@ public class XanaBaseListener implements XanaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMoreStatements(XanaParser.MoreStatementsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMoreStatements(XanaParser.MoreStatementsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterMoreParameters(XanaParser.MoreParametersContext ctx) { }
 	/**
 	 * {@inheritDoc}

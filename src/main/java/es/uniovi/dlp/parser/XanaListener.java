@@ -125,16 +125,6 @@ public interface XanaListener extends ParseTreeListener {
 	 */
 	void exitMoreExpressions(XanaParser.MoreExpressionsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link XanaParser#moreStatements}.
-	 * @param ctx the parse tree
-	 */
-	void enterMoreStatements(XanaParser.MoreStatementsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link XanaParser#moreStatements}.
-	 * @param ctx the parse tree
-	 */
-	void exitMoreStatements(XanaParser.MoreStatementsContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link XanaParser#moreParameters}.
 	 * @param ctx the parse tree
 	 */

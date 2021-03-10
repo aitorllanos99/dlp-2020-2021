@@ -29,7 +29,7 @@ funcBody returns[List<Statement> stat = new ArrayList<Statement>() ,List<VarDefi
         :(s = statements {$stat.addAll($s.st);} | v = varDefinition {$varDef.addAll($v.ast);})*
         ;
 mainFunction returns [FuncDefinition ast]
-        : 'def ' id = 'main' '('')''do' fb = funcBody 'end' {$ast = new FuncDefinition($id.getLine(), $id.getCharPositionInLine()+1, $fb.stat, $fb.varDef, new VoidType($id.getLine(), $id.getCharPositionInLine()+1),$id.text);}
+        : 'def ' id = 'main' '('')''do' fb = funcBody 'end' {$ast = new FuncDefinition($id.getLine(), $id.getCharPositionInLine()+1, $fb.stat, $fb.varDef, new FuncType($id.getLine(), $id.getCharPositionInLine()+1,$fb.varDef,new VoidType($id.getLine(), $id.getCharPositionInLine()+1)),$id.text);}
         ;
 
 varDefinition returns [List<VarDefinition> ast = new ArrayList<VarDefinition>()]
@@ -59,9 +59,7 @@ statements returns [List<Statement> st = new ArrayList<Statement>()]
 moreExpressions returns[List<Expression> ast = new ArrayList<Expression>()]
         : e1 = expression {$ast.add($e1.ast);} (',' e2 = expression{$ast.add($e2.ast);})*
         ;
-moreStatements returns [List<Statement> ast = new ArrayList<Statement>()]
-        : stat=statements* {for(Statement s: $stat.st) $ast.add(s);}
-        ;
+
 moreParameters returns[List<Expression> ast = new ArrayList<Expression>()]
         :(e1 = expression {$ast.add($e1.ast);} (',' e2 = expression{$ast.add($e2.ast);})*)?
         ;

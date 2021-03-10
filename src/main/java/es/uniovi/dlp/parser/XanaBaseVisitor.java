@@ -101,13 +101,6 @@ public class XanaBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements X
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMoreStatements(XanaParser.MoreStatementsContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitMoreParameters(XanaParser.MoreParametersContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

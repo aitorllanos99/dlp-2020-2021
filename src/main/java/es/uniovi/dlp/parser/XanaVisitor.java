@@ -84,12 +84,6 @@ public interface XanaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMoreExpressions(XanaParser.MoreExpressionsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link XanaParser#moreStatements}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMoreStatements(XanaParser.MoreStatementsContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link XanaParser#moreParameters}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
