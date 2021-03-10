@@ -29,8 +29,8 @@ public class XanaParser extends Parser {
 		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, T__22=23, T__23=24, 
 		T__24=25, T__25=26, T__26=27, T__27=28, T__28=29, T__29=30, T__30=31, 
 		T__31=32, T__32=33, T__33=34, T__34=35, T__35=36, T__36=37, T__37=38, 
-		WHITESPACE=39, INT_CONSTANT=40, REAL_CONSTANT=41, ELEVATION=42, EXPONENTIAL=43, 
-		COMMENTS=44, COMMENTSBIGGER=45, ID=46, CHAR_CONSTANT=47;
+		WHITESPACE=39, INT_CONSTANT=40, REAL_CONSTANT=41, DECIMALPOINT=42, ELEVATION=43, 
+		EXPONENTIAL=44, COMMENTS=45, COMMENTSBIGGER=46, ID=47, CHAR_CONSTANT=48;
 	public static final int
 		RULE_program = 0, RULE_definitions = 1, RULE_funcDefinition = 2, RULE_funcParameters = 3, 
 		RULE_funcBody = 4, RULE_mainFunction = 5, RULE_varDefinition = 6, RULE_varTypes = 7, 
@@ -62,8 +62,8 @@ public class XanaParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, "WHITESPACE", "INT_CONSTANT", "REAL_CONSTANT", "ELEVATION", 
-			"EXPONENTIAL", "COMMENTS", "COMMENTSBIGGER", "ID", "CHAR_CONSTANT"
+			null, null, null, "WHITESPACE", "INT_CONSTANT", "REAL_CONSTANT", "DECIMALPOINT", 
+			"ELEVATION", "EXPONENTIAL", "COMMENTS", "COMMENTSBIGGER", "ID", "CHAR_CONSTANT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -260,7 +260,8 @@ public class XanaParser extends Parser {
 	public static class FuncDefinitionContext extends ParserRuleContext {
 		public FuncDefinition ast;
 		public Token id;
-		public FuncParametersContext fp;
+		public FuncParametersContext funcParameters;
+		public List<FuncParametersContext> fp = new ArrayList<FuncParametersContext>();
 		public FunctionTypesContext ft;
 		public FuncBodyContext fb;
 		public TerminalNode ID() { return getToken(XanaParser.ID, 0); }
@@ -311,7 +312,8 @@ public class XanaParser extends Parser {
 			if (_la==ID) {
 				{
 				setState(54);
-				((FuncDefinitionContext)_localctx).fp = funcParameters();
+				((FuncDefinitionContext)_localctx).funcParameters = funcParameters();
+				((FuncDefinitionContext)_localctx).fp.add(((FuncDefinitionContext)_localctx).funcParameters);
 				}
 			}
 
@@ -327,7 +329,9 @@ public class XanaParser extends Parser {
 			((FuncDefinitionContext)_localctx).fb = funcBody();
 			setState(62);
 			match(T__5);
-			((FuncDefinitionContext)_localctx).ast =  new FuncDefinition(((FuncDefinitionContext)_localctx).id.getLine(), ((FuncDefinitionContext)_localctx).id.getCharPositionInLine()+1, ((FuncDefinitionContext)_localctx).fb.stat, ((FuncDefinitionContext)_localctx).fb.varDef, new FuncType(((FuncDefinitionContext)_localctx).id.getLine(), ((FuncDefinitionContext)_localctx).id.getCharPositionInLine()+1,((FuncDefinitionContext)_localctx).fp.ast,((FuncDefinitionContext)_localctx).ft.t),(((FuncDefinitionContext)_localctx).id!=null?((FuncDefinitionContext)_localctx).id.getText():null));
+			List<VarDefinition> parameters = new ArrayList<VarDefinition>();
+			                                                                                                       for(var s: ((FuncDefinitionContext)_localctx).fp) parameters.addAll(s.ast);
+			                                                                                                       ((FuncDefinitionContext)_localctx).ast =  new FuncDefinition(((FuncDefinitionContext)_localctx).id.getLine(), ((FuncDefinitionContext)_localctx).id.getCharPositionInLine()+1, ((FuncDefinitionContext)_localctx).fb.stat, parameters, ((FuncDefinitionContext)_localctx).fb.varDef, new FuncType(((FuncDefinitionContext)_localctx).id.getLine(), ((FuncDefinitionContext)_localctx).id.getCharPositionInLine()+1,parameters,((FuncDefinitionContext)_localctx).ft.t),(((FuncDefinitionContext)_localctx).id!=null?((FuncDefinitionContext)_localctx).id.getText():null));
 			}
 		}
 		catch (RecognitionException re) {
@@ -556,7 +560,7 @@ public class XanaParser extends Parser {
 			((MainFunctionContext)_localctx).fb = funcBody();
 			setState(97);
 			match(T__5);
-			((MainFunctionContext)_localctx).ast =  new FuncDefinition(((MainFunctionContext)_localctx).id.getLine(), ((MainFunctionContext)_localctx).id.getCharPositionInLine()+1, ((MainFunctionContext)_localctx).fb.stat, ((MainFunctionContext)_localctx).fb.varDef, new FuncType(((MainFunctionContext)_localctx).id.getLine(), ((MainFunctionContext)_localctx).id.getCharPositionInLine()+1,new ArrayList<VarDefinition>(),new VoidType(((MainFunctionContext)_localctx).id.getLine(), ((MainFunctionContext)_localctx).id.getCharPositionInLine()+1)),(((MainFunctionContext)_localctx).id!=null?((MainFunctionContext)_localctx).id.getText():null));
+			((MainFunctionContext)_localctx).ast =  new FuncDefinition(((MainFunctionContext)_localctx).id.getLine(), ((MainFunctionContext)_localctx).id.getCharPositionInLine()+1, ((MainFunctionContext)_localctx).fb.stat,new ArrayList<VarDefinition>(), ((MainFunctionContext)_localctx).fb.varDef, new FuncType(((MainFunctionContext)_localctx).id.getLine(), ((MainFunctionContext)_localctx).id.getCharPositionInLine()+1,new ArrayList<VarDefinition>(),new VoidType(((MainFunctionContext)_localctx).id.getLine(), ((MainFunctionContext)_localctx).id.getCharPositionInLine()+1)),(((MainFunctionContext)_localctx).id!=null?((MainFunctionContext)_localctx).id.getText():null));
 			}
 		}
 		catch (RecognitionException re) {
@@ -1871,7 +1875,7 @@ public class XanaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\61\u0155\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\62\u0155\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\3\2\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\7\3\61\n\3\f\3\16\3"+
@@ -1905,18 +1909,18 @@ public class XanaParser extends Parser {
 		"$\u0152\3\2\2\2&\'\5\4\3\2\'(\5\f\7\2()\b\2\1\2)\3\3\2\2\2*+\5\16\b\2"+
 		"+,\b\3\1\2,\61\3\2\2\2-.\5\6\4\2./\b\3\1\2/\61\3\2\2\2\60*\3\2\2\2\60"+
 		"-\3\2\2\2\61\64\3\2\2\2\62\60\3\2\2\2\62\63\3\2\2\2\63\5\3\2\2\2\64\62"+
-		"\3\2\2\2\65\66\7\3\2\2\66\67\7\60\2\2\679\7\4\2\28:\5\b\5\298\3\2\2\2"+
+		"\3\2\2\2\65\66\7\3\2\2\66\67\7\61\2\2\679\7\4\2\28:\5\b\5\298\3\2\2\2"+
 		"9:\3\2\2\2:;\3\2\2\2;<\7\5\2\2<=\7\6\2\2=>\5\36\20\2>?\7\7\2\2?@\5\n\6"+
-		"\2@A\7\b\2\2AB\b\4\1\2B\7\3\2\2\2CD\7\60\2\2DE\7\6\2\2EF\5\34\17\2FO\b"+
-		"\5\1\2GH\7\t\2\2HI\7\60\2\2IJ\7\6\2\2JK\5\34\17\2KL\b\5\1\2LN\3\2\2\2"+
+		"\2@A\7\b\2\2AB\b\4\1\2B\7\3\2\2\2CD\7\61\2\2DE\7\6\2\2EF\5\34\17\2FO\b"+
+		"\5\1\2GH\7\t\2\2HI\7\61\2\2IJ\7\6\2\2JK\5\34\17\2KL\b\5\1\2LN\3\2\2\2"+
 		"MG\3\2\2\2NQ\3\2\2\2OM\3\2\2\2OP\3\2\2\2P\t\3\2\2\2QO\3\2\2\2RS\5\24\13"+
 		"\2ST\b\6\1\2TY\3\2\2\2UV\5\16\b\2VW\b\6\1\2WY\3\2\2\2XR\3\2\2\2XU\3\2"+
 		"\2\2Y\\\3\2\2\2ZX\3\2\2\2Z[\3\2\2\2[\13\3\2\2\2\\Z\3\2\2\2]^\7\3\2\2^"+
 		"_\7\n\2\2_`\7\4\2\2`a\7\5\2\2ab\7\7\2\2bc\5\n\6\2cd\7\b\2\2de\b\7\1\2"+
 		"e\r\3\2\2\2fg\5\22\n\2gh\7\6\2\2hi\5\20\t\2ij\b\b\1\2j\17\3\2\2\2kl\5"+
 		"\"\22\2lm\b\t\1\2mr\3\2\2\2no\5$\23\2op\b\t\1\2pr\3\2\2\2qk\3\2\2\2qn"+
-		"\3\2\2\2r\21\3\2\2\2st\7\60\2\2tz\b\n\1\2uv\7\t\2\2vw\7\60\2\2wy\b\n\1"+
-		"\2xu\3\2\2\2y|\3\2\2\2zx\3\2\2\2z{\3\2\2\2{\23\3\2\2\2|z\3\2\2\2}~\7\60"+
+		"\3\2\2\2r\21\3\2\2\2st\7\61\2\2tz\b\n\1\2uv\7\t\2\2vw\7\61\2\2wy\b\n\1"+
+		"\2xu\3\2\2\2y|\3\2\2\2zx\3\2\2\2z{\3\2\2\2{\23\3\2\2\2|z\3\2\2\2}~\7\61"+
 		"\2\2~\177\7\4\2\2\177\u0080\5\30\r\2\u0080\u0081\7\5\2\2\u0081\u0082\b"+
 		"\13\1\2\u0082\u00be\3\2\2\2\u0083\u0084\7\13\2\2\u0084\u0085\5\32\16\2"+
 		"\u0085\u0086\b\13\1\2\u0086\u00be\3\2\2\2\u0087\u0089\7\f\2\2\u0088\u008a"+
@@ -1947,10 +1951,10 @@ public class XanaParser extends Parser {
 		"\u00d1\3\2\2\2\u00d0\u00cc\3\2\2\2\u00d1\u00d4\3\2\2\2\u00d2\u00d0\3\2"+
 		"\2\2\u00d2\u00d3\3\2\2\2\u00d3\u00d6\3\2\2\2\u00d4\u00d2\3\2\2\2\u00d5"+
 		"\u00ca\3\2\2\2\u00d5\u00d6\3\2\2\2\u00d6\31\3\2\2\2\u00d7\u00d8\b\16\1"+
-		"\2\u00d8\u00d9\7\60\2\2\u00d9\u00da\7\4\2\2\u00da\u00db\5\30\r\2\u00db"+
+		"\2\u00d8\u00d9\7\61\2\2\u00d9\u00da\7\4\2\2\u00da\u00db\5\30\r\2\u00db"+
 		"\u00dc\7\5\2\2\u00dc\u00dd\b\16\1\2\u00dd\u00f9\3\2\2\2\u00de\u00df\7"+
-		"*\2\2\u00df\u00f9\b\16\1\2\u00e0\u00e1\7\61\2\2\u00e1\u00f9\b\16\1\2\u00e2"+
-		"\u00e3\7+\2\2\u00e3\u00f9\b\16\1\2\u00e4\u00e5\7\60\2\2\u00e5\u00f9\b"+
+		"*\2\2\u00df\u00f9\b\16\1\2\u00e0\u00e1\7\62\2\2\u00e1\u00f9\b\16\1\2\u00e2"+
+		"\u00e3\7+\2\2\u00e3\u00f9\b\16\1\2\u00e4\u00e5\7\61\2\2\u00e5\u00f9\b"+
 		"\16\1\2\u00e6\u00e7\7\4\2\2\u00e7\u00e8\5\32\16\2\u00e8\u00e9\7\5\2\2"+
 		"\u00e9\u00ea\b\16\1\2\u00ea\u00f9\3\2\2\2\u00eb\u00ec\7\22\2\2\u00ec\u00ed"+
 		"\5\32\16\2\u00ed\u00ee\7\23\2\2\u00ee\u00ef\b\16\1\2\u00ef\u00f9\3\2\2"+

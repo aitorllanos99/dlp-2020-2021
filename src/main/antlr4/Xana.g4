@@ -20,7 +20,9 @@ definitions returns [List<Definition> ast = new ArrayList<Definition>()]
            ;
 
 funcDefinition returns [FuncDefinition ast]
-        : 'def ' id = ID '('fp = funcParameters?')''::' ft = functionTypes  'do' fb = funcBody 'end' {$ast = new FuncDefinition($id.getLine(), $id.getCharPositionInLine()+1, $fb.stat, $fb.varDef, new FuncType($id.getLine(), $id.getCharPositionInLine()+1,$fp.ast,$ft.t),$id.text);}
+        : 'def ' id = ID '('fp += funcParameters?')''::' ft = functionTypes  'do' fb = funcBody 'end' {List<VarDefinition> parameters = new ArrayList<VarDefinition>();
+                                                                                                       for(var s: $fp) parameters.addAll(s.ast);
+                                                                                                       $ast = new FuncDefinition($id.getLine(), $id.getCharPositionInLine()+1, $fb.stat, parameters, $fb.varDef, new FuncType($id.getLine(), $id.getCharPositionInLine()+1,parameters,$ft.t),$id.text);}
         ;
 funcParameters returns [List<VarDefinition> ast = new ArrayList<VarDefinition>()]
         : (id1 = ID '::' t1 = type {$ast.add(new VarDefinition($id1.getLine(), $id1.getCharPositionInLine() +1, $id1.text, $t1.t));}(',' id2 = ID '::' t2 = type{$ast.add(new VarDefinition($id2.getLine(), $id2.getCharPositionInLine() +1, $id2.text, $t2.t));})*)
@@ -29,7 +31,7 @@ funcBody returns[List<Statement> stat = new ArrayList<Statement>() ,List<VarDefi
         :(s = statements {$stat.addAll($s.st);} | v = varDefinition {$varDef.addAll($v.ast);})*
         ;
 mainFunction returns [FuncDefinition ast]
-        : 'def ' id = 'main' '('')''do' fb = funcBody 'end' {$ast = new FuncDefinition($id.getLine(), $id.getCharPositionInLine()+1, $fb.stat, $fb.varDef, new FuncType($id.getLine(), $id.getCharPositionInLine()+1,new ArrayList<VarDefinition>(),new VoidType($id.getLine(), $id.getCharPositionInLine()+1)),$id.text);}
+        : 'def ' id = 'main' '('')''do' fb = funcBody 'end' {$ast = new FuncDefinition($id.getLine(), $id.getCharPositionInLine()+1, $fb.stat,new ArrayList<VarDefinition>(), $fb.varDef, new FuncType($id.getLine(), $id.getCharPositionInLine()+1,new ArrayList<VarDefinition>(),new VoidType($id.getLine(), $id.getCharPositionInLine()+1)),$id.text);}
         ;
 
 varDefinition returns [List<VarDefinition> ast = new ArrayList<VarDefinition>()]
@@ -111,11 +113,6 @@ complexType returns [Type t]: id = 'defstruct' 'do' vd += varDefinition* 'end' {
                                                                                 $t = new RecordType($id.getLine(), $id.getCharPositionInLine()+1, rec);}
              |'['i = INT_CONSTANT '::' tp = type ']' {$t = new ArrayType($i.getLine(), $i.getCharPositionInLine()+1,$tp.t,LexerHelper.lexemeToInt($i.text));}
              ;
-
-/*structFieldsDefinition returns[List <VarDefinition> ast  = new ArrayList<VarDefinition>();]:
-             (id1=ID '::' t1=type)* {$ast.add(new VarDefinition($id1.getLine(), $id1.getCharPositionInLine() +1, $id1.text, $t1.t));}
-            ;*/
-
 //*******LEXER******
 WHITESPACE: [ \n\t\r]+ -> skip
         ;

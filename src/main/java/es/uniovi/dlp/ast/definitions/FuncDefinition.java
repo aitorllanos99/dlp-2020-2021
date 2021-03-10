@@ -10,14 +10,16 @@ import java.util.List;
 public class FuncDefinition extends AbstractDefinition  implements Definition{
     public List<Statement> statementsList;
     public List<VarDefinition> parameters;
+    public List<VarDefinition> bodyVarDefinitions;
     public String name;
     public Type type;
 
-    public FuncDefinition(int line, int column, List<Statement> statementsList, List<VarDefinition> parameters, Type type, String name) {
+    public FuncDefinition(int line, int column, List<Statement> statementsList, List<VarDefinition> parameters, List<VarDefinition> bodyVarDefinitions, Type type, String name) {
         super(line, column);
         this.statementsList =statementsList;
         this.parameters = parameters;
         this.type = type;
         this.name = name;
+        this.bodyVarDefinitions = bodyVarDefinitions;
     }
 }
