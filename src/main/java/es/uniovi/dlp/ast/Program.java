@@ -29,4 +29,8 @@ public class Program implements ASTNode {
     public int getColumn() {
         return column;
     }
+
+    public List<Definition> getDefinitions(){
+        return new ArrayList<>(definitions);
+    }
 }

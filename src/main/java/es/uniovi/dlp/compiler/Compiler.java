@@ -2,6 +2,7 @@ package es.uniovi.dlp.compiler;
 
 import es.uniovi.dlp.ast.Program;
 import es.uniovi.dlp.error.ErrorManager;
+import es.uniovi.dlp.error.Location;
 import es.uniovi.dlp.parser.XanaLexer;
 import es.uniovi.dlp.parser.XanaParser;
 import org.antlr.v4.runtime.CharStream;
@@ -27,6 +28,7 @@ public class Compiler {
 
     private void checkErrors() {
         ErrorManager errorManager = ErrorManager.getInstance();
+
         if (errorManager.hasErrors()) {
             errorManager.getErrors().forEach(System.err::println);
             System.exit(-1);

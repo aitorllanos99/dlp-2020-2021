@@ -1,6 +1,7 @@
 package es.uniovi.dlp.ast.types;
 
 import es.uniovi.dlp.ast.ErrorManager;
+import es.uniovi.dlp.visitor.Visitor;
 
 import java.util.List;
 
@@ -18,4 +19,8 @@ public class RecordType extends AbstractType implements Type {
 
     }
 
+    @Override
+    public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
+        return null;
+    }
 }

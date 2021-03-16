@@ -1,6 +1,7 @@
 package es.uniovi.dlp.ast.types;
 
 import es.uniovi.dlp.ast.ErrorManager;
+import es.uniovi.dlp.visitor.Visitor;
 
 public class ErrorType extends AbstractType implements Type{
     private String message;
@@ -15,4 +16,8 @@ public class ErrorType extends AbstractType implements Type{
         return message + " [" + line + ":" + column+"]";
     }
 
+    @Override
+    public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
+        return null;
+    }
 }

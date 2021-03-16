@@ -12,4 +12,9 @@ public class Arithmetic extends AbstractExpression implements Expression{
         this.expression2 = expressions2;
         this.operator = operator;
     }
+
+    @Override
+    public boolean getLValue() {
+        return false;
+    }
 }
