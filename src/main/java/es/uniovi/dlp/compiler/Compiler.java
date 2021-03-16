@@ -7,7 +7,7 @@ import es.uniovi.dlp.parser.XanaParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-import visitor.semantic.TypeCheckingVisitor;
+import es.uniovi.dlp.visitor.semantic.TypeCheckingVisitor;
 
 import java.io.IOException;
 
