@@ -1,4 +1,4 @@
-package visitor;
+package es.uniovi.dlp.visitor;
 
 import es.uniovi.dlp.ast.Program;
 
