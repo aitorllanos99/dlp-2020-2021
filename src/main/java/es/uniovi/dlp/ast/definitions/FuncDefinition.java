@@ -27,6 +27,6 @@ public class FuncDefinition extends AbstractDefinition implements Definition {
 
     @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
-        return null;
+        return returnTypeParamTypeAbstractVisitor.visit(this,param);
     }
 }

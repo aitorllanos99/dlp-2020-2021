@@ -17,6 +17,6 @@ public class RealLiteral extends AbstractExpression implements Expression{
 
     @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
-        return null;
+        return returnTypeParamTypeAbstractVisitor.visit(this,param);
     }
 }

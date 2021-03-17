@@ -10,19 +10,17 @@ public class Invocation extends AbstractExpression implements Statement,Expressi
     public Variable name;
     public List<Expression> arguments;
 
+
     public Invocation(int line, int column, Variable name, List<Expression> arguments) {
         super(line, column);
         this.name = name;
         this.arguments = arguments;
     }
 
-    @Override
-    public boolean getLValue() {
-        return false;
-    }
+
 
     @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
-        return null;
+        return returnTypeParamTypeAbstractVisitor.visit(this,param);
     }
 }

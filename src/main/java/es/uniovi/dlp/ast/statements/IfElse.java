@@ -21,6 +21,6 @@ public class IfElse extends AbstractStatement implements Statement{
 
     @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
-        return null;
+        return returnTypeParamTypeAbstractVisitor.visit(this,param);
     }
 }

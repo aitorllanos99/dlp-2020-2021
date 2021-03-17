@@ -14,13 +14,10 @@ public class FieldAccess extends AbstractExpression implements Expression{
 
     }
 
-    @Override
-    public boolean getLValue() {
-        return true;
-    }
+
 
     @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
-        return null;
+        return returnTypeParamTypeAbstractVisitor.visit(this,param);
     }
 }
