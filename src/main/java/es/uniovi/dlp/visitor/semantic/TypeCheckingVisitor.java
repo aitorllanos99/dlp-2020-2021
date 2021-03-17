@@ -6,7 +6,7 @@ import es.uniovi.dlp.ast.expressions.*;
 import es.uniovi.dlp.ast.statements.*;
 import es.uniovi.dlp.ast.types.*;
 import es.uniovi.dlp.error.ErrorManager;
-import es.uniovi.dlp.ast.Program;
+
 import es.uniovi.dlp.error.ErrorReason;
 import es.uniovi.dlp.error.Location;
 import es.uniovi.dlp.visitor.AbstractVisitor;
