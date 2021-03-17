@@ -46,7 +46,6 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
 
     @Override
     public Type visit(CharLiteral charLiteral, Type param) {
-        charLiteral.accept(this, param);
         charLiteral.setLvalue(false);
         return null;
     }
@@ -61,7 +60,6 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
 
     @Override
     public Type visit(DoubleLiteral doubleLiteral, Type param) {
-        doubleLiteral.accept(this, param);
         doubleLiteral.setLvalue(false);
         return null;
     }
@@ -84,7 +82,6 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
 
     @Override
     public Type visit(IntLiteral intLiteral, Type param) {
-        intLiteral.accept(this, param);
         intLiteral.setLvalue(false);
         return null;
     }
@@ -106,7 +103,6 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
 
     @Override
     public Type visit(RealLiteral realLiteral, Type param) {
-        realLiteral.accept(this, param);
         realLiteral.setLvalue(false);
         return null;
     }
@@ -127,7 +123,6 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
 
     @Override
     public Type visit(Variable variable, Type param) {
-        variable.accept(this, param);
         variable.setLvalue(true);
         return null;
     }
