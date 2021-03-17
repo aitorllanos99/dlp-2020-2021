@@ -20,150 +20,151 @@ public abstract class AbstractVisitor<ReturnType, ParamType> implements Visitor<
 
     @Override
     public ReturnType visit(VarDefinition varDefinition, ParamType param) {
-        return null;
+        return varDefinition.accept(this, param);
     }
 
     @Override
     public ReturnType visit(FuncDefinition funcDefinition, ParamType param) {
-        return null;
+        return funcDefinition.accept(this, param);
     }
 
     @Override
     public ReturnType visit(Arithmetic arithmetic, ParamType param) {
-        return null;
+        return arithmetic.accept(this, param);
     }
 
     @Override
     public ReturnType visit(Cast cast, ParamType param) {
-        return null;
+        return cast.accept(this, param);
     }
 
     @Override
     public ReturnType visit(CharLiteral charLiteral, ParamType param) {
-        return null;
+        return charLiteral.accept(this, param);
     }
 
     @Override
     public ReturnType visit(Comparison comparison, ParamType param) {
-        return null;
+        return comparison.accept(this, param);
     }
 
     @Override
     public ReturnType visit(DoubleLiteral doubleLiteral, ParamType param) {
-        return null;
+        return doubleLiteral.accept(this, param);
     }
 
     @Override
     public ReturnType visit(FieldAccess fieldAccess, ParamType param) {
-        return null;
+        return fieldAccess.accept(this, param);
     }
 
     @Override
     public ReturnType visit(Indexing indexing, ParamType param) {
-        return null;
+        return indexing.accept(this, param);
     }
 
     @Override
     public ReturnType visit(IntLiteral intLiteral, ParamType param) {
-        return null;
+        return intLiteral.accept(this, param);
     }
 
     @Override
     public ReturnType visit(Invocation invocation, ParamType param) {
-        return null;
+        return invocation.accept(this, param);
     }
 
     @Override
     public ReturnType visit(Logical logical, ParamType param) {
-        return null;
+        return logical.accept(this, param);
     }
 
     @Override
     public ReturnType visit(RealLiteral realLiteral, ParamType param) {
-        return null;
+        return realLiteral.accept(this, param);
     }
 
     @Override
     public ReturnType visit(UnaryMinus unaryMinus, ParamType param) {
-        return null;
+        return unaryMinus.accept(this, param);
     }
 
     @Override
     public ReturnType visit(UnaryNot unaryNot, ParamType param) {
-        return null;
+        return unaryNot.accept(this, param);
     }
 
     @Override
     public ReturnType visit(Variable variable, ParamType param) {
-        return null;
+        return variable.accept(this, param);
     }
 
+    @Override
     public ReturnType visit(Assignment assignment, ParamType param) {
-        return null;
+        return assignment.accept(this, param);
     }
 
     @Override
     public ReturnType visit(IfElse ifElse, ParamType param) {
-        return null;
+        return ifElse.accept(this, param);
     }
 
     @Override
     public ReturnType visit(Read read, ParamType param) {
-        return null;
+        return read.accept(this, param);
     }
 
     @Override
     public ReturnType visit(Return returnStatement, ParamType param) {
-        return null;
+        return returnStatement.accept(this, param);
     }
 
     @Override
     public ReturnType visit(While whileStatement, ParamType param) {
-        return null;
+        return whileStatement.accept(this,param);
     }
 
     @Override
     public ReturnType visit(Write write, ParamType param) {
-        return null;
+        return write.accept(this,param);
     }
 
     @Override
     public ReturnType visit(ArrayType arrayType, ParamType param) {
-        return null;
+        return arrayType.accept(this,param);
     }
 
     @Override
     public ReturnType visit(CharType charType, ParamType param) {
-        return null;
+        return charType.accept(this,param);
     }
 
     @Override
     public ReturnType visit(DoubleType doubleType, ParamType param) {
-        return null;
+        return doubleType.accept(this,param);
     }
 
     @Override
     public ReturnType visit(FuncType funcType, ParamType param) {
-        return null;
+        return funcType.accept(this,param);
     }
 
     @Override
     public ReturnType visit(IntType intType, ParamType param) {
-        return null;
+        return intType.accept(this,param);
     }
 
     @Override
     public ReturnType visit(RecordField recordField, ParamType param) {
-        return null;
+        return recordField.accept(this,param);
     }
 
     @Override
     public ReturnType visit(RecordType recordType, ParamType param) {
-        return null;
+        return recordType.accept(this,param);
     }
 
     @Override
     public ReturnType visit(VoidType voidType, ParamType param) {
-        return null;
+        return voidType.accept(this,param);
     }
 }
