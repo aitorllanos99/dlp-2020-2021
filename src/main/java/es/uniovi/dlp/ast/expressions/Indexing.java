@@ -13,6 +13,13 @@ public class Indexing extends AbstractExpression implements Expression{
         this.index = index;
     }
 
+    public Expression getArray() {
+        return array;
+    }
+
+    public Expression getIndex() {
+        return index;
+    }
 
     @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {

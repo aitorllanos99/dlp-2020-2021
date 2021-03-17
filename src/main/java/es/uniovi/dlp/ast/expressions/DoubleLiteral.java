@@ -4,7 +4,7 @@ import es.uniovi.dlp.visitor.Visitor;
 
 public class DoubleLiteral extends AbstractExpression implements Expression{
 
-    public Double value;
+    private Double value;
 
 
 
@@ -13,6 +13,9 @@ public class DoubleLiteral extends AbstractExpression implements Expression{
         this.value = value;
     }
 
+    public Double getValue() {
+        return value;
+    }
 
     @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {

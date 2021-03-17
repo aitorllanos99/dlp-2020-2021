@@ -4,13 +4,17 @@ import es.uniovi.dlp.visitor.Visitor;
 
 public class CharLiteral extends AbstractExpression implements Expression{
 
-    public Character value;
+    private Character value;
 
 
 
     public CharLiteral(int line, int column, Character value) {
         super(line, column);
         this.value = value;
+    }
+
+    public Character getValue() {
+        return value;
     }
 
     @Override

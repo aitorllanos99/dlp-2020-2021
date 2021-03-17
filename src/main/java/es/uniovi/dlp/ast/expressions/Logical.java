@@ -3,9 +3,9 @@ package es.uniovi.dlp.ast.expressions;
 import es.uniovi.dlp.visitor.Visitor;
 
 public class Logical extends AbstractExpression implements Expression{
-    public String operation;
-    public Expression leftExpression;
-    public Expression rightExpression;
+    private String operation;
+    private Expression leftExpression;
+    private Expression rightExpression;
 
     public Logical(int line, int column, Expression rightExpression , Expression leftExpression,String operation) {
         super(line, column);
@@ -14,9 +14,16 @@ public class Logical extends AbstractExpression implements Expression{
         this.rightExpression = rightExpression;
     }
 
-    @Override
-    public boolean getLValue() {
-        return false;
+    public String getOperation() {
+        return operation;
+    }
+
+    public Expression getLeftExpression() {
+        return leftExpression;
+    }
+
+    public Expression getRightExpression() {
+        return rightExpression;
     }
 
     @Override

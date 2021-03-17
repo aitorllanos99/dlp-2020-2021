@@ -4,7 +4,7 @@ import es.uniovi.dlp.visitor.Visitor;
 
 public class Variable extends AbstractExpression implements Expression{
 
-    public String ident;
+    private String ident;
 
 
     public Variable(int line, int column, String value) {
@@ -12,9 +12,8 @@ public class Variable extends AbstractExpression implements Expression{
         this.ident = value;
     }
 
-    @Override
-    public boolean getLValue() {
-        return true;
+    public String getIdent() {
+        return ident;
     }
 
     @Override

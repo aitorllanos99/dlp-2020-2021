@@ -6,8 +6,8 @@ import es.uniovi.dlp.visitor.AbstractVisitor;
 import es.uniovi.dlp.visitor.Visitor;
 
 public class VarDefinition extends AbstractDefinition implements Definition {
-    public String name;
-    public Type type;
+    private String name;
+    private Type type;
 
     public VarDefinition(int line, int column, String name, Type type) {
         super(line, column);

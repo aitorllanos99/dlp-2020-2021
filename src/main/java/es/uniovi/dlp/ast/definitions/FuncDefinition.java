@@ -7,14 +7,15 @@ import es.uniovi.dlp.ast.types.Type;
 import es.uniovi.dlp.visitor.AbstractVisitor;
 import es.uniovi.dlp.visitor.Visitor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FuncDefinition extends AbstractDefinition implements Definition {
-    public List<Statement> statementsList;
-    public List<VarDefinition> parameters;
-    public List<VarDefinition> bodyVarDefinitions;
-    public String name;
-    public Type type;
+    private List<Statement> statementsList;
+    private List<VarDefinition> parameters;
+    private List<VarDefinition> bodyVarDefinitions;
+    private String name;
+    private Type type;
 
     public FuncDefinition(int line, int column, List<Statement> statementsList, List<VarDefinition> parameters, List<VarDefinition> bodyVarDefinitions, Type type, String name) {
         super(line, column);
@@ -23,6 +24,26 @@ public class FuncDefinition extends AbstractDefinition implements Definition {
         this.type = type;
         this.name = name;
         this.bodyVarDefinitions = bodyVarDefinitions;
+    }
+
+    public List<Statement> getStatementsList() {
+        return new ArrayList<>(statementsList);
+    }
+
+    public List<VarDefinition> getParameters() {
+        return new ArrayList<>(parameters);
+    }
+
+    public List<VarDefinition> getBodyVarDefinitions() {
+        return new ArrayList<>(bodyVarDefinitions);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Type getType() {
+        return type;
     }
 
     @Override

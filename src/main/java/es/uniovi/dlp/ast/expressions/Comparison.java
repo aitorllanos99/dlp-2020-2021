@@ -3,9 +3,9 @@ package es.uniovi.dlp.ast.expressions;
 import es.uniovi.dlp.visitor.Visitor;
 
 public class Comparison extends AbstractExpression implements Expression{
-    public Expression expression1;
-    public Expression expression2;
-    public String operator;
+    private Expression expression1;
+    private Expression expression2;
+    private String operator;
 
 
     public Comparison(int line, int column, Expression expressions1, Expression expressions2, String operator) {
@@ -15,7 +15,17 @@ public class Comparison extends AbstractExpression implements Expression{
         this.operator = operator;
     }
 
+    public Expression getLeftExpression() {
+        return expression1;
+    }
 
+    public Expression getRightExpression() {
+        return expression2;
+    }
+
+    public String getOperator() {
+        return operator;
+    }
 
     @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {

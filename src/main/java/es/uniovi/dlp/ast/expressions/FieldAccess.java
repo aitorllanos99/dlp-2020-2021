@@ -14,7 +14,13 @@ public class FieldAccess extends AbstractExpression implements Expression{
 
     }
 
+    public Expression getExpression1() {
+        return expression1;
+    }
 
+    public Expression getProperty() {
+        return property;
+    }
 
     @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
