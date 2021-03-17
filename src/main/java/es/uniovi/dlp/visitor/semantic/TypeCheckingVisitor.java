@@ -131,8 +131,10 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     public Type visit(Assignment assignment, Type param) {
         assignment.getLeftExpression().accept(this, param);
         assignment.getRightExpression().accept(this, param);
+
         if (!assignment.getLeftExpression().getLValue())
             ErrorManager.getInstance().addError(new Location(assignment.getLine(), assignment.getColumn()), ErrorReason.LVALUE_REQUIRED);
+
         return null;
     }
 
@@ -147,6 +149,8 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     @Override
     public Type visit(Read read, Type param) {
         read.getExpression().accept(this, param);
+        if (!read.getExpression().getLValue())
+            ErrorManager.getInstance().addError(new Location(read.getLine(), read.getColumn()), ErrorReason.LVALUE_REQUIRED);
         return null;
     }
 
