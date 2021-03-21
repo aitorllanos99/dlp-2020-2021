@@ -15,6 +15,7 @@ import java.io.IOException;
 public class Compiler {
     private final String file;
     private Program program;
+    private boolean reportErrors = true;
 
     public Compiler(String file) {
         this.file = file;
@@ -27,6 +28,8 @@ public class Compiler {
     }
 
     private void checkErrors() {
+        if (!reportErrors) return;
+
         ErrorManager errorManager = ErrorManager.getInstance();
 
         if (errorManager.hasErrors()) {
@@ -52,6 +55,10 @@ public class Compiler {
     private void assignType() {
         TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor();
         typeCheckingVisitor.visit(program, null);
+    }
+
+    public void setReportErrors(boolean reportErrors) {
+        this.reportErrors = reportErrors;
     }
 }
 
