@@ -2,7 +2,7 @@ def f(e :: int) :: double do
     return e as double
 end
 
-def main do
+def main() do
     i, a, j :: int
     v :: [10 :: double]
 
