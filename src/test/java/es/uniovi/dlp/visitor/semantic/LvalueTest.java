@@ -1,4 +1,4 @@
-package es.uniovi.dlp.semantic;
+package es.uniovi.dlp.visitor.semantic;
 
 import es.uniovi.dlp.compiler.Compiler;
 import es.uniovi.dlp.error.Error;
