@@ -1,4 +1,4 @@
-// Generated from D:/1Escritorio/Informatica/Uni/Cuarto Curso/Segundo Cuatrimestre/DLP/Compiler/src/main/antlr4\Xana.g4 by ANTLR 4.9.1
+// Generated from Xana.g4 by ANTLR 4.9.1
 
 package es.uniovi.dlp.parser;
 import es.uniovi.dlp.ast.definitions.*;
@@ -131,19 +131,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_program; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterProgram(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitProgram(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitProgram(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ProgramContext program() throws RecognitionException {
@@ -190,19 +177,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_definitions; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterDefinitions(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitDefinitions(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitDefinitions(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final DefinitionsContext definitions() throws RecognitionException {
@@ -278,19 +252,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_funcDefinition; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterFuncDefinition(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitFuncDefinition(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitFuncDefinition(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FuncDefinitionContext funcDefinition() throws RecognitionException {
@@ -365,19 +326,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_funcParameters; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterFuncParameters(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitFuncParameters(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitFuncParameters(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FuncParametersContext funcParameters() throws RecognitionException {
@@ -451,19 +399,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_funcBody; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterFuncBody(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitFuncBody(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitFuncBody(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FuncBodyContext funcBody() throws RecognitionException {
@@ -525,19 +460,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_mainFunction; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterMainFunction(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitMainFunction(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitMainFunction(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final MainFunctionContext mainFunction() throws RecognitionException {
@@ -588,19 +510,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_varDefinition; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterVarDefinition(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitVarDefinition(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitVarDefinition(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final VarDefinitionContext varDefinition() throws RecognitionException {
@@ -643,19 +552,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_varTypes; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterVarTypes(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitVarTypes(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitVarTypes(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final VarTypesContext varTypes() throws RecognitionException {
@@ -711,19 +607,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_moreIdentDefinitions; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterMoreIdentDefinitions(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitMoreIdentDefinitions(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitMoreIdentDefinitions(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final MoreIdentDefinitionsContext moreIdentDefinitions() throws RecognitionException {
@@ -801,19 +684,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_statements; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterStatements(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitStatements(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitStatements(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final StatementsContext statements() throws RecognitionException {
@@ -967,7 +837,7 @@ public class XanaParser extends Parser {
 				match(T__12);
 				setState(175);
 				((StatementsContext)_localctx).me = moreExpressions();
-				((StatementsContext)_localctx).me.ast.stream().map(e-> _localctx.st.add(new Read((((StatementsContext)_localctx).me!=null?(((StatementsContext)_localctx).me.start):null).getLine(), (((StatementsContext)_localctx).me!=null?(((StatementsContext)_localctx).me.start):null).getCharPositionInLine() +1, e)));
+				((StatementsContext)_localctx).me.ast.forEach(e-> _localctx.st.add(new Read((((StatementsContext)_localctx).me!=null?(((StatementsContext)_localctx).me.start):null).getLine(), (((StatementsContext)_localctx).me!=null?(((StatementsContext)_localctx).me.start):null).getCharPositionInLine() +1, e)));
 				}
 				break;
 			case 6:
@@ -977,7 +847,7 @@ public class XanaParser extends Parser {
 				match(T__13);
 				setState(179);
 				((StatementsContext)_localctx).me = moreExpressions();
-				((StatementsContext)_localctx).me.ast.stream().map(e-> _localctx.st.add(new Write((((StatementsContext)_localctx).me!=null?(((StatementsContext)_localctx).me.start):null).getLine(), (((StatementsContext)_localctx).me!=null?(((StatementsContext)_localctx).me.start):null).getCharPositionInLine() +1, e)));
+				((StatementsContext)_localctx).me.ast.forEach(e-> _localctx.st.add(new Write((((StatementsContext)_localctx).me!=null?(((StatementsContext)_localctx).me.start):null).getLine(), (((StatementsContext)_localctx).me!=null?(((StatementsContext)_localctx).me.start):null).getCharPositionInLine() +1, e)));
 				}
 				break;
 			case 7:
@@ -1019,19 +889,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_moreExpressions; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterMoreExpressions(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitMoreExpressions(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitMoreExpressions(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final MoreExpressionsContext moreExpressions() throws RecognitionException {
@@ -1088,19 +945,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_moreParameters; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterMoreParameters(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitMoreParameters(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitMoreParameters(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final MoreParametersContext moreParameters() throws RecognitionException {
@@ -1185,19 +1029,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expression; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitExpression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitExpression(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExpressionContext expression() throws RecognitionException {
@@ -1494,19 +1325,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_type; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitType(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final TypeContext type() throws RecognitionException {
@@ -1572,19 +1390,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionTypes; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterFunctionTypes(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitFunctionTypes(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitFunctionTypes(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FunctionTypesContext functionTypes() throws RecognitionException {
@@ -1634,19 +1439,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_voidType; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterVoidType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitVoidType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitVoidType(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final VoidTypeContext voidType() throws RecognitionException {
@@ -1680,19 +1472,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_primitiveType; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterPrimitiveType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitPrimitiveType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitPrimitiveType(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final PrimitiveTypeContext primitiveType() throws RecognitionException {
@@ -1762,19 +1541,6 @@ public class XanaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_complexType; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).enterComplexType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof XanaListener ) ((XanaListener)listener).exitComplexType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof XanaVisitor ) return ((XanaVisitor<? extends T>)visitor).visitComplexType(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ComplexTypeContext complexType() throws RecognitionException {

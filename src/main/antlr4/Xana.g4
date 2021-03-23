@@ -54,8 +54,8 @@ statements returns [List<Statement> st = new ArrayList<Statement>()]
                                                                                                $st.add(new IfElse($ex.start.getLine(), $ex.start.getCharPositionInLine()+1, $ex.ast, ifs,elses));}
         | 'while' ex=expression+ 'do' ms += statements* 'end' {List<Statement> sts = new ArrayList<Statement>();
                                                                    for(var s: $ms) sts.addAll(s.st);$st.add(new While($ex.start.getLine(), $ex.start.getCharPositionInLine()+1, sts, $ex.ast));}
-        | 'in' me = moreExpressions {$me.ast.stream().map(e-> $st.add(new Read($me.start.getLine(), $me.start.getCharPositionInLine() +1, e)));}
-        | 'puts' me = moreExpressions {$me.ast.stream().map(e-> $st.add(new Write($me.start.getLine(), $me.start.getCharPositionInLine() +1, e)));}
+        | 'in' me = moreExpressions {$me.ast.forEach(e-> $st.add(new Read($me.start.getLine(), $me.start.getCharPositionInLine() +1, e)));}
+        | 'puts' me = moreExpressions {$me.ast.forEach(e-> $st.add(new Write($me.start.getLine(), $me.start.getCharPositionInLine() +1, e)));}
         | left = expression '=' right=expression {$st.add(new Assignment($left.start.getLine(), $left.start.getCharPositionInLine() +1 , $left.ast ,  $right.ast));}
         ;
 moreExpressions returns[List<Expression> ast = new ArrayList<Expression>()]

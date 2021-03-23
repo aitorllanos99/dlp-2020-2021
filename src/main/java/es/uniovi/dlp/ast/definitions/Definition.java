@@ -6,4 +6,5 @@ import es.uniovi.dlp.visitor.Visitor;
 
 public interface Definition extends ASTNode {
     <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType,ParamType> returnTypeParamTypeAbstractVisitor, ParamType param);
+    String getName();
 }

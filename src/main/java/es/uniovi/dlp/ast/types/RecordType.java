@@ -12,12 +12,6 @@ public class RecordType extends AbstractType implements Type {
     public RecordType(int line, int column, List<RecordField> fields) {
         super(line, column);
         this.fields = fields;
-
-        for(RecordField f: fields)
-               if(fields.stream().filter(e -> f.getName().equals(e.getName())).count() > 1)
-                    ErrorManager.getInstance().addError(new ErrorType(f.line, f.column, "Fields with same name"));
-
-
     }
 
     public List<RecordField> getFields() {
