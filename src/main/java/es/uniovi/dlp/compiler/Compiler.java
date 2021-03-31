@@ -5,6 +5,7 @@ import es.uniovi.dlp.error.ErrorManager;
 import es.uniovi.dlp.error.Location;
 import es.uniovi.dlp.parser.XanaLexer;
 import es.uniovi.dlp.parser.XanaParser;
+import es.uniovi.dlp.visitor.semantic.IdentificationVisitor;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -53,8 +54,10 @@ public class Compiler {
     }
 
     private void assignType() {
-        TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor();
-        typeCheckingVisitor.visit(program, null);
+       // TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor();
+       // typeCheckingVisitor.visit(program, null);
+        IdentificationVisitor identificationVisitor = new IdentificationVisitor();
+        identificationVisitor.visit(program, null);
     }
 
     public void setReportErrors(boolean reportErrors) {

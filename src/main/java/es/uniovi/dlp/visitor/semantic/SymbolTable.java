@@ -27,19 +27,24 @@ public class SymbolTable {
 
     public boolean insert(Definition definition) {
         Map<String, Definition> toInsert = table.get(scope); //Cogemos el ultimo hueco
-        if (!toInsert.containsKey(definition.getName())) {//Si no hay un simbolo que se llame igual entra
-            toInsert.put(definition.getName(),definition);
-            //TODO: Como meter el ambito??????
+        if (!toInsert.containsKey(definition.getName())) { //Si no hay un simbolo que se llame igual entra
+            toInsert.put(definition.getName(), definition);
+            definition.setScope(scope);
             return true;
         }
-        return true;
+        return false;
     }
 
     public Definition find(String id) {
+        for (int i = scope; i >= 0; i--)
+            if (table.get(i).containsKey(id))
+                return table.get(i).get(id);
         return null;
     }
 
     public Definition findInCurrentScope(String id) {
+        if (table.get(scope).containsKey(id))
+            return table.get(scope).get(id);
         return null;
     }
 

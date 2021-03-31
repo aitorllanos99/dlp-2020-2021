@@ -42,6 +42,8 @@ public class FuncDefinition extends AbstractDefinition implements Definition {
         return name;
     }
 
+
+
     public Type getType() {
         return type;
     }
