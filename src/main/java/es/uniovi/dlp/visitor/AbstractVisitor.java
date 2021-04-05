@@ -28,7 +28,6 @@ public abstract class AbstractVisitor<ReturnType, ParamType> implements Visitor<
     public ReturnType visit(FuncDefinition funcDefinition, ParamType param) {
         funcDefinition.getType().accept(this, param);
         funcDefinition.getBodyVarDefinitions().forEach(var -> var.accept(this, param));
-        funcDefinition.getParameters().forEach(var -> var.accept(this, param));
         funcDefinition.getStatementsList().forEach(var -> var.accept(this, param));
         return null;
     }
@@ -151,13 +150,13 @@ public abstract class AbstractVisitor<ReturnType, ParamType> implements Visitor<
     @Override
     public ReturnType visit(Read read, ParamType param) {
         read.getExpression().accept(this, param);
-        return read.accept(this, param);
+        return null;
     }
 
     @Override
     public ReturnType visit(Return returnStatement, ParamType param) {
         returnStatement.getExpression().accept(this, param);
-        return returnStatement.accept(this, param);
+        return null;
     }
 
     @Override

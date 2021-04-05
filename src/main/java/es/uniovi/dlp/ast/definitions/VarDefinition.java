@@ -24,6 +24,10 @@ public class VarDefinition extends AbstractDefinition implements Definition {
         return type;
     }
 
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
         return returnTypeParamTypeAbstractVisitor.visit(this, param);

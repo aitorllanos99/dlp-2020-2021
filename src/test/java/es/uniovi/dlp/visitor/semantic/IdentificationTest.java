@@ -49,7 +49,7 @@ public class IdentificationTest {
     void missingFunctionDefinition() {
         runCompiler("examples/errors/identification/missing_function_declaration.xana");
         assertFoundErrors(Arrays.asList(
-                new Error(5, 5, ErrorReason.FUNCTION_NOT_DECLARED)
+                new Error(5, 4, ErrorReason.FUNCTION_NOT_DECLARED)
         ));
     }
 
@@ -60,7 +60,7 @@ public class IdentificationTest {
                 new Error(3, 7, ErrorReason.VARIABLE_ALREADY_DECLARED),
                 new Error(6, 3, ErrorReason.VARIABLE_ALREADY_DECLARED),
                 new Error(11, 15, ErrorReason.VARIABLE_NOT_DECLARED),
-                new Error(12, 3, ErrorReason.FUNCTION_NOT_DECLARED)
+                new Error(12, 2, ErrorReason.FUNCTION_NOT_DECLARED)
         ));
     }
 }

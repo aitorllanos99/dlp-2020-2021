@@ -10,6 +10,7 @@ import java.util.Map;
 public class SymbolTable {
     private int scope = 0;
     private List<Map<String, Definition>> table = new ArrayList<>();
+    // private List<Map<String, Definition>> table = new Stack<>();
 
     public SymbolTable() {
         table.add(new HashMap<>());
@@ -26,9 +27,9 @@ public class SymbolTable {
     }
 
     public boolean insert(Definition definition) {
-        Map<String, Definition> toInsert = table.get(scope); //Cogemos el ultimo hueco
-        if (!toInsert.containsKey(definition.getName())) { //Si no hay un simbolo que se llame igual entra
-            toInsert.put(definition.getName(), definition);
+        Map<String, Definition> lastScope = table.get(scope); //Cogemos el ambito
+        if (!lastScope.containsKey(definition.getName())) {
+            lastScope.put(definition.getName(), definition);
             definition.setScope(scope);
             return true;
         }

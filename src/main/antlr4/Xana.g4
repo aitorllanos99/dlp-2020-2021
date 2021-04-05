@@ -20,9 +20,9 @@ definitions returns [List<Definition> ast = new ArrayList<Definition>()]
            ;
 
 funcDefinition returns [FuncDefinition ast]
-        : 'def ' id = ID '('fp += funcParameters?')''::' ft = functionTypes  'do' fb = funcBody 'end' {List<VarDefinition> parameters = new ArrayList<VarDefinition>();
+        : d='def ' id = ID '('fp += funcParameters?')''::' ft = functionTypes  'do' fb = funcBody 'end' {List<VarDefinition> parameters = new ArrayList<VarDefinition>();
                                                                                                        for(var s: $fp) parameters.addAll(s.ast);
-                                                                                                       $ast = new FuncDefinition($id.getLine(), $id.getCharPositionInLine()+1, $fb.stat, parameters, $fb.varDef, new FuncType($id.getLine(), $id.getCharPositionInLine()+1,parameters,$ft.t),$id.text);}
+                                                                                                       $ast = new FuncDefinition($d.getLine(), $d.getCharPositionInLine()+1, $fb.stat, parameters, $fb.varDef, new FuncType($id.getLine(), $id.getCharPositionInLine()+1,parameters,$ft.t),$id.text);}
         ;
 funcParameters returns [List<VarDefinition> ast = new ArrayList<VarDefinition>()]
         : (id1 = ID '::' t1 = type {$ast.add(new VarDefinition($id1.getLine(), $id1.getCharPositionInLine() +1, $id1.text, $t1.t));}(',' id2 = ID '::' t2 = type{$ast.add(new VarDefinition($id2.getLine(), $id2.getCharPositionInLine() +1, $id2.text, $t2.t));})*)
@@ -31,18 +31,20 @@ funcBody returns[List<Statement> stat = new ArrayList<Statement>() ,List<VarDefi
         :(s = statements {$stat.addAll($s.st);} | v = varDefinition {$varDef.addAll($v.ast);})*
         ;
 mainFunction returns [FuncDefinition ast]
-        : 'def ' id = 'main' '('')''do' fb = funcBody 'end' {$ast = new FuncDefinition($id.getLine(), $id.getCharPositionInLine()+1, $fb.stat,new ArrayList<VarDefinition>(), $fb.varDef, new FuncType($id.getLine(), $id.getCharPositionInLine()+1,new ArrayList<VarDefinition>(),new VoidType($id.getLine(), $id.getCharPositionInLine()+1)),$id.text);}
+        : d='def ' id = 'main' '('')''do' fb = funcBody 'end' {$ast = new FuncDefinition($d.getLine(), $d.getCharPositionInLine()+1, $fb.stat,new ArrayList<VarDefinition>(), $fb.varDef, new FuncType($id.getLine(), $id.getCharPositionInLine()+1,new ArrayList<VarDefinition>(),new VoidType($id.getLine(), $id.getCharPositionInLine()+1)),$id.text);}
         ;
 
 varDefinition returns [List<VarDefinition> ast = new ArrayList<VarDefinition>()]
-            : mid = moreIdentDefinitions '::' t = varTypes {for(String s: $mid.ast) $ast.add(new VarDefinition($mid.start.getLine(), $mid.start.getCharPositionInLine() +1 , s, $t.t));}
+            : mid = moreIdentDefinitions '::' t = varTypes {for(VarDefinition vd: $mid.ast) $ast.add(new VarDefinition(vd.getLine(),vd.getColumn(),vd.getName(),$t.t));}
             ;
+
+            //$ast.add(new VarDefinition($mid.ast.start.getLine(), $mid.start.getCharPositionInLine() +1 , s, $t
 varTypes returns [Type t]
             : p = primitiveType {$t = $p.t;}
             | c = complexType {$t = $c.t;}
             ;
-moreIdentDefinitions returns[List<String> ast = new ArrayList<String>()]:
-            id1 = ID {$ast.add($id1.text);} (',' id2 = ID {$ast.add($id2.text);} )*
+moreIdentDefinitions returns[List<VarDefinition> ast = new ArrayList<VarDefinition>()]:
+            id1 = ID {$ast.add(new VarDefinition($id1.getLine(),$id1.getCharPositionInLine()+1, $id1.text,null));} (',' id2 = ID {$ast.add(new VarDefinition($id2.getLine(),$id2.getCharPositionInLine()+1, $id2.text,null));} )*
             ;
 statements returns [List<Statement> st = new ArrayList<Statement>()]
         : ID '(' mp = moreParameters ')'{$st.add(new Invocation($ID.getLine(), $ID.getCharPositionInLine(), new Variable($ID.getLine(), $ID.getCharPositionInLine() + 1, $ID.text), $mp.ast));}

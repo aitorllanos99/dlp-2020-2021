@@ -20,8 +20,6 @@ public class IdentificationVisitor extends AbstractVisitor<Type, Type> {
             table.insert(varDefinition);
         else
             ErrorManager.getInstance().addError(new Location(varDefinition.getLine(), varDefinition.getColumn()), ErrorReason.VARIABLE_ALREADY_DECLARED);
-
-        varDefinition.getType().accept(this, param);
         return null;
     }
 
@@ -33,9 +31,7 @@ public class IdentificationVisitor extends AbstractVisitor<Type, Type> {
             ErrorManager.getInstance().addError(new Location(funcDefinition.getLine(), funcDefinition.getColumn()), ErrorReason.FUNCTION_ALREADY_DECLARED);
         //Hacemos el ambito de la funcion
         table.set();
-        funcDefinition.getBodyVarDefinitions().forEach(var -> var.accept(this, param));
-        funcDefinition.getParameters().forEach(var -> var.accept(this, param));
-        funcDefinition.getStatementsList().forEach(var -> var.accept(this, param));
+        super.visit(funcDefinition,param);
         table.reset();
         return null;
     }
@@ -51,7 +47,6 @@ public class IdentificationVisitor extends AbstractVisitor<Type, Type> {
     public Type visit(Variable variable, Type param) {
        if(table.find(variable.getIdent()) == null)
            ErrorManager.getInstance().addError(new Location(variable.getLine(), variable.getColumn()), ErrorReason.VARIABLE_NOT_DECLARED);
-
         return null;
     }
 

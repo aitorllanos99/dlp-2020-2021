@@ -1,4 +1,4 @@
-// Generated from Xana.g4 by ANTLR 4.9.1
+// Generated from D:/1Escritorio/Informatica/Uni/Cuarto Curso/Segundo Cuatrimestre/DLP/Compiler/src/main/antlr4\Xana.g4 by ANTLR 4.9.1
 
 package es.uniovi.dlp.parser;
 import es.uniovi.dlp.ast.definitions.*;
