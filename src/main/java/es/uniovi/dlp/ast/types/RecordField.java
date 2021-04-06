@@ -3,7 +3,7 @@ package es.uniovi.dlp.ast.types;
 import es.uniovi.dlp.ast.AbstractASTNode;
 import es.uniovi.dlp.visitor.Visitor;
 
-public class RecordField extends AbstractASTNode implements Type{
+public class RecordField extends AbstractType implements Type{
     private String name;
     private Type type;
     private boolean alreadyDeclared;

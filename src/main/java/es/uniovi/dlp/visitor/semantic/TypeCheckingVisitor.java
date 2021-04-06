@@ -18,6 +18,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
 
     @Override
     public Type visit(Assignment assignment, Type param) {
+        super.visit(assignment,param);
         if (!assignment.getLeftExpression().getLValue())
             ErrorManager.getInstance().addError(new Location(assignment.getLine(), assignment.getColumn()), ErrorReason.LVALUE_REQUIRED);
         return null;
@@ -25,22 +26,13 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
 
     @Override
     public Type visit(Read read, Type param) {
+        super.visit(read,param);
         if (!read.getExpression().getLValue())
             ErrorManager.getInstance().addError(new Location(read.getLine(), read.getColumn()), ErrorReason.LVALUE_REQUIRED);
         return null;
     }
 
-    @Override
-    public Type visit(RecordType recordType, Type param) {
 
-        //Patch for this case, should be modifed, without break it prints it twice
-        for (RecordField f : recordType.getFields())
-            if(recordType.getFields().stream().filter(e -> f.getName().equals(e.getName())).count() > 1) {
-                ErrorManager.getInstance().addError(new Location(f.getLine(), f.getColumn()), ErrorReason.FIELD_ALREADY_DECLARED);
-                break;
-            }
-        return null;
-    }
 
 
 }

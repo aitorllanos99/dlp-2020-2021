@@ -38,7 +38,6 @@ varDefinition returns [List<VarDefinition> ast = new ArrayList<VarDefinition>()]
             : mid = moreIdentDefinitions '::' t = varTypes {for(VarDefinition vd: $mid.ast) $ast.add(new VarDefinition(vd.getLine(),vd.getColumn(),vd.getName(),$t.t));}
             ;
 
-            //$ast.add(new VarDefinition($mid.ast.start.getLine(), $mid.start.getCharPositionInLine() +1 , s, $t
 varTypes returns [Type t]
             : p = primitiveType {$t = $p.t;}
             | c = complexType {$t = $c.t;}

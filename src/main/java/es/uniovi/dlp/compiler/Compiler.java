@@ -25,7 +25,13 @@ public class Compiler {
     public void run() throws IOException {
         program = parse(file);
         assignType();
+        assigntIdentifiers();
         checkErrors();
+    }
+
+    private void assigntIdentifiers() {
+        IdentificationVisitor identificationVisitor = new IdentificationVisitor();
+        identificationVisitor.visit(program, null);
     }
 
     private void checkErrors() {
@@ -54,10 +60,9 @@ public class Compiler {
     }
 
     private void assignType() {
-       // TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor();
-       // typeCheckingVisitor.visit(program, null);
-        IdentificationVisitor identificationVisitor = new IdentificationVisitor();
-        identificationVisitor.visit(program, null);
+        TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor();
+        typeCheckingVisitor.visit(program, null);
+
     }
 
     public void setReportErrors(boolean reportErrors) {
