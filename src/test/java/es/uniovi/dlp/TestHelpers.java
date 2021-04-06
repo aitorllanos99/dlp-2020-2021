@@ -76,7 +76,7 @@ public class TestHelpers {
 
     public static void assertFoundErrors(List<Error> errors) {
         var foundErrors = ErrorManager.getInstance().getErrors();
-        assertIterableEquals(foundErrors, errors);
+        assertIterableEquals(errors, foundErrors);
     }
 
     public static void runCompiler(String file) {

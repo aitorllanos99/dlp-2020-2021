@@ -15,8 +15,8 @@ Este es el proyecto base que servirá para implementar un compilador durante el 
 - [x] [Laboratorio 5 - Construcción del AST](docs/labs/lab_05.md)
 - [x] [Laboratorio 6 - Control & ErrorHandler](docs/labs/lab_06.md)
 - [x] [Laboratorio 7 - Identificación de LValue](docs/labs/lab_07.md)
-- [ ] [Laboratorio 8 - Fase de identificación](docs/labs/lab_08.md)
-- [ ] Laboratorio 9
+- [x] [Laboratorio 8 - Fase de identificación](docs/labs/lab_08.md)
+- [ ] [Laboratorio 9 - Comprobación de tipos](docs/labs/lab_09.md)
 - [ ] Laboratorio 10
 - [ ] Laboratorio 11
 - [ ] Laboratorio 12
