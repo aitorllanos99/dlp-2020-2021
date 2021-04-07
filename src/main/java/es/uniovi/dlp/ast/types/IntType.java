@@ -36,13 +36,22 @@ public class IntType extends AbstractType implements Type {
     }
 
     @Override
+    public Type logical(Type type) {
+        if(type instanceof IntType)
+            return type;
+        return null;
+    }
+
+    @Override
     public boolean isIndexable() {
         return true;
     }
 
     @Override
-    public boolean isReturnable() {
-        return false;
+    public Type isReturnable(Type type) {
+        if(type instanceof IntType)
+            return type;
+        return null;
     }
 
     @Override

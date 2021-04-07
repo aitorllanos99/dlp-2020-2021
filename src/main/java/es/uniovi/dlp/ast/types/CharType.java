@@ -30,6 +30,13 @@ public class CharType extends AbstractType implements Type {
     }
 
     @Override
+    public Type isReturnable(Type type) {
+        if(type instanceof CharType)
+            return type;
+        return null;
+    }
+
+    @Override
     public Type promotableTo(Type to) {
         if (to instanceof CharType)
             return to;

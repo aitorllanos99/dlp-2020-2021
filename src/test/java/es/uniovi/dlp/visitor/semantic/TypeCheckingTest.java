@@ -24,7 +24,6 @@ public class TypeCheckingTest {
     @Test
     void invalidCast() {
         runCompiler("examples/errors/types/invalid_cast.xana");
-
         assertFoundErrors(Arrays.asList(
                 new Error(12, 10, ErrorReason.INVALID_CAST),
                 new Error(13, 10, ErrorReason.INVALID_CAST)

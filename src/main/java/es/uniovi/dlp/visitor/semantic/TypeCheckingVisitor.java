@@ -55,7 +55,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     public Type visit(Comparison comparison, Type param) {
         super.visit(comparison, param);
         comparison.setType(comparison.getLeftExpression().getType().comparison(comparison.getRightExpression().getType()));
-        if(comparison.getType() == null)
+        if (comparison.getType() == null)
             ErrorManager.getInstance().addError(new Location(comparison.getLine(), comparison.getColumn()), ErrorReason.INVALID_COMPARISON);
 
         return null;
@@ -75,11 +75,31 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         return null;
     }
 
+
+    @Override
+    public Type visit(Logical logical, Type param) {
+        super.visit(logical, param);
+        logical.setType(logical.getLeftExpression().getType().logical(logical.getRightExpression().getType()));
+        if(logical.getType() == null)
+            ErrorManager.getInstance().addError(new Location(logical.getLine(), logical.getColumn()), ErrorReason.NOT_LOGICAL);
+
+        return null;
+    }
+
     @Override
     public Type visit(UnaryMinus unaryMinus, Type param) {
         super.visit(unaryMinus, param);
         if (!unaryMinus.getExpression().getType().isArithmetic())
             ErrorManager.getInstance().addError(new Location(unaryMinus.getLine(), unaryMinus.getColumn()), ErrorReason.INVALID_ARITHMETIC);
+
+        return null;
+    }
+
+    @Override
+    public Type visit(UnaryNot unaryNot, Type param) {
+        super.visit(unaryNot, param);
+        if (!unaryNot.getExpression().getType().isLogical())
+            ErrorManager.getInstance().addError(new Location(unaryNot.getLine(), unaryNot.getColumn()), ErrorReason.NOT_LOGICAL);
 
         return null;
     }
@@ -112,6 +132,15 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     }
 
     @Override
+    public Type visit(IfElse ifElse, Type param) {
+        super.visit(ifElse, param);
+        if (!ifElse.getCondition().getType().isLogical())
+            ErrorManager.getInstance().addError(new Location(ifElse.getLine(), ifElse.getColumn()), ErrorReason.NOT_LOGICAL);
+
+        return null;
+    }
+
+    @Override
     public Type visit(Read read, Type param) {
         super.visit(read, param);
         if (!read.getExpression().getLValue())
@@ -122,8 +151,17 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     @Override
     public Type visit(Return returnStatement, Type param) {
         super.visit(returnStatement, param);
-        if (!returnStatement.getExpression().getType().isReturnable())
+        if (returnStatement.getExpression().getType().isReturnable(param) == null)
             ErrorManager.getInstance().addError(new Location(returnStatement.getLine(), returnStatement.getColumn()), ErrorReason.INVALID_RETURN_TYPE);
+
+        return null;
+    }
+
+    @Override
+    public Type visit(While whileStatement, Type param) {
+        super.visit(whileStatement, param);
+        if (!whileStatement.getCondition().getType().isLogical())
+            ErrorManager.getInstance().addError(new Location(whileStatement.getLine(), whileStatement.getColumn()), ErrorReason.NOT_LOGICAL);
 
         return null;
     }

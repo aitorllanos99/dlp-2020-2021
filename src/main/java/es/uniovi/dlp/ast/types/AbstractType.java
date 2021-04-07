@@ -58,8 +58,8 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     }
 
     @Override
-    public boolean isReturnable() {
-        return true;
+    public Type isReturnable(Type funcType) {
+        return null;
     }
 
     @Override

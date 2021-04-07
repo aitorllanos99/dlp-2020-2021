@@ -36,8 +36,10 @@ public class DoubleType extends AbstractType implements Type {
     }
 
     @Override
-    public boolean isReturnable() {
-        return false;
+    public Type isReturnable(Type type) {
+        if(type instanceof DoubleType)
+            return type;
+        return null;
     }
 
     @Override

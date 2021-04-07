@@ -3,7 +3,7 @@ def always_true() :: int do
 end
 
 def main() do
-    if always_true() do
+     if always_true() do
         puts 't', 'r', 'u', 'e', '\n'
     end
 
