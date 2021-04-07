@@ -23,7 +23,7 @@ public class DoubleType extends AbstractType implements Type{
 
     @Override
     public Type promotableTo(Type to) {
-        if(to instanceof DoubleType)
+        if(to instanceof DoubleType || to instanceof CharType || to instanceof IntType)
             return to;
         return null;
     }

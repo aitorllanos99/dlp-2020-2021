@@ -22,6 +22,13 @@ public class IntType extends AbstractType implements Type {
     }
 
     @Override
+    public Type promotableTo(Type to) {
+        if(to instanceof IntType)
+            return to;
+        return null;
+    }
+
+    @Override
     public boolean isIndexable() {
         return true;
     }

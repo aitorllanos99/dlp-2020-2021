@@ -95,6 +95,9 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         super.visit(assignment, param);
         if (!assignment.getLeftExpression().getLValue())
             ErrorManager.getInstance().addError(new Location(assignment.getLine(), assignment.getColumn()), ErrorReason.LVALUE_REQUIRED);
+        if(assignment.getLeftExpression().getType().promotableTo(assignment.getRightExpression().getType()) == null)
+            ErrorManager.getInstance().addError(new Location(assignment.getLine(), assignment.getColumn()), ErrorReason.INCOMPATIBLE_TYPES);
+
         return null;
     }
 
