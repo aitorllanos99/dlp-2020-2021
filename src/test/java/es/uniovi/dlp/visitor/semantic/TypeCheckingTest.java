@@ -56,7 +56,7 @@ public class TypeCheckingTest {
     void invalidComparison() {
         runCompiler("examples/errors/types/invalid_comparison.xana");
         assertFoundErrors(Arrays.asList(
-                new Error(12, 15, ErrorReason.INVALID_COMPARISON)
+                new Error(12, 11, ErrorReason.INVALID_COMPARISON)
         ));
     }
 

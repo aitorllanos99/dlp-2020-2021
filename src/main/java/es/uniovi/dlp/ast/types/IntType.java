@@ -29,6 +29,13 @@ public class IntType extends AbstractType implements Type {
     }
 
     @Override
+    public Type comparison(Type leftType) {
+        if(leftType instanceof IntType || leftType instanceof CharType || leftType instanceof DoubleType)
+            return this;
+        return null;
+    }
+
+    @Override
     public boolean isIndexable() {
         return true;
     }

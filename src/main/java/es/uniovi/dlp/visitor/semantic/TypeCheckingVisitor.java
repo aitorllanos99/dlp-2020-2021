@@ -52,6 +52,16 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     }
 
     @Override
+    public Type visit(Comparison comparison, Type param) {
+        super.visit(comparison, param);
+        comparison.setType(comparison.getLeftExpression().getType().comparison(comparison.getRightExpression().getType()));
+        if(comparison.getType() == null)
+            ErrorManager.getInstance().addError(new Location(comparison.getLine(), comparison.getColumn()), ErrorReason.INVALID_COMPARISON);
+
+        return null;
+    }
+
+    @Override
     public Type visit(DoubleLiteral doubleLiteral, Type param) {
         super.visit(doubleLiteral, param);
         doubleLiteral.setType(new DoubleType(doubleLiteral.getLine(), doubleLiteral.getColumn()));
@@ -68,7 +78,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     @Override
     public Type visit(UnaryMinus unaryMinus, Type param) {
         super.visit(unaryMinus, param);
-        if(!unaryMinus.getExpression().getType().isArithmetic())
+        if (!unaryMinus.getExpression().getType().isArithmetic())
             ErrorManager.getInstance().addError(new Location(unaryMinus.getLine(), unaryMinus.getColumn()), ErrorReason.INVALID_ARITHMETIC);
 
         return null;
@@ -95,7 +105,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         super.visit(assignment, param);
         if (!assignment.getLeftExpression().getLValue())
             ErrorManager.getInstance().addError(new Location(assignment.getLine(), assignment.getColumn()), ErrorReason.LVALUE_REQUIRED);
-        if(assignment.getLeftExpression().getType().promotableTo(assignment.getRightExpression().getType()) == null)
+        if (assignment.getLeftExpression().getType().promotableTo(assignment.getRightExpression().getType()) == null)
             ErrorManager.getInstance().addError(new Location(assignment.getLine(), assignment.getColumn()), ErrorReason.INCOMPATIBLE_TYPES);
 
         return null;
