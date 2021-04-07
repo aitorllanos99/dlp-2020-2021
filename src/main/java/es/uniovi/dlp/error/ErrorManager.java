@@ -30,6 +30,9 @@ public class ErrorManager {
         Collections.sort(errors);
         return errors;
     }
+    public void reset(){
+        errors.clear();
+    }
 
     public boolean hasErrors() {
         return !errors.isEmpty();

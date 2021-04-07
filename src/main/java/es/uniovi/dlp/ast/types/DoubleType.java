@@ -8,6 +8,27 @@ public class DoubleType extends AbstractType implements Type{
     }
 
     @Override
+    public Type cast(Type from) {
+        if(from instanceof IntType || from instanceof DoubleType)
+            return from;
+        return null;
+    }
+
+    @Override
+    public Type arithmetic(Type type) {
+        if(type instanceof DoubleType)
+            return type;
+        return null;
+    }
+
+    @Override
+    public Type promotableTo(Type to) {
+        if(to instanceof DoubleType)
+            return to;
+        return null;
+    }
+
+    @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
         return returnTypeParamTypeAbstractVisitor.visit(this,param);
     }

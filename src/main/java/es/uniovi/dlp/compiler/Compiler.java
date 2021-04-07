@@ -24,12 +24,12 @@ public class Compiler {
 
     public void run() throws IOException {
         program = parse(file);
+        assignIdentifiers();
         assignType();
-        assigntIdentifiers();
         checkErrors();
     }
 
-    private void assigntIdentifiers() {
+    private void assignIdentifiers() {
         IdentificationVisitor identificationVisitor = new IdentificationVisitor();
         identificationVisitor.visit(program, null);
     }
@@ -41,6 +41,7 @@ public class Compiler {
 
         if (errorManager.hasErrors()) {
             errorManager.getErrors().forEach(System.err::println);
+            errorManager.reset();
             System.exit(-1);
         }
     }

@@ -19,7 +19,15 @@ public class RecordType extends AbstractType implements Type {
     }
 
     @Override
+    public Type dot(String field) {
+        for (RecordField f : fields)
+            if (f.getName().equals(field))
+                return f.getType();
+        return null;
+    }
+
+    @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
-        return returnTypeParamTypeAbstractVisitor.visit(this,param);
+        return returnTypeParamTypeAbstractVisitor.visit(this, param);
     }
 }

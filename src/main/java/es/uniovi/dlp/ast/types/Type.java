@@ -10,10 +10,10 @@ public interface Type {
     Type comparison(Type leftType);
     Type logical(Type type);
     Type arithmetic(Type type);
-    boolean promotableTo(Type to);
+    Type promotableTo(Type to);
     boolean isLogical();
-    boolean isArithmetic();
-    boolean allowDot();
-    boolean isIndexable();
+    Type parenthesis(Type type);
+
+
 
 }

@@ -40,7 +40,7 @@ public abstract class AbstractVisitor<ReturnType, ParamType> implements Visitor<
 
     @Override
     public ReturnType visit(Cast cast, ParamType param) {
-        cast.getType().accept(this, param);
+        cast.getTypeToCast().accept(this, param);
         cast.getExpression().accept(this, param);
         cast.setLvalue(false);
         return null;
@@ -103,11 +103,7 @@ public abstract class AbstractVisitor<ReturnType, ParamType> implements Visitor<
         return null;
     }
 
-    @Override
-    public ReturnType visit(RealLiteral realLiteral, ParamType param) {
-        realLiteral.setLvalue(false);
-        return null;
-    }
+
 
     @Override
     public ReturnType visit(UnaryMinus unaryMinus, ParamType param) {

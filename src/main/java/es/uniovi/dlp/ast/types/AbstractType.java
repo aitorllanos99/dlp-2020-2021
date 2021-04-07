@@ -39,8 +39,8 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     }
 
     @Override
-    public boolean promotableTo(Type to) {
-        return false;
+    public Type promotableTo(Type to) {
+        return null;
     }
 
     @Override
@@ -49,17 +49,7 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     }
 
     @Override
-    public boolean isArithmetic() {
-        return false;
-    }
-
-    @Override
-    public boolean allowDot() {
-        return false;
-    }
-
-    @Override
-    public boolean isIndexable() {
-        return false;
+    public Type parenthesis(Type type) {
+        return null;
     }
 }

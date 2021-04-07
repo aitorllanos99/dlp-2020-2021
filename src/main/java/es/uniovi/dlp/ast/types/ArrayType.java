@@ -12,12 +12,23 @@ public class ArrayType extends AbstractType implements Type{
         this.size = size;
     }
 
+    public void setArrayOf(Type arrayOf) {
+        this.arrayOf = arrayOf;
+    }
+
     public Type getArrayOf() {
         return arrayOf;
     }
 
     public int getSize() {
         return size;
+    }
+
+    @Override
+    public Type indexing(Type indexingType) {
+        if(indexingType instanceof IntType)
+            return arrayOf;
+        return super.indexing(indexingType);
     }
 
     @Override

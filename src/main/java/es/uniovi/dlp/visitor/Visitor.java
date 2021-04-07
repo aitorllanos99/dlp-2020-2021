@@ -25,7 +25,6 @@ public interface Visitor<ReturnType, ParamType> {
     ReturnType visit(IntLiteral intLiteral, ParamType param);
     ReturnType visit(Invocation invocation, ParamType param);
     ReturnType visit(Logical logical, ParamType param);
-    ReturnType visit(RealLiteral realLiteral, ParamType param);
     ReturnType visit(UnaryMinus unaryMinus, ParamType param);
     ReturnType visit(UnaryNot unaryNot, ParamType param);
     ReturnType visit(Variable variable, ParamType param);

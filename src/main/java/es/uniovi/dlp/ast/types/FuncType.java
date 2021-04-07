@@ -25,6 +25,11 @@ public class FuncType extends AbstractType implements Type{
     }
 
     @Override
+    public Type parenthesis(Type type) {
+       return null;
+    }
+
+    @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
         return returnTypeParamTypeAbstractVisitor.visit(this,param);
     }

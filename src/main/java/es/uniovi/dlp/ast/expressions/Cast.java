@@ -5,11 +5,11 @@ import es.uniovi.dlp.visitor.Visitor;
 
 public class Cast extends AbstractExpression implements Expression{
     private Expression expression;
-    private Type type;
+    private Type typeToCast;
 
     public Cast(int line, int column, Type typeToCast, Expression expression) {
         super(line, column);
-        this.type = typeToCast;
+        this.typeToCast = typeToCast;
         this.expression = expression;
     }
 
@@ -17,8 +17,8 @@ public class Cast extends AbstractExpression implements Expression{
         return expression;
     }
 
-    public Type getType() {
-        return type;
+    public Type getTypeToCast() {
+        return typeToCast;
     }
 
     @Override

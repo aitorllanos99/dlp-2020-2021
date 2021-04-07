@@ -5,6 +5,7 @@ import es.uniovi.dlp.ast.definitions.FuncDefinition;
 import es.uniovi.dlp.ast.definitions.VarDefinition;
 import es.uniovi.dlp.ast.expressions.Invocation;
 import es.uniovi.dlp.ast.expressions.Variable;
+import es.uniovi.dlp.ast.types.ErrorType;
 import es.uniovi.dlp.ast.types.RecordField;
 import es.uniovi.dlp.ast.types.RecordType;
 import es.uniovi.dlp.ast.types.Type;
@@ -22,7 +23,7 @@ public class IdentificationVisitor extends AbstractVisitor<Type, Type> {
             table.insert(varDefinition);
         else
             ErrorManager.getInstance().addError(new Location(varDefinition.getLine(), varDefinition.getColumn()), ErrorReason.VARIABLE_ALREADY_DECLARED);
-        super.visit(varDefinition,param);
+        super.visit(varDefinition, param);
         return null;
     }
 
@@ -43,15 +44,19 @@ public class IdentificationVisitor extends AbstractVisitor<Type, Type> {
     public Type visit(Invocation invocation, Type param) {
         if (table.find(invocation.getName().getIdent()) == null)
             ErrorManager.getInstance().addError(new Location(invocation.getLine(), invocation.getColumn()), ErrorReason.FUNCTION_NOT_DECLARED);
-        super.visit(invocation,param);
+        super.visit(invocation, param);
         return null;
     }
 
     @Override
     public Type visit(Variable variable, Type param) {
-        if (table.find(variable.getIdent()) == null)
+        if (table.find(variable.getIdent()) == null) {
             ErrorManager.getInstance().addError(new Location(variable.getLine(), variable.getColumn()), ErrorReason.VARIABLE_NOT_DECLARED);
-        super.visit(variable,param);
+            variable.setDefinition(new VarDefinition(variable.getLine(), variable.getColumn(),
+                    "FAILURE", new ErrorType(variable.getLine(), variable.getColumn(), "Variable not declared")));
+        } else
+            variable.setDefinition(table.find(variable.getIdent()));
+            super.visit(variable, param);
         return null;
     }
 
@@ -66,18 +71,17 @@ public class IdentificationVisitor extends AbstractVisitor<Type, Type> {
     }*/
 
     @Override
-    public Type visit(RecordType recordType, Type param){
+    public Type visit(RecordType recordType, Type param) {
         for (RecordField f : recordType.getFields())
-            if(recordType.getFields().stream().filter(e -> f.getName().equals(e.getName())).count() > 1) {
+            if (recordType.getFields().stream().filter(e -> f.getName().equals(e.getName())).count() > 1) {
                 ErrorManager.getInstance().addError(new Location(f.getLine(), f.getColumn()), ErrorReason.FIELD_ALREADY_DECLARED);
                 break;
             }
       /*  table.set();
         super.visit(recordType,param);
         table.reset();*/
-        return  null;
+        return null;
     }
-
 
 
 }
