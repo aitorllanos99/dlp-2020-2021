@@ -16,7 +16,7 @@ public class DoubleType extends AbstractType implements Type{
 
     @Override
     public Type arithmetic(Type type) {
-        if(type instanceof DoubleType)
+        if(type instanceof DoubleType || type instanceof  IntType)
             return type;
         return null;
     }

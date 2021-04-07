@@ -15,6 +15,7 @@ public interface Type {
     Type parenthesis(Type type);
     boolean isIndexable();
     boolean isReturnable();
+    boolean isArithmetic();
 
 
 }

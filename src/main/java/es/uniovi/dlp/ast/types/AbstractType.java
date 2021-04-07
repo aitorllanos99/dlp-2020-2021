@@ -61,4 +61,9 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public boolean isReturnable() {
         return true;
     }
+
+    @Override
+    public boolean isArithmetic() {
+        return true;
+    }
 }

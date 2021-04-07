@@ -17,7 +17,7 @@ public class CharType extends AbstractType implements Type{
 
     @Override
     public Type arithmetic(Type type) {
-        if(type instanceof CharType)
+        if(type instanceof CharType || type instanceof IntType)
             return type;
         return super.arithmetic(type);
     }

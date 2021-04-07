@@ -24,7 +24,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         Type arrayType = indexing.getArray().getType();
         Type indexType = indexing.getIndex().getType();
         indexing.setType(arrayType.indexing(indexType));
-        if(!(indexing.getArray().getType() instanceof ArrayType)) {
+        if (!(indexing.getArray().getType() instanceof ArrayType)) {
             ErrorManager.getInstance().addError(new Location(indexing.getLine(), indexing.getColumn()), ErrorReason.INVALID_INDEXING);
             return null;
         }
@@ -44,11 +44,10 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     }
 
 
-
     @Override
     public Type visit(CharLiteral charLiteral, Type param) {
-         super.visit(charLiteral, param);
-         charLiteral.setType(new CharType(charLiteral.getLine(),charLiteral.getColumn()));
+        super.visit(charLiteral, param);
+        charLiteral.setType(new CharType(charLiteral.getLine(), charLiteral.getColumn()));
         return null;
     }
 
@@ -67,9 +66,27 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     }
 
     @Override
+    public Type visit(UnaryMinus unaryMinus, Type param) {
+        super.visit(unaryMinus, param);
+        if(!unaryMinus.getExpression().getType().isArithmetic())
+            ErrorManager.getInstance().addError(new Location(unaryMinus.getLine(), unaryMinus.getColumn()), ErrorReason.INVALID_ARITHMETIC);
+
+        return null;
+    }
+
+    @Override
     public Type visit(Variable variable, Type param) {
         super.visit(variable, param);
         variable.setType(variable.getDefinition().getType());
+        return null;
+    }
+
+    @Override
+    public Type visit(Arithmetic arithmetic, Type param) {
+        super.visit(arithmetic, param);
+        arithmetic.setType(arithmetic.getLeftExpression().getType().arithmetic(arithmetic.getRightExpression().getType()));
+        if (arithmetic.getType() == null)
+            ErrorManager.getInstance().addError(new Location(arithmetic.getLine(), arithmetic.getColumn()), ErrorReason.INVALID_ARITHMETIC);
         return null;
     }
 
@@ -92,7 +109,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     @Override
     public Type visit(Return returnStatement, Type param) {
         super.visit(returnStatement, param);
-        if(!returnStatement.getExpression().getType().isReturnable())
+        if (!returnStatement.getExpression().getType().isReturnable())
             ErrorManager.getInstance().addError(new Location(returnStatement.getLine(), returnStatement.getColumn()), ErrorReason.INVALID_RETURN_TYPE);
 
         return null;
