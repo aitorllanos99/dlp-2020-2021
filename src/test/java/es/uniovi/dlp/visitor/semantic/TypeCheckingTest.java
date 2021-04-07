@@ -15,8 +15,8 @@ public class TypeCheckingTest {
     void invalidIndexing() {
         runCompiler("examples/errors/types/invalid_indexing.xana");
         assertFoundErrors(Arrays.asList(
-                new Error(6, 20, ErrorReason.INVALID_INDEX_EXPRESSION),
-                new Error(7, 19, ErrorReason.INVALID_INDEX_EXPRESSION),
+                new Error(6, 15, ErrorReason.INVALID_INDEX_EXPRESSION),
+                new Error(7, 14, ErrorReason.INVALID_INDEX_EXPRESSION),
                 new Error(9, 10, ErrorReason.INVALID_INDEXING)
         ));
     }

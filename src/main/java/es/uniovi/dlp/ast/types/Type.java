@@ -13,7 +13,7 @@ public interface Type {
     Type promotableTo(Type to);
     boolean isLogical();
     Type parenthesis(Type type);
-
+    boolean isIndexable();
 
 
 }

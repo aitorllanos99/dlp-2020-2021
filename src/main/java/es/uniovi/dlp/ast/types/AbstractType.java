@@ -52,4 +52,8 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public Type parenthesis(Type type) {
         return null;
     }
+    @Override
+    public boolean isIndexable() {
+        return false;
+    }
 }

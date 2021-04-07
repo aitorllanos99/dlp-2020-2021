@@ -24,8 +24,13 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         Type arrayType = indexing.getArray().getType();
         Type indexType = indexing.getIndex().getType();
         indexing.setType(arrayType.indexing(indexType));
+        if(!(indexing.getArray().getType() instanceof ArrayType)) {
+            ErrorManager.getInstance().addError(new Location(indexing.getLine(), indexing.getColumn()), ErrorReason.INVALID_INDEXING);
+            return null;
+        }
         if (indexing.getType() == null)
             ErrorManager.getInstance().addError(new Location(indexing.getLine(), indexing.getColumn()), ErrorReason.INVALID_INDEX_EXPRESSION);
+
         return null;
     }
 
