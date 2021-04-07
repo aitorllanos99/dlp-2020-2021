@@ -56,4 +56,9 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public boolean isIndexable() {
         return false;
     }
+
+    @Override
+    public boolean isReturnable() {
+        return true;
+    }
 }

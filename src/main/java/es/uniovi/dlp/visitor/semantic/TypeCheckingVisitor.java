@@ -44,14 +44,12 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     }
 
 
-    @Override
-    public Type visit(Program program, Type param) {
-        return super.visit(program, param);
-    }
 
     @Override
     public Type visit(CharLiteral charLiteral, Type param) {
-        return super.visit(charLiteral, param);
+         super.visit(charLiteral, param);
+         charLiteral.setType(new CharType(charLiteral.getLine(),charLiteral.getColumn()));
+        return null;
     }
 
     @Override
@@ -91,5 +89,12 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         return null;
     }
 
+    @Override
+    public Type visit(Return returnStatement, Type param) {
+        super.visit(returnStatement, param);
+        if(!returnStatement.getExpression().getType().isReturnable())
+            ErrorManager.getInstance().addError(new Location(returnStatement.getLine(), returnStatement.getColumn()), ErrorReason.INVALID_RETURN_TYPE);
 
+        return null;
+    }
 }
