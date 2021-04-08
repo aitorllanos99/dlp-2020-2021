@@ -2,6 +2,9 @@ package es.uniovi.dlp.ast.types;
 
 import es.uniovi.dlp.ast.ASTNode;
 import es.uniovi.dlp.ast.AbstractASTNode;
+import es.uniovi.dlp.ast.expressions.Expression;
+
+import java.util.List;
 
 public abstract class AbstractType extends AbstractASTNode implements Type {
     public AbstractType(int line, int column) {
@@ -49,7 +52,7 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     }
 
     @Override
-    public Type parenthesis(Type type) {
+    public Type parenthesis(List<Expression> args){
         return null;
     }
     @Override
@@ -65,5 +68,10 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     @Override
     public boolean isArithmetic() {
         return true;
+    }
+
+    @Override
+    public Type assignment(Type type) {
+        return null;
     }
 }

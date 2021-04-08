@@ -48,7 +48,7 @@ public class IntType extends AbstractType implements Type {
     }
 
     @Override
-    public Type isReturnable(Type type) {
+    public Type assignment(Type type) {
         if(type instanceof IntType)
             return type;
         return null;

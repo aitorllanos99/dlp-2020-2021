@@ -29,8 +29,7 @@ public class CharType extends AbstractType implements Type {
         return null;
     }
 
-    @Override
-    public Type isReturnable(Type type) {
+    public Type assignment(Type type) {
         if(type instanceof CharType)
             return type;
         return null;

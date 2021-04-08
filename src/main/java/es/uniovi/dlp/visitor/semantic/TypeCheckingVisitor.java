@@ -13,6 +13,8 @@ import es.uniovi.dlp.error.ErrorReason;
 import es.uniovi.dlp.error.Location;
 import es.uniovi.dlp.visitor.AbstractVisitor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
@@ -75,12 +77,18 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         return null;
     }
 
+    @Override
+    public Type visit(Invocation invocation, Type param) {
+        super.visit(invocation, param);
+        invocation.setType(invocation.getName().getDefinition().getType().parenthesis(invocation.getArguments()));
+        return null;
+    }
 
     @Override
     public Type visit(Logical logical, Type param) {
         super.visit(logical, param);
         logical.setType(logical.getLeftExpression().getType().logical(logical.getRightExpression().getType()));
-        if(logical.getType() == null)
+        if (logical.getType() == null)
             ErrorManager.getInstance().addError(new Location(logical.getLine(), logical.getColumn()), ErrorReason.NOT_LOGICAL);
 
         return null;
@@ -125,7 +133,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         super.visit(assignment, param);
         if (!assignment.getLeftExpression().getLValue())
             ErrorManager.getInstance().addError(new Location(assignment.getLine(), assignment.getColumn()), ErrorReason.LVALUE_REQUIRED);
-        if (assignment.getLeftExpression().getType().promotableTo(assignment.getRightExpression().getType()) == null)
+        if (assignment.getLeftExpression().getType().assignment(assignment.getRightExpression().getType()) == null)
             ErrorManager.getInstance().addError(new Location(assignment.getLine(), assignment.getColumn()), ErrorReason.INCOMPATIBLE_TYPES);
 
         return null;
@@ -151,7 +159,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     @Override
     public Type visit(Return returnStatement, Type param) {
         super.visit(returnStatement, param);
-        if (returnStatement.getExpression().getType().isReturnable(param) == null)
+        if (returnStatement.getExpression().getType().promotableTo(param) == null)
             ErrorManager.getInstance().addError(new Location(returnStatement.getLine(), returnStatement.getColumn()), ErrorReason.INVALID_RETURN_TYPE);
 
         return null;

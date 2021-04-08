@@ -36,8 +36,8 @@ public class DoubleType extends AbstractType implements Type {
     }
 
     @Override
-    public Type isReturnable(Type type) {
-        if(type instanceof DoubleType)
+    public Type assignment(Type type) {
+        if (type instanceof DoubleType || type instanceof CharType || type instanceof IntType)
             return type;
         return null;
     }
