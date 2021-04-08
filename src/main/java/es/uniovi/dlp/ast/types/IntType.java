@@ -42,10 +42,6 @@ public class IntType extends AbstractType implements Type {
         return null;
     }
 
-    @Override
-    public boolean isIndexable() {
-        return true;
-    }
 
     @Override
     public Type assignment(Type type) {

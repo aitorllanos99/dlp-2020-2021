@@ -18,7 +18,7 @@ public interface Type {
     boolean isLogical();
     Type parenthesis(List<Expression> args);
     boolean isDifferentArgs(List<Expression> args);
-    boolean isIndexable();
+    boolean isStructField(String field);
     Type isReturnable(Type funcType);
     boolean isArithmetic();
 

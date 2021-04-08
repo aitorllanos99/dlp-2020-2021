@@ -69,7 +69,6 @@ public abstract class AbstractVisitor<ReturnType, ParamType> implements Visitor<
     @Override
     public ReturnType visit(FieldAccess fieldAccess, ParamType param) {
         fieldAccess.getExpression1().accept(this, param);
-        fieldAccess.getProperty().accept(this, param);
         fieldAccess.setLvalue(true);
         return null;
     }

@@ -5,9 +5,9 @@ import es.uniovi.dlp.visitor.Visitor;
 
 public class FieldAccess extends AbstractExpression implements Expression{
     public Expression expression1;
-    public Expression property;
+    public String property;
 
-    public FieldAccess(int line, int column, Expression expressions1 , Expression expressions2) {
+    public FieldAccess(int line, int column, Expression expressions1 , String expressions2) {
         super(line, column);
         this.expression1 = expressions1;
         this.property = expressions2;
@@ -18,7 +18,7 @@ public class FieldAccess extends AbstractExpression implements Expression{
         return expression1;
     }
 
-    public Expression getProperty() {
+    public String getProperty() {
         return property;
     }
 

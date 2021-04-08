@@ -75,7 +75,7 @@ expression returns [Expression ast]
         | '(' expression ')' {$ast = $expression.ast;}
         | '[' expression ']' {$ast = $expression.ast;}
         | left = expression '[' right = expression ']'{$ast = new Indexing($left.start.getLine(), $left.start.getCharPositionInLine()+1, $left.ast, $right.ast);}
-        | left = expression '.' right = expression {$ast = new FieldAccess($left.start.getLine(), $left.start.getCharPositionInLine() +1, $left.ast, $right.ast);}
+        | left = expression '.'  ID {$ast = new FieldAccess($left.start.getLine(), $left.start.getCharPositionInLine() +1, $left.ast, $ID.text);}
         | exp = expression 'as' tc = type {$ast = new Cast($exp.start.getLine(), $exp.start.getCharPositionInLine()+1, $tc.t, $exp.ast);}
         | '-' exp = expression {$ast = new UnaryMinus($exp.start.getLine(), $exp.start.getCharPositionInLine() + 1, $exp.ast);}
         | '!' exp = expression {$ast = new UnaryNot($exp.start.getLine(), $exp.start.getCharPositionInLine() + 1, $exp.ast);}

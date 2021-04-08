@@ -56,7 +56,7 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
         return null;
     }
     @Override
-    public boolean isIndexable() {
+    public boolean isStructField(String field) {
         return false;
     }
 

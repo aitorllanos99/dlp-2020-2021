@@ -71,6 +71,21 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     }
 
     @Override
+    public Type visit(FieldAccess fieldAccess, Type param) {
+        super.visit(fieldAccess, param);
+
+        if(!fieldAccess.getExpression1().getType().isStructField(fieldAccess.getProperty())) {
+            ErrorManager.getInstance().addError(new Location(fieldAccess.getLine(), fieldAccess.getColumn()), ErrorReason.NO_SUCH_FIELD);
+            return null;
+        }
+        fieldAccess.setType(fieldAccess.getExpression1().getType().dot(fieldAccess.getProperty()));
+        if(fieldAccess.getType() == null)
+            ErrorManager.getInstance().addError(new Location(fieldAccess.getLine(), fieldAccess.getColumn()), ErrorReason.INVALID_DOT);
+
+        return null;
+    }
+
+    @Override
     public Type visit(IntLiteral intLiteral, Type param) {
         super.visit(intLiteral, param);
         intLiteral.setType(new IntType(intLiteral.getLine(), intLiteral.getColumn()));
@@ -80,13 +95,13 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     @Override
     public Type visit(Invocation invocation, Type param) {
         super.visit(invocation, param);
-        if (invocation.getName().getDefinition().getType().isDifferentArgs(invocation.getArguments())){
+        if (invocation.getName().getDefinition().getType().isDifferentArgs(invocation.getArguments())) {
             ErrorManager.getInstance().addError(new Location(invocation.getLine(), invocation.getColumn()), ErrorReason.INVALID_ARGS);
             return null;
         }
         invocation.setType(invocation.getName().getDefinition().getType().parenthesis(invocation.getArguments()));
-        if(invocation.getType() == null)
-            ErrorManager.getInstance().addError(new Location(invocation.getLine(),invocation.getColumn()), ErrorReason.INVALID_INVOCATION);
+        if (invocation.getType() == null)
+            ErrorManager.getInstance().addError(new Location(invocation.getLine(), invocation.getColumn()), ErrorReason.INVALID_INVOCATION);
         return null;
     }
 
@@ -166,7 +181,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     public Type visit(Return returnStatement, Type param) {
         super.visit(returnStatement, param);
         returnStatement.getExpression().setType(returnStatement.getExpression().getType().promotableTo(param));
-       // if (returnStatement.getExpression().getType() == null)
+        // if (returnStatement.getExpression().getType() == null)
         //    ErrorManager.getInstance().addError(new Location(returnStatement.getLine(), returnStatement.getColumn()), ErrorReason.INVALID_RETURN_TYPE);
 
         return null;
