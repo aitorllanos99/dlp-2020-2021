@@ -80,7 +80,13 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     @Override
     public Type visit(Invocation invocation, Type param) {
         super.visit(invocation, param);
+        if (invocation.getName().getDefinition().getType().isDifferentArgs(invocation.getArguments())){
+            ErrorManager.getInstance().addError(new Location(invocation.getLine(), invocation.getColumn()), ErrorReason.INVALID_ARGS);
+            return null;
+        }
         invocation.setType(invocation.getName().getDefinition().getType().parenthesis(invocation.getArguments()));
+        if(invocation.getType() == null)
+            ErrorManager.getInstance().addError(new Location(invocation.getLine(),invocation.getColumn()), ErrorReason.INVALID_INVOCATION);
         return null;
     }
 
@@ -159,8 +165,9 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     @Override
     public Type visit(Return returnStatement, Type param) {
         super.visit(returnStatement, param);
-        if (returnStatement.getExpression().getType().promotableTo(param) == null)
-            ErrorManager.getInstance().addError(new Location(returnStatement.getLine(), returnStatement.getColumn()), ErrorReason.INVALID_RETURN_TYPE);
+        returnStatement.getExpression().setType(returnStatement.getExpression().getType().promotableTo(param));
+       // if (returnStatement.getExpression().getType() == null)
+        //    ErrorManager.getInstance().addError(new Location(returnStatement.getLine(), returnStatement.getColumn()), ErrorReason.INVALID_RETURN_TYPE);
 
         return null;
     }

@@ -27,12 +27,19 @@ public class FuncType extends AbstractType implements Type {
 
     @Override
     public Type parenthesis(List<Expression> args) {
-        if (args.size() != parameters.size())
+        if (isDifferentArgs(args))
             return null;
         for (int i = 0; i < args.size(); i++)
             if (args.get(i).getType().promotableTo(parameters.get(i).getType()) == null)
                 return null;
         return this;
+    }
+
+    @Override
+    public boolean isDifferentArgs(List<Expression> args) {
+        if (args.size() != parameters.size())
+            return true;
+        return false;
     }
 
     @Override

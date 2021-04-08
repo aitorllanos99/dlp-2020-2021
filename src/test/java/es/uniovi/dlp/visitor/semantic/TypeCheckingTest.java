@@ -93,10 +93,10 @@ public class TypeCheckingTest {
     void invalidInvocation() {
         runCompiler("examples/errors/types/invalid_invocation.xana");
         assertFoundErrors(Arrays.asList(
-                new Error(10, 5, ErrorReason.INVALID_ARGS),
-                new Error(13, 5, ErrorReason.INVALID_ARGS),
-                new Error(14, 5, ErrorReason.INVALID_ARGS),
-                new Error(17, 5, ErrorReason.INVALID_INVOCATION)
+                new Error(10, 4, ErrorReason.INVALID_ARGS),
+                new Error(13, 4, ErrorReason.INVALID_ARGS),
+                new Error(14, 4, ErrorReason.INVALID_ARGS),
+                new Error(17, 4, ErrorReason.INVALID_INVOCATION)
         ));
     }
 

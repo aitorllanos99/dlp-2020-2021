@@ -74,4 +74,9 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public Type assignment(Type type) {
         return null;
     }
+
+    @Override
+    public boolean isDifferentArgs(List<Expression> args) {
+        return false;
+    }
 }

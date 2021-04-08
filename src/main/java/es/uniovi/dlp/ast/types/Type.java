@@ -17,6 +17,7 @@ public interface Type {
     Type assignment(Type type);
     boolean isLogical();
     Type parenthesis(List<Expression> args);
+    boolean isDifferentArgs(List<Expression> args);
     boolean isIndexable();
     Type isReturnable(Type funcType);
     boolean isArithmetic();

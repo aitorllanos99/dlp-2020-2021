@@ -8,6 +8,7 @@ import es.uniovi.dlp.visitor.Visitor;
 public interface Expression extends ASTNode {
     boolean getLValue();
     Type getType();
+    void setType(Type type);
     <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param);
 
 }
