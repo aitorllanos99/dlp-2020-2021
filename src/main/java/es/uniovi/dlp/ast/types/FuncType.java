@@ -42,6 +42,14 @@ public class FuncType extends AbstractType implements Type {
         return false;
     }
 
+
+    @Override
+    public boolean isLogical() {
+        if(returnType instanceof IntType)
+            return true;
+        return false;
+    }
+
     @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
         return returnTypeParamTypeAbstractVisitor.visit(this, param);

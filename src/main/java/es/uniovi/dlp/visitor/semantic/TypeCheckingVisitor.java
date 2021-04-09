@@ -180,7 +180,8 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     @Override
     public Type visit(Return returnStatement, Type param) {
         super.visit(returnStatement, param);
-        returnStatement.getExpression().setType(returnStatement.getExpression().getType().promotableTo(param));
+        FuncType t = (FuncType) param;
+        returnStatement.getExpression().setType(returnStatement.getExpression().getType().promotableTo(t.getReturnType()));
         if (returnStatement.getExpression().getType() == null)
            ErrorManager.getInstance().addError(new Location(returnStatement.getLine(), returnStatement.getColumn()), ErrorReason.INVALID_RETURN_TYPE);
 
