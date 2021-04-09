@@ -181,8 +181,8 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     public Type visit(Return returnStatement, Type param) {
         super.visit(returnStatement, param);
         returnStatement.getExpression().setType(returnStatement.getExpression().getType().promotableTo(param));
-        // if (returnStatement.getExpression().getType() == null)
-        //    ErrorManager.getInstance().addError(new Location(returnStatement.getLine(), returnStatement.getColumn()), ErrorReason.INVALID_RETURN_TYPE);
+        if (returnStatement.getExpression().getType() == null)
+           ErrorManager.getInstance().addError(new Location(returnStatement.getLine(), returnStatement.getColumn()), ErrorReason.INVALID_RETURN_TYPE);
 
         return null;
     }
