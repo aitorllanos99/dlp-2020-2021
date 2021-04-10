@@ -23,6 +23,10 @@ public class DoubleType extends AbstractType implements Type {
 
     @Override
     public Type promotableTo(Type to) {
+        if(to instanceof FuncType){
+            if(((FuncType) to).getReturnType() instanceof DoubleType)
+                return ((FuncType) to).getReturnType();
+        }
         if (to instanceof DoubleType)
             return to;
         return null;

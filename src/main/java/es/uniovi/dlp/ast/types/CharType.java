@@ -37,6 +37,10 @@ public class CharType extends AbstractType implements Type {
 
     @Override
     public Type promotableTo(Type to) {
+        if(to instanceof FuncType){
+            if(((FuncType) to).getReturnType() instanceof CharType)
+                return ((FuncType) to).getReturnType();
+        }
         if (to instanceof CharType)
             return to;
         return null;

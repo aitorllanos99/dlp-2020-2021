@@ -23,6 +23,10 @@ public class IntType extends AbstractType implements Type {
 
     @Override
     public Type promotableTo(Type to) {
+        if(to instanceof FuncType){
+            if(((FuncType) to).getReturnType() instanceof IntType)
+                return ((FuncType) to).getReturnType();
+        }
         if(to instanceof IntType)
             return to;
         return null;

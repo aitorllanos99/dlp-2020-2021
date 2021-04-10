@@ -26,6 +26,11 @@ public class FuncType extends AbstractType implements Type {
     }
 
     @Override
+    public Type promotableTo(Type to) {
+        return returnType.promotableTo(to);
+    }
+
+    @Override
     public Type parenthesis(List<Expression> args) {
         if (isDifferentArgs(args))
             return null;

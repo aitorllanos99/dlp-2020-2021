@@ -121,7 +121,7 @@ public class TypeCheckingTest {
                 new Error(39, 19, ErrorReason.NOT_LOGICAL),
                 new Error(43, 5, ErrorReason.INVALID_ARGS),
                 new Error(44, 5, ErrorReason.INVALID_ARGS),
-                new Error(45, 15, ErrorReason.INCOMPATIBLE_TYPES),
+                new Error(45, 5, ErrorReason.INCOMPATIBLE_TYPES),
                 new Error(47, 5, ErrorReason.INVALID_INDEXING),
                 new Error(48, 5, ErrorReason.INCOMPATIBLE_TYPES),
                 new Error(49, 5, ErrorReason.INVALID_INDEXING)
