@@ -100,13 +100,13 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     public Type visit(Invocation invocation, Type param) {
         super.visit(invocation, param);
         if (invocation.getName().getDefinition().getType().isDifferentArgs(invocation.getArguments())) {
-            ErrorManager.getInstance().addError(new Location(invocation.getLine(), invocation.getColumn()), ErrorReason.INVALID_ARGS);
+            ErrorManager.getInstance().addError(new Location(invocation.getName().getLine(), invocation.getName().getColumn()), ErrorReason.INVALID_ARGS);
             return new ErrorType(invocation.getLine(), invocation.getColumn(), "Invocation error");
 
         }
         invocation.setType(invocation.getName().getDefinition().getType().parenthesis(invocation.getArguments()));
         if (invocation.getType() == null) {
-            ErrorManager.getInstance().addError(new Location(invocation.getLine(), invocation.getColumn()), ErrorReason.INVALID_INVOCATION);
+            ErrorManager.getInstance().addError(new Location(invocation.getName().getLine(), invocation.getName().getColumn()), ErrorReason.INVALID_INVOCATION);
             return new ErrorType(invocation.getLine(), invocation.getColumn(), "Invocation error");
 
         }
