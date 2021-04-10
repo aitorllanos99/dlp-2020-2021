@@ -42,6 +42,10 @@ public class IntType extends AbstractType implements Type {
         return null;
     }
 
+    @Override
+    public boolean isLogical() {
+        return true;
+    }
 
     @Override
     public Type assignment(Type type) {

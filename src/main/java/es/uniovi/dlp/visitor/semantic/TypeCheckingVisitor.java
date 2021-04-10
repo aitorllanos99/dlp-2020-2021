@@ -27,11 +27,11 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         Type indexType = indexing.getIndex().getType();
         indexing.setType(arrayType.indexing(indexType));
         if (!(indexing.getArray().getType() instanceof ArrayType)) {
-            ErrorManager.getInstance().addError(new Location(indexing.getLine(), indexing.getColumn()), ErrorReason.INVALID_INDEXING);
+            ErrorManager.getInstance().addError(new Location(indexing.getArray().getLine(), indexing.getArray().getColumn()), ErrorReason.INVALID_INDEXING);
             return new ErrorType(indexing.getLine(), indexing.getColumn(), "Indexing error");
         }
         if (indexing.getType() == null) {
-            ErrorManager.getInstance().addError(new Location(indexing.getLine(), indexing.getColumn()), ErrorReason.INVALID_INDEX_EXPRESSION);
+            ErrorManager.getInstance().addError(new Location(indexing.getIndex().getLine(), indexing.getIndex().getColumn()), ErrorReason.INVALID_INDEX_EXPRESSION);
             return new ErrorType(indexing.getLine(), indexing.getColumn(), "Indexing error");
         }
         return null;
@@ -43,7 +43,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         cast.setType(cast.getExpression().getType().cast(cast.getTypeToCast()));
         if (cast.getType() == null) {
             ErrorManager.getInstance().addError(new Location(cast.getLine(), cast.getColumn()), ErrorReason.INVALID_CAST);
-            return new ErrorType(cast.getLine(), cast.getColumn(), "Cast error");
+            return new ErrorType(cast.getExpression().getLine(), cast.getExpression().getColumn(), "Cast error");
         }
         return null;
     }
@@ -61,7 +61,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         super.visit(comparison, param);
         comparison.setType(comparison.getLeftExpression().getType().comparison(comparison.getRightExpression().getType()));
         if (comparison.getType() == null)
-            ErrorManager.getInstance().addError(new Location(comparison.getLine(), comparison.getColumn()), ErrorReason.INVALID_COMPARISON);
+            ErrorManager.getInstance().addError(new Location(comparison.getLeftExpression().getLine(), comparison.getLeftExpression().getColumn()), ErrorReason.INVALID_COMPARISON);
 
         return null;
     }
@@ -118,7 +118,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         super.visit(logical, param);
         logical.setType(logical.getLeftExpression().getType().logical(logical.getRightExpression().getType()));
         if (logical.getType() == null) {
-            ErrorManager.getInstance().addError(new Location(logical.getLine(), logical.getColumn()), ErrorReason.INVALID_LOGICAL);
+            ErrorManager.getInstance().addError(new Location(logical.getLeftExpression().getLine(), logical.getLeftExpression().getColumn()), ErrorReason.INVALID_LOGICAL);
             return new ErrorType(logical.getLine(), logical.getColumn(), "logical Error");
         }
         return null;
@@ -129,7 +129,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         super.visit(unaryMinus, param);
         if (!unaryMinus.getExpression().getType().isArithmetic()) {
             ErrorManager.getInstance().addError(new Location(unaryMinus.getLine(), unaryMinus.getColumn()), ErrorReason.INVALID_ARITHMETIC);
-            return new ErrorType(unaryMinus.getLine(), unaryMinus.getColumn(), "Unary Minus error");
+            return new ErrorType(unaryMinus.getExpression().getLine(), unaryMinus.getExpression().getColumn(), "Unary Minus error");
         }
         unaryMinus.setType(new IntType(unaryMinus.getExpression().getLine(),unaryMinus.getExpression().getColumn()));
         return null;
@@ -181,6 +181,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     @Override
     public Type visit(IfElse ifElse, Type param) {
         super.visit(ifElse, param);
+        System.out.println(ifElse.getCondition().getType());
         if (!ifElse.getCondition().getType().isLogical())
             ErrorManager.getInstance().addError(new Location(ifElse.getLine(), ifElse.getColumn()), ErrorReason.NOT_LOGICAL);
 
@@ -209,7 +210,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     @Override
     public Type visit(While whileStatement, Type param) {
         super.visit(whileStatement, param);
-        if (!whileStatement.getCondition().getType().isLogical())
+        if (whileStatement.getCondition().getType() != null && !whileStatement.getCondition().getType().isLogical())
             ErrorManager.getInstance().addError(new Location(whileStatement.getLine(), whileStatement.getColumn()), ErrorReason.NOT_LOGICAL);
 
         return null;
