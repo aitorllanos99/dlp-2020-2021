@@ -90,7 +90,7 @@ public abstract class AbstractVisitor<ReturnType, ParamType> implements Visitor<
     @Override
     public ReturnType visit(Invocation invocation, ParamType param) {
         invocation.getArguments().forEach(i -> i.accept(this, param));
-        invocation.getName().accept(this,param);
+        invocation.getName().accept(this, param);
         invocation.setLvalue(false);
         return null;
     }
@@ -102,7 +102,6 @@ public abstract class AbstractVisitor<ReturnType, ParamType> implements Visitor<
         logical.setLvalue(false);
         return null;
     }
-
 
 
     @Override
@@ -127,9 +126,10 @@ public abstract class AbstractVisitor<ReturnType, ParamType> implements Visitor<
 
     @Override
     public ReturnType visit(Assignment assignment, ParamType param) {
-        assignment.getLeftExpression().accept(this, param);
-        assignment.getRightExpression().accept(this, param);
-
+        ReturnType type = assignment.getLeftExpression().accept(this, param);
+        ReturnType typeRight = assignment.getRightExpression().accept(this, param);
+        if (type instanceof ErrorType) return type;
+        if (typeRight instanceof ErrorType) return typeRight;
         return null;
     }
 

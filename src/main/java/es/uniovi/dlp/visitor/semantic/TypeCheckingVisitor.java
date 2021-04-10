@@ -40,8 +40,10 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     public Type visit(Cast cast, Type param) {
         super.visit(cast, param);
         cast.setType(cast.getExpression().getType().cast(cast.getTypeToCast()));
-        if (cast.getType() == null)
+        if (cast.getType() == null) {
             ErrorManager.getInstance().addError(new Location(cast.getLine(), cast.getColumn()), ErrorReason.INVALID_CAST);
+            return new ErrorType(cast.getLine(),cast.getColumn(), "Cast error");
+        }
         return null;
     }
 
@@ -109,9 +111,10 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     public Type visit(Logical logical, Type param) {
         super.visit(logical, param);
         logical.setType(logical.getLeftExpression().getType().logical(logical.getRightExpression().getType()));
-        if (logical.getType() == null)
-            ErrorManager.getInstance().addError(new Location(logical.getLine(), logical.getColumn()), ErrorReason.NOT_LOGICAL);
-
+        if (logical.getType() == null) {
+            ErrorManager.getInstance().addError(new Location(logical.getLine(), logical.getColumn()), ErrorReason.INVALID_LOGICAL);
+            return new ErrorType(logical.getLine(),logical.getColumn(), "logical Error");
+        }
         return null;
     }
 
@@ -127,9 +130,10 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     @Override
     public Type visit(UnaryNot unaryNot, Type param) {
         super.visit(unaryNot, param);
-        if (!unaryNot.getExpression().getType().isLogical())
+        if (!unaryNot.getExpression().getType().isLogical()) {
             ErrorManager.getInstance().addError(new Location(unaryNot.getLine(), unaryNot.getColumn()), ErrorReason.NOT_LOGICAL);
-
+            return new ErrorType(unaryNot.getLine(),unaryNot.getColumn(), "Unary Not Mistake");
+        }
         return null;
     }
 
@@ -151,7 +155,9 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
 
     @Override
     public Type visit(Assignment assignment, Type param) {
-        super.visit(assignment, param);
+        Type visitorType = super.visit(assignment, param);
+        if(visitorType instanceof ErrorType)
+            return null;
         if (!assignment.getLeftExpression().getLValue())
             ErrorManager.getInstance().addError(new Location(assignment.getLine(), assignment.getColumn()), ErrorReason.LVALUE_REQUIRED);
         if (assignment.getLeftExpression().getType().assignment(assignment.getRightExpression().getType()) == null)

@@ -46,8 +46,8 @@ public class TypeCheckingTest {
                 new Error(10, 8, ErrorReason.NOT_LOGICAL),
                 new Error(13, 11, ErrorReason.NOT_LOGICAL),
                 new Error(17, 18, ErrorReason.NOT_LOGICAL),
-                new Error(18, 19, ErrorReason.INVALID_LOGICAL),
-                new Error(19, 19, ErrorReason.INVALID_LOGICAL)
+                new Error(18, 17, ErrorReason.INVALID_LOGICAL),
+                new Error(19, 17, ErrorReason.INVALID_LOGICAL)
         ));
     }
 
