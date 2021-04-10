@@ -104,12 +104,20 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
             return new ErrorType(invocation.getLine(), invocation.getColumn(), "Invocation error");
 
         }
-        invocation.setType(invocation.getName().getDefinition().getType().parenthesis(invocation.getArguments()));
-        if (invocation.getType() == null) {
+        if(!(invocation.getName().getDefinition().getType() instanceof FuncType)) {
             ErrorManager.getInstance().addError(new Location(invocation.getName().getLine(), invocation.getName().getColumn()), ErrorReason.INVALID_INVOCATION);
             return new ErrorType(invocation.getLine(), invocation.getColumn(), "Invocation error");
 
         }
+        invocation.setType(invocation.getName().getDefinition().getType().parenthesis(invocation.getArguments()));
+
+        if (invocation.getType() == null) {
+            ErrorManager.getInstance().addError(new Location(invocation.getName().getLine(), invocation.getName().getColumn()), ErrorReason.INVALID_ARGS);
+            return new ErrorType(invocation.getLine(), invocation.getColumn(), "Invocation error");
+
+        }
+
+
         return null;
     }
 

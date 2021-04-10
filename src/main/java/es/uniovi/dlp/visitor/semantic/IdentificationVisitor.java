@@ -14,6 +14,8 @@ import es.uniovi.dlp.error.ErrorReason;
 import es.uniovi.dlp.error.Location;
 import es.uniovi.dlp.visitor.AbstractVisitor;
 
+import java.util.HashSet;
+
 public class IdentificationVisitor extends AbstractVisitor<Type, Type> {
     private SymbolTable table = new SymbolTable();
 
@@ -60,26 +62,14 @@ public class IdentificationVisitor extends AbstractVisitor<Type, Type> {
         return null;
     }
 
-     /* @Override
-   public Type visit(RecordField recordField, Type param) {
-        //Patch for this case, should be modifed, without break it prints it twice
-
-        if (table.find(recordField.getName()) != null)
-           ErrorManager.getInstance().addError(new Location(recordField.getLine(), recordField.getColumn()), ErrorReason.FIELD_ALREADY_DECLARED);
-
-       return null;
-    }*/
 
     @Override
     public Type visit(RecordType recordType, Type param) {
+        var uniques = new HashSet<String>();
         for (RecordField f : recordType.getFields())
-            if (recordType.getFields().stream().filter(e -> f.getName().equals(e.getName())).count() > 1) {
+            if (!uniques.add(f.getName())) {
                 ErrorManager.getInstance().addError(new Location(f.getLine(), f.getColumn()), ErrorReason.FIELD_ALREADY_DECLARED);
-                break;
             }
-      /*  table.set();
-        super.visit(recordType,param);
-        table.reset();*/
         return null;
     }
 
