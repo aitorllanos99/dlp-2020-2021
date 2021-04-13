@@ -78,6 +78,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         super.visit(fieldAccess, param);
         var x = fieldAccess.getExpression1();
         var x2 = fieldAccess.getExpression1().getType();
+
     // PORQUE PONE EL RECORDTYPE COMO ARRAYTYPE??
         if (!fieldAccess.getExpression1().getType().isStructField(fieldAccess.getProperty())) {
             ErrorManager.getInstance().addError(new Location(fieldAccess.getLine(), fieldAccess.getColumn()), ErrorReason.NO_SUCH_FIELD);

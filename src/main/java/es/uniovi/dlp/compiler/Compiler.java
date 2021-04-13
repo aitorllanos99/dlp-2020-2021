@@ -23,6 +23,8 @@ public class Compiler {
     }
 
     public void run() throws IOException {
+        ErrorManager errorManager = ErrorManager.getInstance();
+        errorManager.reset();
         program = parse(file);
         assignIdentifiers();
         assignType();
@@ -41,7 +43,7 @@ public class Compiler {
 
         if (errorManager.hasErrors()) {
             errorManager.getErrors().forEach(System.err::println);
-            errorManager.reset();
+
             System.exit(-1);
         }
     }

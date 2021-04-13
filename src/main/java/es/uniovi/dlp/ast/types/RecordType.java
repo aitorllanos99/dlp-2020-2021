@@ -21,7 +21,7 @@ public class RecordType extends AbstractType implements Type {
     @Override
     public Type dot(String field) {
         for (RecordField f : fields)
-            if (isStructField(field))
+            if (f.getName().equals(field))
                 return f.getType();
         return null;
     }
