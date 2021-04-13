@@ -7,7 +7,7 @@ import es.uniovi.dlp.ast.types.RecordType;
 import es.uniovi.dlp.visitor.AbstractVisitor;
 import es.uniovi.dlp.visitor.Visitor;
 
-public class OffsetVisitor extends AbstractVisitor implements Visitor {
+public class OffsetVisitor extends AbstractVisitor<Object,Object> {
     private int desplazamientoGlobal = 0;
     private int desplazamientoLocal = 0;
 

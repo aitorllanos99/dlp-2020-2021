@@ -5,6 +5,7 @@ import es.uniovi.dlp.error.ErrorManager;
 import es.uniovi.dlp.error.Location;
 import es.uniovi.dlp.parser.XanaLexer;
 import es.uniovi.dlp.parser.XanaParser;
+import es.uniovi.dlp.visitor.codegeneration.OffsetVisitor;
 import es.uniovi.dlp.visitor.semantic.IdentificationVisitor;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -33,7 +34,8 @@ public class Compiler {
     }
 
     private void generateOffsets() {
-
+        OffsetVisitor offsetVisitor = new OffsetVisitor();
+        offsetVisitor.visit(program,null);
     }
 
     private void assignIdentifiers() {
