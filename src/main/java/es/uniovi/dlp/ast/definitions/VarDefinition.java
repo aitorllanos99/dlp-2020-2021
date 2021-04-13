@@ -8,6 +8,7 @@ import es.uniovi.dlp.visitor.Visitor;
 public class VarDefinition extends AbstractDefinition implements Definition {
     private String name;
     private Type type;
+    private int offset;
 
     public VarDefinition(int line, int column, String name, Type type) {
         super(line, column);
@@ -26,6 +27,14 @@ public class VarDefinition extends AbstractDefinition implements Definition {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public int getOffset() {
+        return offset;
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 
     @Override

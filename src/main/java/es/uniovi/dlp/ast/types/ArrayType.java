@@ -37,6 +37,11 @@ public class ArrayType extends AbstractType implements Type{
     }
 
     @Override
+    public int getNumberOfBytes() {
+        return arrayOf.getNumberOfBytes() * size;
+    }
+
+    @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
         return returnTypeParamTypeAbstractVisitor.visit(this,param);
     }

@@ -21,7 +21,6 @@ public interface Type {
     boolean isStructField(String field);
     Type isReturnable(Type funcType);
     boolean isArithmetic();
-
-    //int getNumberOfBytes();
+    int getNumberOfBytes();
 
 }

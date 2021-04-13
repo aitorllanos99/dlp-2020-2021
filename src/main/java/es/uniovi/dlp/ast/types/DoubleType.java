@@ -3,6 +3,7 @@ package es.uniovi.dlp.ast.types;
 import es.uniovi.dlp.visitor.Visitor;
 
 public class DoubleType extends AbstractType implements Type {
+    private static final int DOUBLE_SIZE = 4;
     public DoubleType(int line, int column) {
         super(line, column);
     }
@@ -44,6 +45,11 @@ public class DoubleType extends AbstractType implements Type {
         if (type instanceof DoubleType || type instanceof CharType || type instanceof IntType)
             return type;
         return null;
+    }
+
+    @Override
+    public int getNumberOfBytes() {
+        return DOUBLE_SIZE;
     }
 
     @Override

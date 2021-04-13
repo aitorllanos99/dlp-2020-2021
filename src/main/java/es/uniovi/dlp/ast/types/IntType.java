@@ -3,6 +3,7 @@ package es.uniovi.dlp.ast.types;
 import es.uniovi.dlp.visitor.Visitor;
 
 public class IntType extends AbstractType implements Type {
+    private static final int INT_SIZE = 2;
     public IntType(int line, int column) {
         super(line, column);
     }
@@ -49,6 +50,11 @@ public class IntType extends AbstractType implements Type {
     @Override
     public boolean isLogical() {
         return true;
+    }
+
+    @Override
+    public int getNumberOfBytes() {
+        return INT_SIZE;
     }
 
     @Override

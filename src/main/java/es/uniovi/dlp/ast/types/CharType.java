@@ -3,6 +3,7 @@ package es.uniovi.dlp.ast.types;
 import es.uniovi.dlp.visitor.Visitor;
 
 public class CharType extends AbstractType implements Type {
+    private static final int CHAR_SIZE = 1;
     public CharType(int line, int column) {
         super(line, column);
     }
@@ -33,6 +34,11 @@ public class CharType extends AbstractType implements Type {
         if(type instanceof CharType)
             return type;
         return null;
+    }
+
+    @Override
+    public int getNumberOfBytes() {
+        return CHAR_SIZE;
     }
 
     @Override

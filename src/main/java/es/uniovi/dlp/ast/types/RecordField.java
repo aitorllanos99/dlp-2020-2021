@@ -6,13 +6,12 @@ import es.uniovi.dlp.visitor.Visitor;
 public class RecordField extends AbstractType implements Type{
     private String name;
     private Type type;
-    private boolean alreadyDeclared;
+    private int offset;
 
     public RecordField(int line, int column, String name, Type type) {
         super(line, column);
         this.name = name;
         this.type = type;
-        alreadyDeclared = false;
     }
 
     public String getName() {
@@ -23,16 +22,21 @@ public class RecordField extends AbstractType implements Type{
         return type;
     }
 
-    public void setAlreadyDeclared(boolean alreadyDeclared) {
-        this.alreadyDeclared = alreadyDeclared;
+    public int getOffset() {
+        return offset;
     }
 
-    public boolean isAlreadyDeclared() {
-        return alreadyDeclared;
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 
     @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
         return returnTypeParamTypeAbstractVisitor.visit(this,param);
+    }
+
+    @Override
+    public int getNumberOfBytes() {
+        return 0;
     }
 }

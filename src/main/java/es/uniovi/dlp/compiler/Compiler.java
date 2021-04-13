@@ -28,7 +28,12 @@ public class Compiler {
         program = parse(file);
         assignIdentifiers();
         assignType();
+        generateOffsets();
         checkErrors();
+    }
+
+    private void generateOffsets() {
+
     }
 
     private void assignIdentifiers() {

@@ -35,6 +35,14 @@ public class RecordType extends AbstractType implements Type {
     }
 
     @Override
+    public int getNumberOfBytes() {
+        int total = 0;
+        for(var f: fields)
+            total += f.getType().getNumberOfBytes();
+        return total;
+    }
+
+    @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
         return returnTypeParamTypeAbstractVisitor.visit(this, param);
     }

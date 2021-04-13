@@ -47,6 +47,11 @@ public class FuncType extends AbstractType implements Type {
         return false;
     }
 
+    @Override
+    public int getNumberOfBytes() {
+        return returnType.getNumberOfBytes();
+    }
+
 
     @Override
     public boolean isLogical() {
