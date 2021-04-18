@@ -33,22 +33,23 @@ public class OffsetVisitor extends AbstractVisitor<Object,Object> {
 
     @Override
     public Object visit(FuncType funcType, Object param) {
+        super.visit(funcType, param);
         int offsetParams = 4;
         for(int i= funcType.getParameters().size(); i >=0;i--){
             funcType.getParameters().get(i).setOffset(offsetParams);
             offsetParams += funcType.getParameters().get(i).getType().getNumberOfBytes();
         }
-        super.visit(funcType, param);
         return null;
     }
 
     @Override
     public Object visit(RecordType recordType, Object param) {
+        super.visit(recordType, param);
         int offsetFields = 0;
         for(var f: recordType.getFields()){
             f.setOffset(offsetFields);
             offsetFields += f.getType().getNumberOfBytes();
         }
-        return super.visit(recordType, param);
+        return null;
     }
 }

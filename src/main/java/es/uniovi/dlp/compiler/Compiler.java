@@ -29,7 +29,7 @@ public class Compiler {
         program = parse(file);
         assignIdentifiers();
         assignType();
-        generateOffsets();
+       // generateOffsets();
         checkErrors();
     }
 
