@@ -105,6 +105,7 @@
           <outputDirectory>src/main/java/es/uniovi/dlp/parser/</outputDirectory>
         </configuration>
       </plugin>
+<<<<<<< HEAD
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -169,6 +170,54 @@
                 <target>15</target>
             </configuration>
         </plugin>
+=======
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <id>cli</id>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <mainClass>es.uniovi.dlp.commandline.CLI</mainClass>
+              <arguments>
+                <argument>${file}</argument>
+              </arguments>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>mapl</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>mapl/TextVM.exe</executable>
+              <arguments>
+                <argument>${file}</argument>
+              </arguments>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>mapl-ui</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>mapl/GVM.exe</executable>
+              <arguments>
+                <argument>${file}</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+>>>>>>> upstream/main
     </plugins>
   </build>
 </project>
