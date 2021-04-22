@@ -13,14 +13,19 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import es.uniovi.dlp.visitor.semantic.TypeCheckingVisitor;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 public class Compiler {
     private final String file;
     private Program program;
     private boolean reportErrors = true;
-
+    private OutputStreamWriter out;
     public Compiler(String file) {
         this.file = file;
+    }
+    public Compiler(String file, OutputStreamWriter out) {
+        this.file = file;
+        this.out = out;
     }
 
     public void run() throws IOException {
@@ -29,7 +34,7 @@ public class Compiler {
         program = parse(file);
         assignIdentifiers();
         assignType();
-       // generateOffsets();
+        generateOffsets();
         checkErrors();
     }
 
@@ -77,6 +82,9 @@ public class Compiler {
 
     public void setReportErrors(boolean reportErrors) {
         this.reportErrors = reportErrors;
+    }
+
+    public void setShowDebug(boolean b) {
     }
 }
 

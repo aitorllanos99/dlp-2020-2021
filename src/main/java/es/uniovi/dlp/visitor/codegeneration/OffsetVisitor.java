@@ -35,6 +35,8 @@ public class OffsetVisitor extends AbstractVisitor<Object,Object> {
     public Object visit(FuncType funcType, Object param) {
         super.visit(funcType, param);
         int offsetParams = 4;
+        if(funcType.getParameters().isEmpty())
+            return null;
         for(int i= funcType.getParameters().size(); i >=0;i--){
             funcType.getParameters().get(i).setOffset(offsetParams);
             offsetParams += funcType.getParameters().get(i).getType().getNumberOfBytes();
