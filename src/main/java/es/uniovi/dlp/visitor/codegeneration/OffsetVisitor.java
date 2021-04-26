@@ -37,9 +37,9 @@ public class OffsetVisitor extends AbstractVisitor<Object,Object> {
         int offsetParams = 4;
         if(funcType.getParameters().isEmpty())
             return null;
-        for(int i= funcType.getParameters().size(); i >=0;i--){
-            funcType.getParameters().get(i).setOffset(offsetParams);
-            offsetParams += funcType.getParameters().get(i).getType().getNumberOfBytes();
+        for(var paramByte : funcType.getParameters()){
+            paramByte.setOffset(offsetParams);
+            offsetParams += paramByte.getType().getNumberOfBytes();
         }
         return null;
     }
