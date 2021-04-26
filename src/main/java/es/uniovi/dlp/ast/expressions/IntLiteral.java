@@ -11,6 +11,9 @@ public class IntLiteral extends AbstractExpression implements Expression{
         this.value = value;
     }
 
+    public int getValue() {
+        return value;
+    }
 
     @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {

@@ -42,7 +42,19 @@ public class FuncDefinition extends AbstractDefinition implements Definition {
         return name;
     }
 
+    public int getLocalBytes(){
+        int suma = 0;
+        for(var v: bodyVarDefinitions)
+            suma += v.getType().getNumberOfBytes();
+        return suma;
+    }
 
+    public int getParamBytes(){
+        int suma = 0;
+        for(var v: parameters)
+            suma += v.getType().getNumberOfBytes();
+        return suma;
+    }
 
     public Type getType() {
         return type;

@@ -5,6 +5,8 @@ import es.uniovi.dlp.error.ErrorManager;
 import es.uniovi.dlp.error.Location;
 import es.uniovi.dlp.parser.XanaLexer;
 import es.uniovi.dlp.parser.XanaParser;
+import es.uniovi.dlp.visitor.codegeneration.CodeGenerator;
+import es.uniovi.dlp.visitor.codegeneration.ExecuteCGVisitor;
 import es.uniovi.dlp.visitor.codegeneration.OffsetVisitor;
 import es.uniovi.dlp.visitor.semantic.IdentificationVisitor;
 import org.antlr.v4.runtime.CharStream;
@@ -34,8 +36,9 @@ public class Compiler {
         program = parse(file);
         assignIdentifiers();
         assignType();
-        generateOffsets();
         checkErrors();
+        generateOffsets();
+        generateCode();
     }
 
     private void generateOffsets() {
@@ -46,6 +49,11 @@ public class Compiler {
     private void assignIdentifiers() {
         IdentificationVisitor identificationVisitor = new IdentificationVisitor();
         identificationVisitor.visit(program, null);
+    }
+
+    private void generateCode() {
+        ExecuteCGVisitor executor = new ExecuteCGVisitor(new CodeGenerator(out));
+        executor.visit(program,null);
     }
 
     private void checkErrors() {

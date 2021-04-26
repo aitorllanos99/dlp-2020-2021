@@ -1,6 +1,11 @@
 package es.uniovi.dlp.visitor.codegeneration;
 
 
+import es.uniovi.dlp.ast.types.CharType;
+import es.uniovi.dlp.ast.types.DoubleType;
+import es.uniovi.dlp.ast.types.IntType;
+import es.uniovi.dlp.ast.types.Type;
+
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
@@ -11,218 +16,341 @@ public class CodeGenerator {
         this.out = out;
     }
 
-    public void source(String constant) throws IOException {
-        out.write("\t#source " + constant);
-        out.flush();
+    public void source(String constant) {
+        try {
+            out.write("\t#source " + constant);
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void line(int constant) throws IOException {
-        out.write("\t#line " + constant);
-        out.flush();
-    }
+    public void line(int constant) {
+        try {
+            out.write("\t#line " + constant);
+            out.flush();
+        } catch (IOException e) {
 
-    public void pushb(char c) throws IOException {
-        out.write("\tpushb\t" + c);
-        out.flush();
+        }
     }
+    public void push(String type, int n) {
+        try {
+            out.write("\tpush" + type +"\t" + n);
+            out.flush();
+        } catch (IOException e) {
 
-    public void pushi(int i) throws IOException {
-        out.write("\tpushi\t" + i);
-        out.flush();
-    }
+        }
+    } public void push(String type, double n) {
+        try {
+            out.write("\tpush" + type +"\t" + n);
+            out.flush();
+        } catch (IOException e) {
 
-    public void pushf(double f) throws IOException {
-        out.write("\tpushf\t" + f);
-        out.flush();
-    }
-
-    public void pusha(int i) throws IOException {
-        out.write("\tpusha\t" + i);
-        out.flush();
-    }
-
-    public void pushBp() throws IOException {
-        out.write("\tpush\tbp");
-        out.flush();
-    }
-
-    public void load(String type) throws IOException {
-        out.write("\tload" + type);
-        out.flush();
-    }
-
-    public void store(String type) throws IOException {
-        out.write("\tstore" + type);
-        out.flush();
-    }
-
-    public void pop(String type) throws IOException {
-        out.write("\tpop" + type);
-        out.flush();
-    }
-
-    public void dup(String type) throws IOException {
-        out.write("\tdup" + type);
-        out.flush();
-    }
-
-    public void b2i() throws IOException {
-        out.write("\tb2i");
-        out.flush();
-    }
-
-    public void i2f() throws IOException {
-        out.write("\ti2f");
-        out.flush();
-    }
-
-    public void f2i() throws IOException {
-        out.write("\tf2i");
-        out.flush();
-    }
-
-    public void i2b() throws IOException {
-        out.write("\ti2b");
-        out.flush();
-    }
-
-    public void outb(byte b) throws IOException {
-        out.write("\toutb" + b);
-        out.flush();
-    }
-
-    public void outi(int i) throws IOException {
-        out.write("\touti" + i);
-        out.flush();
-    }
-
-    public void outf(float f) throws IOException {
-        out.write("\toutf" + f);
-        out.flush();
-    }
-
-    public void inb(byte b) throws IOException {
-        out.write("\tinb" + b);
-        out.flush();
-    }
-
-    public void ini(int i) throws IOException {
-        out.write("\tini" + i);
-        out.flush();
-    }
-
-    public void inf(float f) throws IOException {
-        out.write("\tinf" + f);
-        out.flush();
-    }
-
-    public void jmp(int label) throws IOException {
-        out.write("\tjmp" + label);
-        out.flush();
-    }
-
-    public void jz(int label) throws IOException {
-        out.write("\tjmp" + label);
-        out.flush();
-    }
-
-    public void jnz(int label) throws IOException {
-        out.write("\tjmp" + label);
-        out.flush();
-    }
-
-    public void halt() throws IOException {
-        out.write("\thalt\n");
-        out.flush();
-    }
-
-    public void call(String etiqueta) throws IOException {
-        out.write("\tcall " + etiqueta);
-        out.flush();
+        }
     }
 
 
-    public void enter(int i) throws IOException {
-        out.write("\tenter " + i);
-        out.flush();
+    public void pusha(int i) {
+        try {
+            out.write("\tpusha\t" + i);
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void ret(int retBytes, int retVar, int retPar) throws IOException {
-        out.write("\tret " + retBytes + "," + retVar + "," + retPar);
-        out.flush();
+    public void pushBp() {
+        try {
+            out.write("\tpush\tbp");
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void add(String type) throws IOException {
-        out.write("\tadd" + type);
-        out.flush();
+    public void load(String type) {
+        try {
+            out.write("\tload" + type);
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void sub(String type) throws IOException {
-        out.write("\tsub" + type);
-        out.flush();
+    public void store(String type) {
+        try {
+            out.write("\tstore" + type);
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void div(String type) throws IOException {
-        out.write("\tdiv" + type);
-        out.flush();
+    public void pop(String type) {
+        try {
+            out.write("\tpop" + type);
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void mul(String type) throws IOException {
-        out.write("\tmul" + type);
-        out.flush();
+    public void dup(String type) {
+        try {
+            out.write("\tdup" + type);
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void mod(String type) throws IOException {
-        out.write("\tmod" + type);
-        out.flush();
+    public void b2i() {
+        try {
+            out.write("\tb2i");
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void gt(String type) throws IOException {
-        out.write("\tgt" + type);
-        out.flush();
+    public void i2f() {
+        try {
+            out.write("\ti2f");
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void lt(String type) throws IOException {
-        out.write("\tlt" + type);
-        out.flush();
+    public void f2i() {
+        try {
+            out.write("\tf2i");
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void ge(String type) throws IOException {
-        out.write("\tge" + type);
-        out.flush();
+    public void i2b() {
+        try {
+            out.write("\ti2b");
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void le(String type) throws IOException {
-        out.write("\tle" + type);
-        out.flush();
+    public void out(String b) {
+        try {
+            out.write("\tout" + b);
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void eq(String type) throws IOException {
-        out.write("\teq" + type);
-        out.flush();
+    public void in(String x) {
+        try {
+            out.write("\tin" + x);
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void ne(String type) throws IOException {
-        out.write("\tne" + type);
-        out.flush();
+
+    public void jmp(int label) {
+        try {
+            out.write("\tjmp" + label);
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void and() throws IOException {
-        out.write("\tand");
-        out.flush();
+    public void jz(int label) {
+        try {
+            out.write("\tjmp" + label);
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void or() throws IOException {
-        out.write("\tor");
-        out.flush();
+    public void jnz(int label) {
+        try {
+            out.write("\tjmp" + label);
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void not() throws IOException {
-        out.write("\tnot");
-        out.flush();
+    public void halt() {
+        try {
+            out.write("\thalt\n");
+            out.flush();
+        } catch (IOException e) {
+
+        }
     }
 
-    public void logic(String operator) throws IOException {
+    public void call(String etiqueta) {
+        try {
+            out.write("\tcall " + etiqueta);
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+
+    public void enter(int i) {
+        try {
+            out.write("\tenter " + i);
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void ret(int retBytes, int retVar, int retPar) {
+        try {
+            out.write("\tret " + retBytes + "," + retVar + "," + retPar);
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void add(String type) {
+        try {
+            out.write("\tadd" + type);
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void sub(String type) {
+        try {
+            out.write("\tsub" + type);
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void div(String type) {
+        try {
+            out.write("\tdiv" + type);
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void mul(String type) {
+        try {
+            out.write("\tmul" + type);
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void mod(String type) {
+        try {
+            out.write("\tmod" + type);
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void gt(String type) {
+        try {
+            out.write("\tgt" + type);
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void lt(String type) {
+        try {
+            out.write("\tlt" + type);
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void ge(String type) {
+        try {
+            out.write("\tge" + type);
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void le(String type) {
+        try {
+            out.write("\tle" + type);
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void eq(String type) {
+        try {
+            out.write("\teq" + type);
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void ne(String type) {
+        try {
+            out.write("\tne" + type);
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void and() {
+        try {
+            out.write("\tand");
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void or() {
+        try {
+            out.write("\tor");
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void not() {
+        try {
+            out.write("\tnot");
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void logic(String operator) {
+
         switch (operator) {
             case "&&":
                 and();
@@ -236,9 +364,11 @@ public class CodeGenerator {
             default:
                 break;
         }
+
     }
 
-    public void arithmetic(String operator, String type) throws IOException {
+    public void arithmetic(String operator, String type) {
+
         switch (operator) {
             case "+":
                 add(type);
@@ -258,9 +388,11 @@ public class CodeGenerator {
             default:
                 break;
         }
+
     }
 
-    public void comparison(String operator, String type) throws IOException {
+    public void comparison(String operator, String type) {
+
         switch (operator) {
             case ">":
                 gt(type);
@@ -283,6 +415,46 @@ public class CodeGenerator {
             default:
                 break;
         }
+
     }
 
+    public void id(String name) {
+        try {
+            out.write(name + ":");
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void comment(String name) {
+        try {
+            out.write(name);
+            out.flush();
+        } catch (IOException e) {
+
+        }
+    }
+
+    public void promoteTo(Type left, Type right) {
+        if (left instanceof CharType) {
+            if (right instanceof DoubleType) {
+                b2i();
+                i2f();
+            }
+            if (right instanceof IntType) b2i();
+        }
+        if (left instanceof IntType) {
+            if (right instanceof DoubleType) i2f();
+            if (right instanceof CharType) i2b();
+        }
+        if (left instanceof DoubleType) {
+            if (right instanceof IntType) f2i();
+            if (right instanceof CharType) {
+                f2i();
+                i2b();
+            }
+        }
+
+    }
 }

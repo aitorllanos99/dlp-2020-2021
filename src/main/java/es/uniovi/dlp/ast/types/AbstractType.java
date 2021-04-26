@@ -79,4 +79,9 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public boolean isDifferentArgs(List<Expression> args) {
         return false;
     }
+
+    @Override
+    public String sufixCode() {
+        return null;
+    }
 }

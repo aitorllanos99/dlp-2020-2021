@@ -58,6 +58,11 @@ public class IntType extends AbstractType implements Type {
     }
 
     @Override
+    public String sufixCode() {
+        return "i";
+    }
+
+    @Override
     public Type assignment(Type type) {
         if(type instanceof IntType)
             return type;

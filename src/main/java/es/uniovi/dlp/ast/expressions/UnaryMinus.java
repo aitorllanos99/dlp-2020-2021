@@ -2,7 +2,7 @@ package es.uniovi.dlp.ast.expressions;
 
 import es.uniovi.dlp.visitor.Visitor;
 
-public class UnaryMinus extends AbstractExpression implements Expression{
+public class UnaryMinus extends AbstractExpression implements Expression {
     private Expression expression;
 
     public UnaryMinus(int line, int column, Expression expressions) {
@@ -14,8 +14,12 @@ public class UnaryMinus extends AbstractExpression implements Expression{
         return expression;
     }
 
+    public String getOperator() {
+        return "-";
+    }
+
     @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
-        return returnTypeParamTypeAbstractVisitor.visit(this,param);
+        return returnTypeParamTypeAbstractVisitor.visit(this, param);
     }
 }

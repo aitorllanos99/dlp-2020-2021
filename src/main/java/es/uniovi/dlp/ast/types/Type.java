@@ -22,5 +22,6 @@ public interface Type {
     Type isReturnable(Type funcType);
     boolean isArithmetic();
     int getNumberOfBytes();
+    String sufixCode();
 
 }

@@ -42,6 +42,11 @@ public class CharType extends AbstractType implements Type {
     }
 
     @Override
+    public String sufixCode() {
+        return "b";
+    }
+
+    @Override
     public Type promotableTo(Type to) {
         if(to instanceof FuncType){
             if(((FuncType) to).getReturnType() instanceof CharType)
