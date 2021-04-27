@@ -3,9 +3,11 @@ package es.uniovi.dlp.visitor.codegeneration;
 import es.uniovi.dlp.ast.Program;
 import es.uniovi.dlp.ast.definitions.FuncDefinition;
 import es.uniovi.dlp.ast.definitions.VarDefinition;
+import es.uniovi.dlp.ast.expressions.Invocation;
 import es.uniovi.dlp.ast.statements.Assignment;
 import es.uniovi.dlp.ast.statements.Read;
 import es.uniovi.dlp.ast.statements.Write;
+import es.uniovi.dlp.ast.types.VoidType;
 import es.uniovi.dlp.visitor.AbstractVisitor;
 
 public class ExecuteCGVisitor extends AbstractVisitor {
@@ -45,6 +47,15 @@ public class ExecuteCGVisitor extends AbstractVisitor {
         generator.comment("' " + varDefinition.getName() + " :: " + varDefinition.getType().getName()
                 + "( offset " + varDefinition.getOffset() + " )");
 
+        return null;
+    }
+
+    @Override
+    public Object visit(Invocation invocation, Object param) {
+        generator.line(invocation.getLine());
+        valueVisitor.visit(invocation,param);
+        if(! (invocation.getType() instanceof VoidType))
+            generator.pop(invocation.getType().sufixCode());
         return null;
     }
 

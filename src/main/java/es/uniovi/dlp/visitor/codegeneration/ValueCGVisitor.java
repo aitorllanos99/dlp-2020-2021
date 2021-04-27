@@ -1,6 +1,7 @@
 package es.uniovi.dlp.visitor.codegeneration;
 
 import es.uniovi.dlp.ast.expressions.*;
+import es.uniovi.dlp.ast.types.FuncType;
 import es.uniovi.dlp.visitor.AbstractVisitor;
 
 
@@ -60,6 +61,17 @@ public class ValueCGVisitor extends AbstractVisitor {
     @Override
     public Object visit(Indexing indexing, Object param) {
         return super.visit(indexing, param);
+    }
+
+    @Override
+    public Object visit(Invocation invocation, Object param) {
+        int contador = 0;
+        for (var e : invocation.getArguments()) {
+            e.accept(this, param);
+            //generator.promoteTo(e.getType(), ((FuncType) invocation.getName().getType()).getParameters().get(contador).getType());
+        }
+        generator.call(invocation.getName().getIdent());
+        return null;
     }
 
     @Override
