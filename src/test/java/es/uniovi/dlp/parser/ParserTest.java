@@ -3,8 +3,7 @@ package es.uniovi.dlp.parser;
 import org.junit.jupiter.api.Test;
 
 
-import static es.uniovi.dlp.TestHelpers.parserForProgram;
-import static es.uniovi.dlp.TestHelpers.silentParserForProgram;
+import static es.uniovi.dlp.TestHelpers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
@@ -191,6 +190,7 @@ public class ParserTest {
     }
     @Test
     void testError() {
-        parserForProgram("errors/duplicate_record_field").program();
+        parserForProgram("errors/identification/duplicated_record_field").program();
+
     }
 }
