@@ -100,6 +100,8 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
 
     @Override
     public Type visit(Invocation invocation, Type param) {
+        if(invocation.getName().getDefinition() == null)
+            return null; //Identification Error
         super.visit(invocation, param);
         if (invocation.getName().getDefinition().getType().isDifferentArgs(invocation.getArguments())) {
             ErrorManager.getInstance().addError(new Location(invocation.getName().getLine(), invocation.getName().getColumn()), ErrorReason.INVALID_ARGS);
@@ -178,7 +180,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     @Override
     public Type visit(Assignment assignment, Type param) {
         Type visitorType = super.visit(assignment, param);
-        if (visitorType instanceof ErrorType)
+        if (visitorType instanceof ErrorType || assignment.getLeftExpression().getType() instanceof ErrorType)
             return null;
         if (!assignment.getLeftExpression().getLValue())
             ErrorManager.getInstance().addError(new Location(assignment.getLine(), assignment.getColumn()), ErrorReason.LVALUE_REQUIRED);

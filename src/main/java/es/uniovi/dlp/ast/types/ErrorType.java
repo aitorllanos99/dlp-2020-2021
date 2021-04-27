@@ -8,12 +8,6 @@ public class ErrorType extends AbstractType implements Type{
     public ErrorType(int line, int column,String message) {
         super(line, column);
         this.message = message;
-        ErrorManager.getInstance().addError(this);
-    }
-
-    @Override
-    public String toString(){
-        return message + " [" + line + ":" + column+"]";
     }
 
     @Override

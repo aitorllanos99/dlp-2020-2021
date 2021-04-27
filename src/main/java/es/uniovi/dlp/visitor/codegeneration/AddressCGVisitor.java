@@ -31,6 +31,7 @@ public class AddressCGVisitor extends AbstractVisitor {
     @Override
     public Object visit(Variable variable, Object param) {
         super.visit(variable,param);
+        //Variable puede ser una funcion o una varDef
         if (variable.getDefinition().getScope() == 0)
             generator.pusha(((VarDefinition) variable.getDefinition()).getOffset());
         else {

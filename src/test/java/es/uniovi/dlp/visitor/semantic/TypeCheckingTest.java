@@ -46,8 +46,8 @@ public class TypeCheckingTest {
                 new Error(10, 8, ErrorReason.NOT_LOGICAL),
                 new Error(13, 11, ErrorReason.NOT_LOGICAL),
                 new Error(17, 18, ErrorReason.NOT_LOGICAL),
-                new Error(18, 23, ErrorReason.INVALID_LOGICAL),
-                new Error(19, 23, ErrorReason.INVALID_LOGICAL)
+                new Error(18, 17, ErrorReason.INVALID_LOGICAL),
+                new Error(19, 17, ErrorReason.INVALID_LOGICAL)
         ));
     }
 
@@ -114,7 +114,7 @@ public class TypeCheckingTest {
                 new Error(27, 5, ErrorReason.LVALUE_REQUIRED),
                 new Error(28, 8, ErrorReason.LVALUE_REQUIRED),
                 new Error(30, 8, ErrorReason.NO_SUCH_FIELD),
-                new Error(33, 18, ErrorReason.INVALID_LOGICAL),
+                new Error(33, 10, ErrorReason.INVALID_LOGICAL),
                 new Error(35, 10, ErrorReason.INVALID_COMPARISON),
                 new Error(37, 11, ErrorReason.NOT_LOGICAL),
                 new Error(38, 12, ErrorReason.NOT_LOGICAL),

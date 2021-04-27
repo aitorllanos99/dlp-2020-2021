@@ -7,7 +7,7 @@ public class Logical extends AbstractExpression implements Expression{
     private Expression leftExpression;
     private Expression rightExpression;
 
-    public Logical(int line, int column, Expression rightExpression , Expression leftExpression,String operation) {
+    public Logical(int line, int column, Expression leftExpression , Expression rightExpression,String operation) {
         super(line, column);
         this.operation = operation;
         this.leftExpression = leftExpression;

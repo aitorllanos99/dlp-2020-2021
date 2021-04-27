@@ -37,8 +37,10 @@ public class Compiler {
         assignIdentifiers();
         assignType();
         checkErrors();
-        generateOffsets();
-        generateCode();
+        if (!errorManager.hasErrors()) {
+            generateOffsets();
+            generateCode();
+        }
     }
 
     private void generateOffsets() {

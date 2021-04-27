@@ -34,21 +34,18 @@ public class ValueCGVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(CharLiteral charLiteral, Object param) {
-        super.visit(charLiteral,param);
         generator.push(charLiteral.getType().sufixCode(), charLiteral.getValue());
         return null;
     }
 
     @Override
     public Object visit(DoubleLiteral doubleLiteral, Object param) {
-        super.visit(doubleLiteral,param);
         generator.push(doubleLiteral.getType().sufixCode(), doubleLiteral.getValue());
         return null;
     }
 
     @Override
     public Object visit(IntLiteral intLiteral, Object param) {
-        super.visit(intLiteral,param);
         generator.push(intLiteral.getType().sufixCode(), intLiteral.getValue());
         return null;
     }

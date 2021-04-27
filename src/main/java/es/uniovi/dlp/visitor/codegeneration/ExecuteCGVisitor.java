@@ -31,7 +31,7 @@ public class ExecuteCGVisitor extends AbstractVisitor {
             if (def instanceof FuncDefinition) {
                 generator.comment("' Invocation to the " + def.getName() + " function");
                 generator.call(def.getName());
-                generator.halt();
+                if(def.getName().equals("main")) generator.halt();
                 def.accept(this, param);
             }
         }
