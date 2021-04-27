@@ -11,7 +11,7 @@ public class CharType extends AbstractType implements Type {
 
     @Override
     public Type cast(Type from) {
-        if (from instanceof IntType || from instanceof CharType)
+        if (from instanceof IntType || from instanceof CharType | from instanceof DoubleType)
             return from;
         return null;
     }
