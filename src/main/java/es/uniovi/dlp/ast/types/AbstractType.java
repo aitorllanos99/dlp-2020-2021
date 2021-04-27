@@ -84,4 +84,9 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public String sufixCode() {
         return null;
     }
+
+    @Override
+    public String getName() {
+        return null;
+    }
 }

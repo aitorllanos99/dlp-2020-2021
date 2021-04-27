@@ -13,7 +13,6 @@ public class OffsetVisitor extends AbstractVisitor<Object,Object> {
 
     @Override
     public Object visit(VarDefinition varDefinition, Object param) {
-        super.visit(varDefinition, param);
         if (varDefinition.getScope() == 0) {
             varDefinition.setOffset(desplazamientoGlobal);
             desplazamientoGlobal += varDefinition.getType().getNumberOfBytes();
@@ -33,10 +32,7 @@ public class OffsetVisitor extends AbstractVisitor<Object,Object> {
 
     @Override
     public Object visit(FuncType funcType, Object param) {
-        super.visit(funcType, param);
         int offsetParams = 4;
-        if(funcType.getParameters().isEmpty())
-            return null;
         for(var paramByte : funcType.getParameters()){
             paramByte.setOffset(offsetParams);
             offsetParams += paramByte.getType().getNumberOfBytes();
@@ -46,7 +42,6 @@ public class OffsetVisitor extends AbstractVisitor<Object,Object> {
 
     @Override
     public Object visit(RecordType recordType, Object param) {
-        super.visit(recordType, param);
         int offsetFields = 0;
         for(var f: recordType.getFields()){
             f.setOffset(offsetFields);

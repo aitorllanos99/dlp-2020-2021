@@ -8,8 +8,6 @@ import es.uniovi.dlp.ast.statements.Read;
 import es.uniovi.dlp.ast.statements.Write;
 import es.uniovi.dlp.visitor.AbstractVisitor;
 
-import java.io.IOException;
-
 public class ExecuteCGVisitor extends AbstractVisitor {
     private AddressCGVisitor addressVisitor;
     private ValueCGVisitor valueVisitor;
@@ -25,23 +23,33 @@ public class ExecuteCGVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(Program program, Object param) {
-        super.visit(program, param);
-        generator.halt();
+        int fileName = param.toString().split("/").length - 1;
+        generator.source(param.toString().split("/")[fileName]);
+        for (var def : program.getDefinitions())
+            if (def instanceof VarDefinition) def.accept(this, param);
+        for (var def : program.getDefinitions()) {
+            if (def instanceof FuncDefinition) {
+                generator.comment("' Invocation to the " + def.getName() + " function");
+                generator.call(def.getName());
+                generator.halt();
+                def.accept(this, param);
+            }
+        }
+
         return null;
     }
 
     @Override
     public Object visit(VarDefinition varDefinition, Object param) {
-        super.visit(varDefinition,param);
-        generator.comment("' " + varDefinition.getName() + " :: " + varDefinition.getType()
-                + "( offset " + varDefinition.getType().getNumberOfBytes() + " )");
+        super.visit(varDefinition, param);
+        generator.comment("' " + varDefinition.getName() + " :: " + varDefinition.getType().getName()
+                + "( offset " + varDefinition.getOffset() + " )");
 
         return null;
     }
 
     @Override
     public Object visit(FuncDefinition funcDefinition, Object param) {
-        super.visit(funcDefinition,param);
         generator.line(funcDefinition.getLine());
         generator.id(funcDefinition.getName());
         generator.comment("' Parameters");
@@ -60,7 +68,7 @@ public class ExecuteCGVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(Assignment assignment, Object param) {
-        super.visit(assignment,param);
+        super.visit(assignment, param);
         generator.line(assignment.getLine());
         assignment.getLeftExpression().accept(addressVisitor, param); //Sacamos direccion de la izquierda
         assignment.getRightExpression().accept(valueVisitor, param); // Sacamos valor de la derecha
@@ -71,8 +79,9 @@ public class ExecuteCGVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(Read read, Object param) {
-        super.visit(read,param);
+        super.visit(read, param);
         generator.line(read.getLine());
+        generator.comment("' Read");
         read.getExpression().accept(valueVisitor, param); //Sacamos el valor a imprimir
         generator.in(read.getExpression().getType().sufixCode());
         generator.store(read.getExpression().getType().sufixCode());
@@ -81,8 +90,9 @@ public class ExecuteCGVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(Write write, Object param) {
-        super.visit(write,param);
+        super.visit(write, param);
         generator.line(write.getLine());
+        generator.comment("' Write");
         write.getExpression().accept(valueVisitor, param); //Sacamos el valor a imprimir
         generator.out(write.getExpression().getType().sufixCode());
         return null;

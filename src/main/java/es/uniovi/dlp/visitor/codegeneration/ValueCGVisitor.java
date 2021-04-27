@@ -1,6 +1,5 @@
 package es.uniovi.dlp.visitor.codegeneration;
 
-import es.uniovi.dlp.ast.Program;
 import es.uniovi.dlp.ast.expressions.*;
 import es.uniovi.dlp.visitor.AbstractVisitor;
 

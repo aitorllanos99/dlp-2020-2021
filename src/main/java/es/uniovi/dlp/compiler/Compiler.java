@@ -53,7 +53,7 @@ public class Compiler {
 
     private void generateCode() {
         ExecuteCGVisitor executor = new ExecuteCGVisitor(new CodeGenerator(out));
-        executor.visit(program,null);
+        executor.visit(program,file);
     }
 
     private void checkErrors() {

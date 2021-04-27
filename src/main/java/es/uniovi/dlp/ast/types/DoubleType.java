@@ -58,6 +58,11 @@ public class DoubleType extends AbstractType implements Type {
     }
 
     @Override
+    public String getName() {
+        return "double";
+    }
+
+    @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
         return returnTypeParamTypeAbstractVisitor.visit(this, param);
     }

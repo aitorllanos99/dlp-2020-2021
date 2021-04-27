@@ -18,7 +18,7 @@ public class CodeGenerator {
 
     public void source(String constant) {
         try {
-            out.write("\t#source " + constant);
+            out.write("#source " + constant + "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -27,7 +27,7 @@ public class CodeGenerator {
 
     public void line(int constant) {
         try {
-            out.write("\t#line " + constant);
+            out.write("#line " + constant+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -35,14 +35,14 @@ public class CodeGenerator {
     }
     public void push(String type, int n) {
         try {
-            out.write("\tpush" + type +"\t" + n);
+            out.write("\tpush" + type +"\t" + n+ "\n");
             out.flush();
         } catch (IOException e) {
 
         }
     } public void push(String type, double n) {
         try {
-            out.write("\tpush" + type +"\t" + n);
+            out.write("\tpush" + type +"\t" + n+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -52,7 +52,7 @@ public class CodeGenerator {
 
     public void pusha(int i) {
         try {
-            out.write("\tpusha\t" + i);
+            out.write("\tpusha\t" + i+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -61,7 +61,7 @@ public class CodeGenerator {
 
     public void pushBp() {
         try {
-            out.write("\tpush\tbp");
+            out.write("\tpush\tbp\n");
             out.flush();
         } catch (IOException e) {
 
@@ -70,7 +70,7 @@ public class CodeGenerator {
 
     public void load(String type) {
         try {
-            out.write("\tload" + type);
+            out.write("\tload" + type+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -79,7 +79,7 @@ public class CodeGenerator {
 
     public void store(String type) {
         try {
-            out.write("\tstore" + type);
+            out.write("\tstore" + type+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -88,7 +88,7 @@ public class CodeGenerator {
 
     public void pop(String type) {
         try {
-            out.write("\tpop" + type);
+            out.write("\tpop" + type+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -97,7 +97,7 @@ public class CodeGenerator {
 
     public void dup(String type) {
         try {
-            out.write("\tdup" + type);
+            out.write("\tdup" + type+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -106,7 +106,7 @@ public class CodeGenerator {
 
     public void b2i() {
         try {
-            out.write("\tb2i");
+            out.write("\tb2i\n");
             out.flush();
         } catch (IOException e) {
 
@@ -115,7 +115,7 @@ public class CodeGenerator {
 
     public void i2f() {
         try {
-            out.write("\ti2f");
+            out.write("\ti2f\n");
             out.flush();
         } catch (IOException e) {
 
@@ -124,7 +124,7 @@ public class CodeGenerator {
 
     public void f2i() {
         try {
-            out.write("\tf2i");
+            out.write("\tf2i\n");
             out.flush();
         } catch (IOException e) {
 
@@ -133,7 +133,7 @@ public class CodeGenerator {
 
     public void i2b() {
         try {
-            out.write("\ti2b");
+            out.write("\ti2b\n");
             out.flush();
         } catch (IOException e) {
 
@@ -142,7 +142,7 @@ public class CodeGenerator {
 
     public void out(String b) {
         try {
-            out.write("\tout" + b);
+            out.write("\tout" + b+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -151,7 +151,7 @@ public class CodeGenerator {
 
     public void in(String x) {
         try {
-            out.write("\tin" + x);
+            out.write("\tin" + x+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -161,7 +161,7 @@ public class CodeGenerator {
 
     public void jmp(int label) {
         try {
-            out.write("\tjmp" + label);
+            out.write("\tjmp" + label+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -170,7 +170,7 @@ public class CodeGenerator {
 
     public void jz(int label) {
         try {
-            out.write("\tjmp" + label);
+            out.write("\tjmp" + label+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -179,7 +179,7 @@ public class CodeGenerator {
 
     public void jnz(int label) {
         try {
-            out.write("\tjmp" + label);
+            out.write("\tjmp" + label+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -197,7 +197,7 @@ public class CodeGenerator {
 
     public void call(String etiqueta) {
         try {
-            out.write("\tcall " + etiqueta);
+            out.write("\tcall " + etiqueta+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -207,7 +207,7 @@ public class CodeGenerator {
 
     public void enter(int i) {
         try {
-            out.write("\tenter " + i);
+            out.write("\tenter " + i+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -216,7 +216,7 @@ public class CodeGenerator {
 
     public void ret(int retBytes, int retVar, int retPar) {
         try {
-            out.write("\tret " + retBytes + "," + retVar + "," + retPar);
+            out.write("\tret " + retBytes + "," + retVar + "," + retPar+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -225,7 +225,7 @@ public class CodeGenerator {
 
     public void add(String type) {
         try {
-            out.write("\tadd" + type);
+            out.write("\tadd" + type+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -234,7 +234,7 @@ public class CodeGenerator {
 
     public void sub(String type) {
         try {
-            out.write("\tsub" + type);
+            out.write("\tsub" + type+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -243,7 +243,7 @@ public class CodeGenerator {
 
     public void div(String type) {
         try {
-            out.write("\tdiv" + type);
+            out.write("\tdiv" + type+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -252,7 +252,7 @@ public class CodeGenerator {
 
     public void mul(String type) {
         try {
-            out.write("\tmul" + type);
+            out.write("\tmul" + type+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -261,7 +261,7 @@ public class CodeGenerator {
 
     public void mod(String type) {
         try {
-            out.write("\tmod" + type);
+            out.write("\tmod" + type+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -270,7 +270,7 @@ public class CodeGenerator {
 
     public void gt(String type) {
         try {
-            out.write("\tgt" + type);
+            out.write("\tgt" + type+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -279,7 +279,7 @@ public class CodeGenerator {
 
     public void lt(String type) {
         try {
-            out.write("\tlt" + type);
+            out.write("\tlt" + type+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -288,7 +288,7 @@ public class CodeGenerator {
 
     public void ge(String type) {
         try {
-            out.write("\tge" + type);
+            out.write("\tge" + type+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -297,7 +297,7 @@ public class CodeGenerator {
 
     public void le(String type) {
         try {
-            out.write("\tle" + type);
+            out.write("\tle" + type+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -306,7 +306,7 @@ public class CodeGenerator {
 
     public void eq(String type) {
         try {
-            out.write("\teq" + type);
+            out.write("\teq" + type+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -315,7 +315,7 @@ public class CodeGenerator {
 
     public void ne(String type) {
         try {
-            out.write("\tne" + type);
+            out.write("\tne" + type+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -324,7 +324,7 @@ public class CodeGenerator {
 
     public void and() {
         try {
-            out.write("\tand");
+            out.write("\tand\n");
             out.flush();
         } catch (IOException e) {
 
@@ -333,7 +333,7 @@ public class CodeGenerator {
 
     public void or() {
         try {
-            out.write("\tor");
+            out.write("\tor\n");
             out.flush();
         } catch (IOException e) {
 
@@ -342,7 +342,7 @@ public class CodeGenerator {
 
     public void not() {
         try {
-            out.write("\tnot");
+            out.write("\tnot\n");
             out.flush();
         } catch (IOException e) {
 
@@ -377,10 +377,10 @@ public class CodeGenerator {
                 sub(type);
                 break;
             case "*":
-                div(type);
+                mul(type);
                 break;
             case "/":
-                mul(type);
+                div(type);
                 break;
             case "%":
                 mod(type);
@@ -420,7 +420,7 @@ public class CodeGenerator {
 
     public void id(String name) {
         try {
-            out.write(name + ":");
+            out.write(name + ":"+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -429,7 +429,7 @@ public class CodeGenerator {
 
     public void comment(String name) {
         try {
-            out.write(name);
+            out.write(name+ "\n");
             out.flush();
         } catch (IOException e) {
 

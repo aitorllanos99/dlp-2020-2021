@@ -167,7 +167,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     @Override
     public Type visit(Arithmetic arithmetic, Type param) {
         super.visit(arithmetic, param);
-        arithmetic.setType(arithmetic.getLeftExpression().getType().arithmetic(arithmetic.getRightExpression().getType()));
+         arithmetic.setType(arithmetic.getLeftExpression().getType().arithmetic(arithmetic.getRightExpression().getType()));
         if (arithmetic.getType() == null) {
             ErrorManager.getInstance().addError(new Location(arithmetic.getRightExpression().getLine(), arithmetic.getRightExpression().getColumn()), ErrorReason.INVALID_ARITHMETIC);
             return new ErrorType(arithmetic.getLine(), arithmetic.getColumn(), "Arithmetic error");

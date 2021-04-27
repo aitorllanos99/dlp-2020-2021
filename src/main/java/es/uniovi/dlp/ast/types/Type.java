@@ -23,5 +23,6 @@ public interface Type {
     boolean isArithmetic();
     int getNumberOfBytes();
     String sufixCode();
+    String getName();
 
 }
