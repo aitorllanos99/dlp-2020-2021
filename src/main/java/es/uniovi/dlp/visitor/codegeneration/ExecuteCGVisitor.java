@@ -3,10 +3,11 @@ package es.uniovi.dlp.visitor.codegeneration;
 import es.uniovi.dlp.ast.Program;
 import es.uniovi.dlp.ast.definitions.FuncDefinition;
 import es.uniovi.dlp.ast.definitions.VarDefinition;
+import es.uniovi.dlp.ast.expressions.Arithmetic;
+import es.uniovi.dlp.ast.expressions.FieldAccess;
+import es.uniovi.dlp.ast.expressions.Indexing;
 import es.uniovi.dlp.ast.expressions.Invocation;
-import es.uniovi.dlp.ast.statements.Assignment;
-import es.uniovi.dlp.ast.statements.Read;
-import es.uniovi.dlp.ast.statements.Write;
+import es.uniovi.dlp.ast.statements.*;
 import es.uniovi.dlp.ast.types.VoidType;
 import es.uniovi.dlp.visitor.AbstractVisitor;
 
@@ -33,7 +34,7 @@ public class ExecuteCGVisitor extends AbstractVisitor {
             if (def instanceof FuncDefinition) {
                 generator.comment("' Invocation to the " + def.getName() + " function");
                 generator.call(def.getName());
-                if(def.getName().equals("main")) generator.halt();
+                if (def.getName().equals("main")) generator.halt();
                 def.accept(this, param);
             }
         }
@@ -53,8 +54,8 @@ public class ExecuteCGVisitor extends AbstractVisitor {
     @Override
     public Object visit(Invocation invocation, Object param) {
         generator.line(invocation.getLine());
-        valueVisitor.visit(invocation,param);
-        if(! (invocation.getType() instanceof VoidType))
+        valueVisitor.visit(invocation, param);
+        if (!(invocation.getType() instanceof VoidType))
             generator.pop(invocation.getType().sufixCode());
         return null;
     }
@@ -107,5 +108,36 @@ public class ExecuteCGVisitor extends AbstractVisitor {
         write.getExpression().accept(valueVisitor, param); //Sacamos el valor a imprimir
         generator.out(write.getExpression().getType().sufixCode());
         return null;
+    }
+
+    //TODO:
+    @Override
+    public Object visit(IfElse ifElse, Object param) {
+        generator.line(ifElse.getLine());
+        generator.comment("' If statement");
+
+        ifElse.getCondition().accept(valueVisitor,param);
+        generator.jz(-1);
+
+        generator.comment("'Body of the if branch");
+        ifElse.getIfStatements().forEach(c -> c.accept(this,param));
+        generator.jmp(-2);
+
+        generator.comment("' Body of the else branch");
+        ifElse.getElseStatements().forEach(c -> c.accept(this,param));
+
+        return null;
+    }
+
+    @Override
+    public Object visit(While whileStatement, Object param) {
+        return super.visit(whileStatement, param);
+    }
+
+
+
+    @Override
+    public Object visit(Indexing indexing, Object param) {
+        return super.visit(indexing, param);
     }
 }

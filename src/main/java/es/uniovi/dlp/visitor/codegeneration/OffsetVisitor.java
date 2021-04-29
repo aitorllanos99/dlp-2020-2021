@@ -13,6 +13,7 @@ public class OffsetVisitor extends AbstractVisitor<Object,Object> {
 
     @Override
     public Object visit(VarDefinition varDefinition, Object param) {
+        super.visit(varDefinition, param);
         if (varDefinition.getScope() == 0) {
             varDefinition.setOffset(desplazamientoGlobal);
             desplazamientoGlobal += varDefinition.getType().getNumberOfBytes();

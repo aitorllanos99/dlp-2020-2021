@@ -73,7 +73,11 @@ public class ValueCGVisitor extends AbstractVisitor {
         generator.call(invocation.getName().getIdent());
         return null;
     }
-
+    @Override
+    public Object visit(FieldAccess fieldAccess, Object param) {
+        fieldAccess.getExpression1().accept(addressCGVisitor,param);
+        return null;
+    }
     @Override
     public Object visit(Logical logical, Object param) {
         super.visit(logical, param);

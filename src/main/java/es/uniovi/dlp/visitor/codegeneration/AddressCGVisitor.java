@@ -20,7 +20,11 @@ public class AddressCGVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(FieldAccess fieldAccess, Object param) {
-        return super.visit(fieldAccess, param);
+        super.visit(fieldAccess, param);
+        fieldAccess.getExpression1().getType().propertyOffset(fieldAccess.getProperty());
+        generator.push(fieldAccess.getType().sufixCode(), fieldAccess.getExpression1().getType().propertyOffset(fieldAccess.getProperty()));
+        generator.add(fieldAccess.getType().sufixCode());
+        return null;
     }
 
     @Override
@@ -30,8 +34,7 @@ public class AddressCGVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(Variable variable, Object param) {
-        super.visit(variable,param);
-        //Variable puede ser una funcion o una varDef
+        super.visit(variable, param);
         if (variable.getDefinition().getScope() == 0)
             generator.pusha(((VarDefinition) variable.getDefinition()).getOffset());
         else {

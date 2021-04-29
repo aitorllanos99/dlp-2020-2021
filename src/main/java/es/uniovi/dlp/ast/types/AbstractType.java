@@ -89,4 +89,9 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public String getName() {
         return null;
     }
+
+    @Override
+    public int propertyOffset(String property) {
+        return -1024;
+    }
 }

@@ -24,5 +24,5 @@ public interface Type {
     int getNumberOfBytes();
     String sufixCode();
     String getName();
-
+    int propertyOffset(String property);
 }

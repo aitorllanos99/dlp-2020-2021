@@ -161,7 +161,7 @@ public class CodeGenerator {
 
     public void jmp(int label) {
         try {
-            out.write("\tjmp" + label+ "\n");
+            out.write("\tjmp\t label" + label+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -170,7 +170,7 @@ public class CodeGenerator {
 
     public void jz(int label) {
         try {
-            out.write("\tjmp" + label+ "\n");
+            out.write("\tjmp\t label" + label+ "\n");
             out.flush();
         } catch (IOException e) {
 
@@ -188,7 +188,7 @@ public class CodeGenerator {
 
     public void halt() {
         try {
-            out.write("\thalt\n");
+            out.write("halt\n");
             out.flush();
         } catch (IOException e) {
 
@@ -197,7 +197,7 @@ public class CodeGenerator {
 
     public void call(String etiqueta) {
         try {
-            out.write("\tcall " + etiqueta+ "\n");
+            out.write("call " + etiqueta+ "\n");
             out.flush();
         } catch (IOException e) {
 

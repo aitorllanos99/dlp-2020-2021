@@ -1,5 +1,6 @@
 package es.uniovi.dlp.ast.types;
 
+import com.ibm.icu.text.PluralRules;
 import es.uniovi.dlp.ast.ErrorManager;
 import es.uniovi.dlp.visitor.Visitor;
 
@@ -37,7 +38,7 @@ public class RecordType extends AbstractType implements Type {
     @Override
     public int getNumberOfBytes() {
         int total = 0;
-        for(var f: fields)
+        for (var f : fields)
             total += f.getType().getNumberOfBytes();
         return total;
     }
@@ -45,5 +46,18 @@ public class RecordType extends AbstractType implements Type {
     @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
         return returnTypeParamTypeAbstractVisitor.visit(this, param);
+    }
+
+    @Override
+    public int propertyOffset(String property) {
+        for (var f : fields)
+            if (f.getName().equals(property))
+                return f.getOffset();
+        return -1024;
+    }
+
+    @Override
+    public String sufixCode() {
+        return "i";
     }
 }
