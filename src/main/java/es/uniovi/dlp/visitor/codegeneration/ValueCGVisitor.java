@@ -60,12 +60,14 @@ public class ValueCGVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(Indexing indexing, Object param) {
-        return super.visit(indexing, param);
+        indexing.accept(addressCGVisitor,param);
+        generator.load(indexing.getType().sufixCode());
+        return null;
     }
 
     @Override
     public Object visit(Invocation invocation, Object param) {
-        int contador = 0;
+       // int contador = 0;
         for (var e : invocation.getArguments()) {
             e.accept(this, param);
             //generator.promoteTo(e.getType(), ((FuncType) invocation.getName().getType()).getParameters().get(contador).getType());
@@ -76,6 +78,7 @@ public class ValueCGVisitor extends AbstractVisitor {
     @Override
     public Object visit(FieldAccess fieldAccess, Object param) {
         fieldAccess.getExpression1().accept(addressCGVisitor,param);
+        generator.load(fieldAccess.getType().sufixCode());
         return null;
     }
     @Override

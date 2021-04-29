@@ -29,7 +29,12 @@ public class AddressCGVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(Indexing indexing, Object param) {
-        return super.visit(indexing, param);
+        super.visit(indexing, param);
+        indexing.getIndex().accept(valueCGVisitor,param);
+        generator.push(indexing.getArray().getType().sufixCode(),indexing.getType().getNumberOfBytes());
+        generator.mul("i");
+        generator.add("i");
+        return null;
     }
 
     @Override
