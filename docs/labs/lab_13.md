@@ -32,3 +32,9 @@ Ahora también puedes compilar e interpretar el programa en un mismo comando:
 ```
 .\bin\xana.bat examples/codegeneration/complete/input.xana
 ```
+
+En macOS y Linux:
+
+```
+bin/xana.sh examples/codegeneration/complete/input.xana
+```
