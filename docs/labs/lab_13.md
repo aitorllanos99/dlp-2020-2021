@@ -27,3 +27,8 @@ Recuerda que puedes probar el programa usando:
 ```
 .\mapl\TextVM.exe examples/codegeneration/complete/input.xana.mp
 ```
+
+Ahora también puedes compilar e interpretar el programa en un mismo comando:
+```
+.\bin\xana.bat examples/codegeneration/complete/input.xana
+```
