@@ -116,28 +116,36 @@ public class ExecuteCGVisitor extends AbstractVisitor {
         generator.line(ifElse.getLine());
         generator.comment("' If statement");
 
-        ifElse.getCondition().accept(valueVisitor,param);
-        generator.jz(-1);
-
+        ifElse.getCondition().accept(valueVisitor, param);
+        generator.jz(generator.getLabel());
+        generator.id("label" + (generator.getLabel() - 1));
         generator.comment("'Body of the if branch");
-        ifElse.getIfStatements().forEach(c -> c.accept(this,param));
-        generator.jmp(-2);
+        ifElse.getIfStatements().forEach(c -> c.accept(this, param));
 
+        generator.jmp(generator.getLabel());
+        generator.id("label" + (generator.getLabel() - 1));
         generator.comment("' Body of the else branch");
-        ifElse.getElseStatements().forEach(c -> c.accept(this,param));
+        ifElse.getElseStatements().forEach(c -> c.accept(this, param));
 
         return null;
     }
 
     @Override
     public Object visit(While whileStatement, Object param) {
-        return super.visit(whileStatement, param);
+        generator.line(whileStatement.getLine());
+        generator.comment("' While statement");
+
+        whileStatement.getCondition().accept(valueVisitor, param);
+        generator.jz(generator.getLabel());
+        generator.id("label" + (generator.getLabel() - 1));
+        generator.comment("'Body of the while branch");
+
+        whileStatement.getStatements().forEach(c -> c.accept(this, param));
+        generator.jmp(generator.getLabel());
+        generator.id("label" + (generator.getLabel() - 1));
+
+        return null;
     }
 
 
-
-    @Override
-    public Object visit(Indexing indexing, Object param) {
-        return super.visit(indexing, param);
-    }
 }

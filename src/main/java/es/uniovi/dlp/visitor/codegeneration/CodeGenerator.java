@@ -11,6 +11,7 @@ import java.io.OutputStreamWriter;
 
 public class CodeGenerator {
     private OutputStreamWriter out;
+    private int labelCounter;
 
     public CodeGenerator(OutputStreamWriter out) {
         this.out = out;
@@ -184,6 +185,9 @@ public class CodeGenerator {
         } catch (IOException e) {
 
         }
+    }
+    public int getLabel(){
+        return labelCounter++;
     }
 
     public void halt() {
