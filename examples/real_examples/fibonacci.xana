@@ -6,7 +6,8 @@ def fibonacci(n :: int) :: int do
 end
 
 def main() do
-    puts fibonacci(1)
-    puts fibonacci(2)
-    puts fibonacci(10)
+    puts fibonacci(1), '\n'
+    puts fibonacci(2), '\n'
+    puts fibonacci(10), '\n'
+    puts fibonacci(20), '\n'
 end
