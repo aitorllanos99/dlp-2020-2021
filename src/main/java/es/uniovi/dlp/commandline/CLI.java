@@ -15,6 +15,7 @@ public class CLI {
                 break;
             case 2:
                 switch (args[1]) {
+
                     case "--introspector":
                         introspectProgram(args[0]);
                         break;
@@ -37,7 +38,7 @@ public class CLI {
         try {
             new Compiler(file).run();
         } catch (Exception e) {
-            System.err.println("Failed to run the program:");
+            System.err.println("Failed to run the program: RUN2");
             System.err.println(e.getMessage());
         }
     }
@@ -72,7 +73,7 @@ public class CLI {
             compiler.setShowDebug(false);
             compiler.run();
         } catch (Exception e) {
-            System.err.println("Failed to run the program:");
+            System.err.println("Failed to run the program: ");
             System.err.println(e.getMessage());
         }
     }

@@ -4,6 +4,7 @@ import es.uniovi.dlp.visitor.Visitor;
 
 public class CharType extends AbstractType implements Type {
     private static final int CHAR_SIZE = 1;
+
     public CharType(int line, int column) {
         super(line, column);
     }
@@ -18,20 +19,22 @@ public class CharType extends AbstractType implements Type {
 
     @Override
     public Type arithmetic(Type type) {
-        if (type instanceof CharType || type instanceof IntType)
-            return type;
+        if (type instanceof CharType || type instanceof IntType )
+            return new IntType(type.getLine(), type.getColumn());
+        if( type instanceof DoubleType)
+            return new DoubleType(type.getLine(), type.getColumn());
         return super.arithmetic(type);
     }
 
     @Override
     public Type comparison(Type leftType) {
         if (leftType instanceof IntType || leftType instanceof CharType || leftType instanceof DoubleType)
-            return new IntType(line,column);
+            return new IntType(line, column);
         return null;
     }
 
     public Type assignment(Type type) {
-        if(type instanceof CharType)
+        if (type instanceof CharType)
             return type;
         return null;
     }
@@ -53,8 +56,8 @@ public class CharType extends AbstractType implements Type {
 
     @Override
     public Type promotableTo(Type to) {
-        if(to instanceof FuncType){
-            if(((FuncType) to).getReturnType() instanceof CharType)
+        if (to instanceof FuncType) {
+            if (((FuncType) to).getReturnType() instanceof CharType)
                 return ((FuncType) to).getReturnType();
         }
         if (to instanceof CharType)

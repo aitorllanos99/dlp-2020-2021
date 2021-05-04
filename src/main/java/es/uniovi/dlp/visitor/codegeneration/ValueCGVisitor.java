@@ -19,8 +19,10 @@ public class ValueCGVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(Arithmetic arithmetic, Object param) {
-        super.visit(arithmetic, param);
+        arithmetic.getLeftExpression().accept(this, param);
         generator.promoteTo(arithmetic.getLeftExpression().getType(), arithmetic.getType());
+        arithmetic.getRightExpression().accept(this, param);
+        generator.promoteTo(arithmetic.getRightExpression().getType(), arithmetic.getType());
         generator.arithmetic(arithmetic.getOperator(), arithmetic.getType().sufixCode());
         return null;
     }
@@ -85,6 +87,7 @@ public class ValueCGVisitor extends AbstractVisitor {
     public Object visit(Logical logical, Object param) {
         super.visit(logical, param);
         generator.logic(logical.getOperation());
+        generator.promoteTo(logical.getType(),logical.getRightExpression().getType());
         return null;
     }
 

@@ -14,17 +14,20 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import es.uniovi.dlp.visitor.semantic.TypeCheckingVisitor;
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 
 public class Compiler {
     private final String file;
     private Program program;
     private boolean reportErrors = true;
     private OutputStreamWriter out;
-    public Compiler(String file) {
+    private boolean showDebug;
+
+    public Compiler(String file) throws FileNotFoundException {
         this.file = file;
+        this.out = new OutputStreamWriter(new FileOutputStream(file + ".mp"));
     }
+
     public Compiler(String file, OutputStreamWriter out) {
         this.file = file;
         this.out = out;
@@ -37,15 +40,15 @@ public class Compiler {
         assignIdentifiers();
         assignType();
         checkErrors();
-        if (!errorManager.hasErrors()) {
-            generateOffsets();
-            generateCode();
-        }
+        if (errorManager.hasErrors()) return;
+        generateOffsets();
+        generateCode();
+
     }
 
     private void generateOffsets() {
         OffsetVisitor offsetVisitor = new OffsetVisitor();
-        offsetVisitor.visit(program,null);
+        offsetVisitor.visit(program, null);
     }
 
     private void assignIdentifiers() {
@@ -55,7 +58,7 @@ public class Compiler {
 
     private void generateCode() {
         ExecuteCGVisitor executor = new ExecuteCGVisitor(new CodeGenerator(out));
-        executor.visit(program,file);
+        executor.visit(program, file);
     }
 
     private void checkErrors() {
@@ -95,6 +98,7 @@ public class Compiler {
     }
 
     public void setShowDebug(boolean b) {
+        showDebug = b;
     }
 }
 

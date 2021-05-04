@@ -91,10 +91,9 @@ public class ExecuteCGVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(Read read, Object param) {
-        super.visit(read, param);
         generator.line(read.getLine());
         generator.comment("' Read");
-        read.getExpression().accept(valueVisitor, param); //Sacamos el valor a imprimir
+        read.getExpression().accept(addressVisitor, param); //Sacamos el valor a imprimir
         generator.in(read.getExpression().getType().sufixCode());
         generator.store(read.getExpression().getType().sufixCode());
         return null;
@@ -110,7 +109,7 @@ public class ExecuteCGVisitor extends AbstractVisitor {
         return null;
     }
 
-    //TODO:
+
     @Override
     public Object visit(IfElse ifElse, Object param) {
         generator.line(ifElse.getLine());

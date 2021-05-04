@@ -8,8 +8,7 @@ public class CodeTry {
 
     @Test
     void simpleGeneration() {
-        runCompiler("examples/codegenerati" +
-                "on/simple.xana");
+        runCompiler("examples/codegeneration/simple.xana");
 
     }
     @Test

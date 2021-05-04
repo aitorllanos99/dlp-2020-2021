@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface Type {
     <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) ;
+
+    int getLine();
+    int getColumn();
     Type dot(String field);
     Type cast(Type from);
     Type indexing(Type indexingType);

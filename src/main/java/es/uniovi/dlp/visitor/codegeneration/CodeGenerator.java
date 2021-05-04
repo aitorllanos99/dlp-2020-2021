@@ -12,345 +12,257 @@ import java.io.OutputStreamWriter;
 public class CodeGenerator {
     private OutputStreamWriter out;
     private int labelCounter;
+    private int actualLine;
 
     public CodeGenerator(OutputStreamWriter out) {
         this.out = out;
     }
 
     public void source(String constant) {
-        try {
-            out.write("#source " + constant + "\n");
-            out.flush();
-        } catch (IOException e) {
-
-        }
+        writeInstruction("#source " + '"' + constant + '"' + "\n");
     }
 
     public void line(int constant) {
-        try {
-            out.write("#line " + constant+ "\n");
-            out.flush();
-        } catch (IOException e) {
-
-        }
+        if (constant == actualLine)
+            return;
+        writeInstruction("#line " + constant + "\n");
     }
+
     public void push(String type, int n) {
-        try {
-            out.write("\tpush" + type +"\t" + n+ "\n");
-            out.flush();
-        } catch (IOException e) {
+        writeInstruction("\tpush" + type + "\t" + n + "\n");
+    }
 
-        }
-    } public void push(String type, double n) {
-        try {
-            out.write("\tpush" + type +"\t" + n+ "\n");
-            out.flush();
-        } catch (IOException e) {
-
-        }
+    public void push(String type, double n) {
+        writeInstruction("\tpush" + type + "\t" + n + "\n");
     }
 
 
     public void pusha(int i) {
-        try {
-            out.write("\tpusha\t" + i+ "\n");
-            out.flush();
-        } catch (IOException e) {
-
-        }
+        writeInstruction("\tpusha\t" + i + "\n");
     }
 
     public void pushBp() {
-        try {
-            out.write("\tpush\tbp\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tpush\tbp\n");
+
+
     }
 
     public void load(String type) {
-        try {
-            out.write("\tload" + type+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tload" + type + "\n");
+
+
     }
 
     public void store(String type) {
-        try {
-            out.write("\tstore" + type+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tstore" + type + "\n");
+
+
     }
 
     public void pop(String type) {
-        try {
-            out.write("\tpop" + type+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tpop" + type + "\n");
+
+
     }
 
     public void dup(String type) {
-        try {
-            out.write("\tdup" + type+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tdup" + type + "\n");
+
+
     }
 
     public void b2i() {
-        try {
-            out.write("\tb2i\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tb2i\n");
+
+
     }
 
     public void i2f() {
-        try {
-            out.write("\ti2f\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\ti2f\n");
+
+
     }
 
     public void f2i() {
-        try {
-            out.write("\tf2i\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tf2i\n");
+
+
     }
 
     public void i2b() {
-        try {
-            out.write("\ti2b\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\ti2b\n");
+
+
     }
 
     public void out(String b) {
-        try {
-            out.write("\tout" + b+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tout" + b + "\n");
+
+
     }
 
     public void in(String x) {
-        try {
-            out.write("\tin" + x+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tin" + x + "\n");
+
+
     }
 
 
     public void jmp(int label) {
-        try {
-            out.write("\tjmp\t label" + label+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tjmp\t label" + label + "\n");
+
+
     }
 
     public void jz(int label) {
-        try {
-            out.write("\tjmp\t label" + label+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tjmp\t label" + label + "\n");
+
+
     }
 
     public void jnz(int label) {
-        try {
-            out.write("\tjmp" + label+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tjmp" + label + "\n");
+
+
     }
-    public int getLabel(){
+
+    public int getLabel() {
         return labelCounter++;
     }
 
     public void halt() {
-        try {
-            out.write("halt\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("halt\n");
+
+
     }
 
     public void call(String etiqueta) {
-        try {
-            out.write("call " + etiqueta+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("call " + etiqueta + "\n");
+
+
     }
 
 
     public void enter(int i) {
-        try {
-            out.write("\tenter " + i+ "\n");
-            out.flush();
-        } catch (IOException e) {
-
-        }
+        writeInstruction("\tenter " + i + "\n");
     }
 
     public void ret(int retBytes, int retVar, int retPar) {
-        try {
-            out.write("\tret " + retBytes + "," + retVar + "," + retPar+ "\n");
-            out.flush();
-        } catch (IOException e) {
-
-        }
+        writeInstruction("\tret " + retBytes + "," + retVar + "," + retPar + "\n");
     }
 
     public void add(String type) {
-        try {
-            out.write("\tadd" + type+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tadd" + type + "\n");
+
+
     }
 
     public void sub(String type) {
-        try {
-            out.write("\tsub" + type+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tsub" + type + "\n");
+
+
     }
 
     public void div(String type) {
-        try {
-            out.write("\tdiv" + type+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tdiv" + type + "\n");
+
+
     }
 
     public void mul(String type) {
-        try {
-            out.write("\tmul" + type+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tmul" + type + "\n");
+
+
     }
 
     public void mod(String type) {
-        try {
-            out.write("\tmod" + type+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tmod" + type + "\n");
+
+
     }
 
     public void gt(String type) {
-        try {
-            out.write("\tgt" + type+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tgt" + type + "\n");
+
+
     }
 
     public void lt(String type) {
-        try {
-            out.write("\tlt" + type+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tlt" + type + "\n");
+
+
     }
 
     public void ge(String type) {
-        try {
-            out.write("\tge" + type+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tge" + type + "\n");
+
+
     }
 
     public void le(String type) {
-        try {
-            out.write("\tle" + type+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tle" + type + "\n");
+
+
     }
 
     public void eq(String type) {
-        try {
-            out.write("\teq" + type+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\teq" + type + "\n");
+
+
     }
 
     public void ne(String type) {
-        try {
-            out.write("\tne" + type+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tne" + type + "\n");
+
+
     }
 
     public void and() {
-        try {
-            out.write("\tand\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tand\n");
+
+
     }
 
     public void or() {
-        try {
-            out.write("\tor\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tor\n");
+
+
     }
 
     public void not() {
-        try {
-            out.write("\tnot\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction("\tnot\n");
+
+
     }
 
     public void logic(String operator) {
@@ -423,21 +335,17 @@ public class CodeGenerator {
     }
 
     public void id(String name) {
-        try {
-            out.write(name + ":"+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction(name + ":" + "\n");
+
+
     }
 
     public void comment(String name) {
-        try {
-            out.write(name+ "\n");
-            out.flush();
-        } catch (IOException e) {
 
-        }
+        writeInstruction(name + "\n");
+
+
     }
 
     public void promoteTo(Type left, Type right) {
@@ -460,5 +368,16 @@ public class CodeGenerator {
             }
         }
 
+    }
+
+
+    public void writeInstruction(String e) {
+        try {
+            out.write(e);
+            out.flush();
+        } catch (
+                Exception ex) {
+
+        }
     }
 }
