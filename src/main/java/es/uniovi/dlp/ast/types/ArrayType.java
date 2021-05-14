@@ -43,7 +43,12 @@ public class ArrayType extends AbstractType implements Type{
 
     @Override
     public String sufixCode() {
-        return arrayOf.sufixCode();
+        return "i";
+    }
+
+    @Override
+    public String getName() {
+        return "[" + size + " :: " + arrayOf.getName() + "]";
     }
 
     @Override

@@ -25,6 +25,7 @@ public class CodeGenerator {
     public void line(int constant) {
         if (constant == actualLine)
             return;
+        actualLine = constant;
         writeInstruction("#line " + constant + "\n");
     }
 
@@ -128,14 +129,14 @@ public class CodeGenerator {
 
     public void jz(int label) {
 
-        writeInstruction("\tjmp\t label" + label + "\n");
+        writeInstruction("\tjz\t label" + label + "\n");
 
 
     }
 
     public void jnz(int label) {
 
-        writeInstruction("\tjmp" + label + "\n");
+        writeInstruction("\tjnz" + label + "\n");
 
 
     }
@@ -361,7 +362,7 @@ public class CodeGenerator {
             if (right instanceof CharType) i2b();
         }
         if (left instanceof DoubleType) {
-            if (right instanceof IntType) f2i();
+            if (right instanceof IntType) i2f();
             if (right instanceof CharType) {
                 f2i();
                 i2b();

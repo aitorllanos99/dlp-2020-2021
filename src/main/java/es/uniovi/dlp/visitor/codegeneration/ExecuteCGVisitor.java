@@ -85,6 +85,7 @@ public class ExecuteCGVisitor extends AbstractVisitor {
         assignment.getLeftExpression().accept(addressVisitor, param); //Sacamos direccion de la izquierda
         assignment.getRightExpression().accept(valueVisitor, param); // Sacamos valor de la derecha
         generator.promoteTo(assignment.getLeftExpression().getType(), assignment.getRightExpression().getType());
+        generator.promoteTo(assignment.getRightExpression().getType(), assignment.getRightExpression().getType());
         generator.store(assignment.getLeftExpression().getType().sufixCode());
         return null;
     }
@@ -116,15 +117,21 @@ public class ExecuteCGVisitor extends AbstractVisitor {
         generator.comment("' If statement");
 
         ifElse.getCondition().accept(valueVisitor, param);
-        generator.jz(generator.getLabel());
-        generator.id("label" + (generator.getLabel() - 1));
+
+
+        int labelElse = generator.getLabel();
+        int labelFinElse = generator.getLabel();
+        generator.jz(labelElse);
         generator.comment("'Body of the if branch");
         ifElse.getIfStatements().forEach(c -> c.accept(this, param));
 
-        generator.jmp(generator.getLabel());
-        generator.id("label" + (generator.getLabel() - 1));
+        generator.jmp(labelFinElse);
+
+        generator.id("label" + labelElse);
         generator.comment("' Body of the else branch");
         ifElse.getElseStatements().forEach(c -> c.accept(this, param));
+
+        generator.id("label" + labelFinElse);
 
         return null;
     }
@@ -134,14 +141,17 @@ public class ExecuteCGVisitor extends AbstractVisitor {
         generator.line(whileStatement.getLine());
         generator.comment("' While statement");
 
+        int whileLabel = generator.getLabel();
+        int finWhileLabel = generator.getLabel();
+        generator.id("label" + whileLabel);
         whileStatement.getCondition().accept(valueVisitor, param);
-        generator.jz(generator.getLabel());
-        generator.id("label" + (generator.getLabel() - 1));
-        generator.comment("'Body of the while branch");
+        generator.jz(finWhileLabel);
 
+        generator.comment("'Body of the while branch");
         whileStatement.getStatements().forEach(c -> c.accept(this, param));
-        generator.jmp(generator.getLabel());
-        generator.id("label" + (generator.getLabel() - 1));
+        generator.jmp(whileLabel);
+
+        generator.id("label" + finWhileLabel);
 
         return null;
     }

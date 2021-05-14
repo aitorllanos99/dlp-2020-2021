@@ -47,6 +47,8 @@ public class OffsetVisitor extends AbstractVisitor<Object,Object> {
         for(var f: recordType.getFields()){
             f.setOffset(offsetFields);
             offsetFields += f.getType().getNumberOfBytes();
+            if(f.getType() instanceof RecordType)
+                visit(f,param);
         }
         return null;
     }

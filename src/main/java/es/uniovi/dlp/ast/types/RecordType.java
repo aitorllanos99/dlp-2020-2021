@@ -60,4 +60,16 @@ public class RecordType extends AbstractType implements Type {
     public String sufixCode() {
         return "i";
     }
+
+    @Override
+    public String getName() {
+        String name = "record(";
+        for (int i = 0; i < fields.size(); i++) {
+            var f = fields.get(i);
+            name += "(" + f.getName() + " x " + f.getType().getName() + ")";
+            if (i != fields.size() - 1)
+                name += " x ";
+        }
+        return name + ")";
+    }
 }

@@ -22,14 +22,14 @@ public class AddressCGVisitor extends AbstractVisitor {
     public Object visit(FieldAccess fieldAccess, Object param) {
         super.visit(fieldAccess, param);
         fieldAccess.getExpression1().getType().propertyOffset(fieldAccess.getProperty());
-        generator.push(fieldAccess.getType().sufixCode(), fieldAccess.getExpression1().getType().propertyOffset(fieldAccess.getProperty()));
-        generator.add(fieldAccess.getType().sufixCode());
+        generator.push( "i", fieldAccess.getExpression1().getType().propertyOffset(fieldAccess.getProperty()));
+        generator.add("i");
         return null;
     }
 
     @Override
     public Object visit(Indexing indexing, Object param) {
-        super.visit(indexing, param);
+        indexing.getArray().accept(this, param);
         indexing.getIndex().accept(valueCGVisitor,param);
         generator.push(indexing.getArray().getType().sufixCode(),indexing.getType().getNumberOfBytes());
         generator.mul("i");

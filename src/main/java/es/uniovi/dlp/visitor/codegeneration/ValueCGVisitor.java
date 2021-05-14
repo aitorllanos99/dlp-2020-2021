@@ -79,7 +79,8 @@ public class ValueCGVisitor extends AbstractVisitor {
     }
     @Override
     public Object visit(FieldAccess fieldAccess, Object param) {
-        fieldAccess.getExpression1().accept(addressCGVisitor,param);
+        fieldAccess.accept(addressCGVisitor,param);
+        generator.promoteTo(fieldAccess.getExpression1().getType(),fieldAccess.getType());
         generator.load(fieldAccess.getType().sufixCode());
         return null;
     }
