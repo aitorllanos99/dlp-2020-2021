@@ -8,6 +8,7 @@ import es.uniovi.dlp.ast.expressions.FieldAccess;
 import es.uniovi.dlp.ast.expressions.Indexing;
 import es.uniovi.dlp.ast.expressions.Invocation;
 import es.uniovi.dlp.ast.statements.*;
+import es.uniovi.dlp.ast.types.FuncType;
 import es.uniovi.dlp.ast.types.VoidType;
 import es.uniovi.dlp.visitor.AbstractVisitor;
 
@@ -56,7 +57,7 @@ public class ExecuteCGVisitor extends AbstractVisitor {
         generator.line(invocation.getLine());
         valueVisitor.visit(invocation, param);
         if (!(invocation.getType() instanceof VoidType))
-            generator.pop(invocation.getType().sufixCode());
+            generator.pop(invocation.getType().sufixCode()); //Sino corrompe la memoria
         return null;
     }
 
@@ -72,7 +73,7 @@ public class ExecuteCGVisitor extends AbstractVisitor {
             params.accept(this, null);
         generator.enter(funcDefinition.getLocalBytes());
         for (var stats : funcDefinition.getStatementsList())
-            stats.accept(this, null);
+            stats.accept(this, funcDefinition.getType());
 
         generator.ret(funcDefinition.getType().getNumberOfBytes(), funcDefinition.getLocalBytes(), funcDefinition.getParamBytes());
         return null;
@@ -156,5 +157,16 @@ public class ExecuteCGVisitor extends AbstractVisitor {
         return null;
     }
 
+    @Override
+    public Object visit(Return returnStatement, Object param) {
+        generator.line(returnStatement.getLine());
+        generator.comment("' Return");
 
+        returnStatement.getExpression().accept(valueVisitor, param);
+
+        FuncType f = (FuncType) param; //Hay que ver si hay que hacer conversion implicita
+        generator.promoteTo(f.getReturnType(), returnStatement.getExpression().getType());
+
+        return null;
+    }
 }
