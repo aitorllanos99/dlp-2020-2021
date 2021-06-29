@@ -31,6 +31,7 @@ public class ExecuteCGVisitor extends AbstractVisitor {
         generator.source(param.toString().split("/")[fileName]);
         for (var def : program.getDefinitions())
             if (def instanceof VarDefinition) def.accept(this, param);
+
         for (var def : program.getDefinitions()) {
             if (def instanceof FuncDefinition) {
                 generator.comment("' Invocation to the " + def.getName() + " function");
@@ -57,7 +58,7 @@ public class ExecuteCGVisitor extends AbstractVisitor {
         generator.line(invocation.getLine());
         valueVisitor.visit(invocation, param);
         if (!(invocation.getType() instanceof VoidType))
-            generator.pop(invocation.getType().sufixCode()); //Sino corrompe la memoria
+            generator.pop(""); //Sino corrompe la memoria, no tiene tipo es void
         return null;
     }
 

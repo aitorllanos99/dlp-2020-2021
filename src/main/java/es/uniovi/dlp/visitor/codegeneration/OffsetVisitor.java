@@ -7,6 +7,8 @@ import es.uniovi.dlp.ast.types.RecordType;
 import es.uniovi.dlp.visitor.AbstractVisitor;
 import es.uniovi.dlp.visitor.Visitor;
 
+import java.util.stream.Collectors;
+
 public class OffsetVisitor extends AbstractVisitor<Object,Object> {
     private int desplazamientoGlobal = 0;
     private int desplazamientoLocal = 0;
@@ -33,10 +35,11 @@ public class OffsetVisitor extends AbstractVisitor<Object,Object> {
 
     @Override
     public Object visit(FuncType funcType, Object param) {
-        int offsetParams = 4;
+        int offsetParams = funcType.getParameters().stream().mapToInt(c -> c.getType().getNumberOfBytes()).sum() + 2;
+
         for(var paramByte : funcType.getParameters()){
             paramByte.setOffset(offsetParams);
-            offsetParams += paramByte.getType().getNumberOfBytes();
+            offsetParams -= paramByte.getType().getNumberOfBytes();
         }
         return null;
     }

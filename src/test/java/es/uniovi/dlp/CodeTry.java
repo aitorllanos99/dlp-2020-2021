@@ -11,6 +11,7 @@ public class CodeTry {
         runCompiler("examples/codegeneration/simple.xana");
 
     }
+
     @Test
     void ifGeneration() {
         runCompiler("examples/codegeneration/if.xana");
@@ -21,13 +22,29 @@ public class CodeTry {
         runCompiler("examples/codegeneration/while.xana");
 
     }
+
     @Test
-    void  indexingGeneration() {
+    void indexingGeneration() {
         runCompiler("examples/codegeneration/indexing.xana");
     }
+
     @Test
     void fieldAccessGeneration() {
         runCompiler("examples/codegeneration/field_access.xana");
 
     }
+    @Test
+    void input() {
+        runCompiler("examples/codegeneration/complete/input.xana");
+
+
+    }
+
+    @Test
+    void bigInput() {
+        runCompiler("examples/codegeneration/complete/big_input.xana");
+
+
+    }
+
 }

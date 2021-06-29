@@ -44,8 +44,9 @@ public class AddressCGVisitor extends AbstractVisitor {
             generator.pusha(((VarDefinition) variable.getDefinition()).getOffset());
         else {
             generator.pushBp();
-            generator.push(variable.getType().sufixCode(), ((VarDefinition) variable.getDefinition()).getOffset());
-            generator.add(variable.getType().sufixCode());
+           // generator.push(variable.getType().sufixCode(), ((VarDefinition) variable.getDefinition()).getOffset());
+            generator.push("i", ((VarDefinition) variable.getDefinition()).getOffset());
+            generator.add("i");
         }
         return null;
     }
