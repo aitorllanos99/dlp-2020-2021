@@ -21,7 +21,7 @@ public enum ErrorReason {
     INVALID_ARGS("Invalid arguments"),
     INVALID_INVOCATION("The expression is not a function"),
 
-    EXAM_INVALID_PRINT("The print is not an array"),
+    EXAM_INVALID_ARRAY_ASSIGNMENT("The right array must be higher than the left"),
     EXAM_INVALID_PRINT_TYPE("The expression must be a character"),
 
     ;

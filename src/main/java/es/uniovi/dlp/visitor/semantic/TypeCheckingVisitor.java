@@ -179,13 +179,28 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
 
     @Override
     public Type visit(Assignment assignment, Type param) {
+
         Type visitorType = super.visit(assignment, param);
         if (visitorType instanceof ErrorType || assignment.getLeftExpression().getType() instanceof ErrorType)
             return null;
+
+        /** Examen ej 2*/
+        if(assignment.getLeftExpression().getType() instanceof ArrayType && assignment.getLeftExpression().getType() instanceof ArrayType){
+            ArrayType l = (ArrayType) assignment.getLeftExpression().getType();
+            ArrayType r = (ArrayType) assignment.getRightExpression().getType();
+            if(r.getSize() < l.getSize()) { //assignment.getLeftExpression().getType().arrayAssignable(assignment.getRightExpression().getType());
+                ErrorManager.getInstance().addError(new Location(assignment.getLine(), assignment.getColumn()), ErrorReason.EXAM_INVALID_ARRAY_ASSIGNMENT);
+                return null;
+            }
+            for(int i=0; i<l.getSize();i++){
+
+            }
+        }
         if (!assignment.getLeftExpression().getLValue())
             ErrorManager.getInstance().addError(new Location(assignment.getLine(), assignment.getColumn()), ErrorReason.LVALUE_REQUIRED);
         if (assignment.getLeftExpression().getType().assignment(assignment.getRightExpression().getType()) == null)
             ErrorManager.getInstance().addError(new Location(assignment.getLine(), assignment.getColumn()), ErrorReason.INCOMPATIBLE_TYPES);
+
 
         return null;
     }

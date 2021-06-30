@@ -1,0 +1,33 @@
+def main() do
+
+vector :: [3 :: char]
+vector[0] = 'l'
+vector[1] = 'o'
+vector[2] = 'l'
+
+puts vector
+
+vector2 :: [3 :: char]
+vector2[0] = 'n'
+vector2[1] = 'i'
+vector2[2] = 's'
+
+puts vector2
+
+
+vector = vector2
+
+puts vector
+puts vector2
+
+vector3 :: [4 :: char]
+vector3[0] = 'n'
+vector3[1] = 'i'
+vector3[2] = 's'
+
+vector2 = vector3
+
+puts vector3
+puts vector2
+
+end
