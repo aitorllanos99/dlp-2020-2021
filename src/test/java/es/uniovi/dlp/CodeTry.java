@@ -47,4 +47,13 @@ public class CodeTry {
 
     }
 
+    @Test
+    void examE1() {
+        runCompiler("examples/exams/exam1/exercise1.xana");
+    }
+
+    @Test
+    void wtf() {
+        runCompiler("examples/real_examples/insert_sort.xana");
+    }
 }

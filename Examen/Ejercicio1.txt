@@ -1,0 +1,29 @@
+Ejercicio 1:
+
+Implementar print para array, pero solo de car�cteres (Tipo Char). En caso de que a un print se le pase un array de otro tipo diferente, este tendr� que dar un error
+de compilaci�n. Este print se encargar� de recorrer todos los elementos del Array e imprimir su valor, de manera que si antes se hac�a:
+
+print array[0], array[1], array[2], ... array[n];
+
+Ahora podemos simplificarlo escribiendo:
+
+print array;
+
+Ej programa v�lido:
+
+prueba[3]:char;
+
+prueba[0] = 'a';
+prueba[1] = 'b';
+prueba[2] = 'c';
+
+print prueba;
+
+Ej programa inv�lido:
+
+
+prueba[3]: int;
+pruebaDouble[2]: double;
+
+print prueba;
+print pruebaDouble;

@@ -1,0 +1,28 @@
+
+Ejercicio 2: Con lo anterior ya implementado, permitir que se puedan asignar arrays de caracteres a otros arrays de caracteres, para ello tomar las siguientes consideraciones:
+	- El array de origen, (el de la derecha), ha de tener mayor o igual tama�o que el array de destino, en caso contrario se producir� un error. En el caso de que el array
+	de origen tenga m�s tama�o que el de destino, se copiar�n unicamente aquellos caracteres correspondientes a las primeras posiciones del array.
+
+
+Ej:
+
+prueba[3]:char;
+
+prueba[0] = 'a';
+prueba[1] = 'b';
+prueba[2] = 'c';
+
+print prueba; //Imprimiria abc
+
+otra[3]:char;
+
+otra[0] = 'd';
+otra[1] = 'e';
+otra[2] = 'f';
+
+print otra; //Imprimiria def
+
+prueba = otra
+
+print prueba; //Imprimiria def
+print otra; //Imprimiria def

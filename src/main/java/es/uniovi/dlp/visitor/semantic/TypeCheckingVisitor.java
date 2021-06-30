@@ -81,7 +81,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
             ErrorManager.getInstance().addError(new Location(fieldAccess.getLine(), fieldAccess.getColumn()), ErrorReason.NO_SUCH_FIELD);
             return new ErrorType(fieldAccess.getLine(), fieldAccess.getColumn(), "Field access error");
         }
-        
+
         fieldAccess.setType(fieldAccess.getExpression1().getType().dot(fieldAccess.getProperty()));
 
         if (fieldAccess.getType() == null) {
@@ -100,7 +100,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
 
     @Override
     public Type visit(Invocation invocation, Type param) {
-        if(invocation.getName().getDefinition() == null)
+        if (invocation.getName().getDefinition() == null)
             return null; //Identification Error
         super.visit(invocation, param);
         if (invocation.getName().getDefinition().getType().isDifferentArgs(invocation.getArguments())) {
@@ -169,7 +169,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     @Override
     public Type visit(Arithmetic arithmetic, Type param) {
         super.visit(arithmetic, param);
-         arithmetic.setType(arithmetic.getLeftExpression().getType().arithmetic(arithmetic.getRightExpression().getType()));
+        arithmetic.setType(arithmetic.getLeftExpression().getType().arithmetic(arithmetic.getRightExpression().getType()));
         if (arithmetic.getType() == null) {
             ErrorManager.getInstance().addError(new Location(arithmetic.getRightExpression().getLine(), arithmetic.getRightExpression().getColumn()), ErrorReason.INVALID_ARITHMETIC);
             return new ErrorType(arithmetic.getLine(), arithmetic.getColumn(), "Arithmetic error");
@@ -224,6 +224,35 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         if (whileStatement.getCondition().getType() != null && !whileStatement.getCondition().getType().isLogical())
             ErrorManager.getInstance().addError(new Location(whileStatement.getLine(), whileStatement.getColumn()), ErrorReason.NOT_LOGICAL);
 
+        return null;
+    }
+
+    /**
+     * Examen Ejercicio 1
+     */
+    @Override
+    public Type visit(Write write, Type param) {
+        super.visit(write, param);
+
+        //Esto cuando es un solo elemento array -> indexing
+        if (write.getExpression() instanceof Indexing) {
+            Indexing i = (Indexing) write.getExpression();
+            if (!(i.getArray().getType() instanceof CharType)) {
+                ErrorManager.getInstance().addError(new Location(write.getLine(), write.getColumn()), ErrorReason.EXAM_INVALID_PRINT_TYPE);
+                return null;
+            }
+        }
+        //Esto cuando es una variable
+        if (write.getExpression() instanceof Variable) {
+            Variable v = (Variable) write.getExpression();
+            if (v.getDefinition().getType() instanceof ArrayType) {
+                ArrayType a = (ArrayType) v.getDefinition().getType();
+                if (!(a.getArrayOf() instanceof CharType)) {
+                    ErrorManager.getInstance().addError(new Location(write.getLine(), write.getColumn()), ErrorReason.EXAM_INVALID_PRINT_TYPE);
+                    return null;
+                }
+            }
+        }
         return null;
     }
 }

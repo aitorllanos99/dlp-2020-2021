@@ -20,6 +20,10 @@ public enum ErrorReason {
     INVALID_RETURN_TYPE("Invalid return type"),
     INVALID_ARGS("Invalid arguments"),
     INVALID_INVOCATION("The expression is not a function"),
+
+    EXAM_INVALID_PRINT("The print is not an array"),
+    EXAM_INVALID_PRINT_TYPE("The expression must be a character"),
+
     ;
 
     private final String message;

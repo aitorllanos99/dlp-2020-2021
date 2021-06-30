@@ -1,0 +1,18 @@
+def main() do
+
+vector :: [3 :: char]
+vector[0] = 'l'
+vector[2] = 'l'
+
+puts vector
+vector2 :: [3 :: int]
+
+vector2[0] = 1
+puts vector2
+puts vector2[0]
+
+i:: int
+i = 1
+
+puts i
+end
