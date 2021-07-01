@@ -94,4 +94,9 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public int propertyOffset(String property) {
         return -1024;
     }
+
+    @Override
+    public boolean isInteger() {
+        return false;
+    }
 }

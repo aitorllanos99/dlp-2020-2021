@@ -1,0 +1,14 @@
+Operador ternario (Mayo)
+
+
+main() {
+  var a: int;
+
+  read a;
+  write a > 10 ? 1 + a : 2 + a;
+
+  f(a ? a + a : 0);
+
+  // write 1.0 ? 0 : 1; // Error, la condicion debe ser entera
+  // write a == 1 ? 0: 1.0; // Error, tipos de la expresi�n no coinciden.
+

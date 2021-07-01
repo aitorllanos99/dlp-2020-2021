@@ -1,0 +1,12 @@
+def main() do
+  a:: int
+
+  in a
+  puts a > 10 ? 1 + a : 2 + a
+
+  f(a ? a + a : 0)
+
+  puts 1.0 ? 0 : 1 # Error, la condicion debe ser entera
+  puts a == 1 ? 0: 1.0 # Error, tipos de la expresi�n no coinciden.
+
+end

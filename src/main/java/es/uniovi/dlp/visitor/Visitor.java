@@ -28,6 +28,7 @@ public interface Visitor<ReturnType, ParamType> {
     ReturnType visit(UnaryMinus unaryMinus, ParamType param);
     ReturnType visit(UnaryNot unaryNot, ParamType param);
     ReturnType visit(Variable variable, ParamType param);
+    ReturnType visit(TernaryOperator ternaryOperator, ParamType param);
 
     ReturnType visit(Assignment assignment, ParamType param);
     ReturnType visit(IfElse ifElse, ParamType param);

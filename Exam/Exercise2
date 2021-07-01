@@ -1,0 +1,15 @@
+Prototipo de funci�n (Junio)
+
+f(int a): int;
+//g(int a);
+// h(); // Error, funci�n declarada no implementada
+
+main() {
+  write f(0);
+}
+
+f(a: int): int {
+  return a + 1;
+}
+
+// g(a: int): int {} // Error, funci�n no coincide con su declaraci�n.

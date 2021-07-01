@@ -28,4 +28,5 @@ public interface Type {
     String sufixCode();
     String getName();
     int propertyOffset(String property);
+    boolean isInteger();
 }

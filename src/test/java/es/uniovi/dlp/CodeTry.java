@@ -46,5 +46,10 @@ public class CodeTry {
 
 
     }
+    @Test
+    void ternary() {
+        runCompiler("examples/Exam/ternary.xana");
 
+
+    }
 }

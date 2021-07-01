@@ -81,7 +81,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
             ErrorManager.getInstance().addError(new Location(fieldAccess.getLine(), fieldAccess.getColumn()), ErrorReason.NO_SUCH_FIELD);
             return new ErrorType(fieldAccess.getLine(), fieldAccess.getColumn(), "Field access error");
         }
-        
+
         fieldAccess.setType(fieldAccess.getExpression1().getType().dot(fieldAccess.getProperty()));
 
         if (fieldAccess.getType() == null) {
@@ -100,7 +100,7 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
 
     @Override
     public Type visit(Invocation invocation, Type param) {
-        if(invocation.getName().getDefinition() == null)
+        if (invocation.getName().getDefinition() == null)
             return null; //Identification Error
         super.visit(invocation, param);
         if (invocation.getName().getDefinition().getType().isDifferentArgs(invocation.getArguments())) {
@@ -167,9 +167,26 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     }
 
     @Override
+    public Type visit(TernaryOperator ternaryOperator, Type param) {
+        super.visit(ternaryOperator, param);
+        if (!ternaryOperator.getCondition().getType().isInteger()) {
+            ErrorManager.getInstance().addError(new Location(ternaryOperator.getLine(), ternaryOperator.getColumn()), ErrorReason.EXAM_TERNARY_OPERATOR_NOT_INT);
+            return new ErrorType(ternaryOperator.getLine(), ternaryOperator.getColumn(), "Ternary Operator Mistake");
+        }
+        Object wtf = ternaryOperator.getExpressionTrue().getType().getClass();
+        Object wtf2 = ternaryOperator.getExpressionFalse().getType().getClass();
+        if(!ternaryOperator.getExpressionTrue().getType().getClass().equals(ternaryOperator.getExpressionFalse().getType().getClass())){
+            ErrorManager.getInstance().addError(new Location(ternaryOperator.getLine(), ternaryOperator.getColumn()), ErrorReason.EXAM_TERNARY_OPERATOR_NOT_SAME_TYPE);
+            return new ErrorType(ternaryOperator.getLine(), ternaryOperator.getColumn(), "Ternary Operator Mistake");
+        }
+        ternaryOperator.setType(ternaryOperator.getExpressionTrue().getType());
+        return null;
+    }
+
+    @Override
     public Type visit(Arithmetic arithmetic, Type param) {
         super.visit(arithmetic, param);
-         arithmetic.setType(arithmetic.getLeftExpression().getType().arithmetic(arithmetic.getRightExpression().getType()));
+        arithmetic.setType(arithmetic.getLeftExpression().getType().arithmetic(arithmetic.getRightExpression().getType()));
         if (arithmetic.getType() == null) {
             ErrorManager.getInstance().addError(new Location(arithmetic.getRightExpression().getLine(), arithmetic.getRightExpression().getColumn()), ErrorReason.INVALID_ARITHMETIC);
             return new ErrorType(arithmetic.getLine(), arithmetic.getColumn(), "Arithmetic error");

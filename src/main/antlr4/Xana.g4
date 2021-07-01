@@ -82,6 +82,7 @@ expression returns [Expression ast]
         | left = expression op = ('*'| '/' | '%') right = expression {$ast = new Arithmetic($left.start.getLine(), $left.start.getCharPositionInLine() + 1, $left.ast, $right.ast, $op.text);}
         | left = expression op = ('+'| '-') right = expression {$ast = new Arithmetic($left.start.getLine(), $left.start.getCharPositionInLine() + 1, $left.ast, $right.ast, $op.text);}
         | left = expression op = ('>'| '>=' | '<'| '<=' | '!='| '==') right = expression {$ast = new Comparison($left.start.getLine(), $left.start.getCharPositionInLine() + 1, $left.ast, $right.ast, $op.text);}
+        | cond= expression '?' expressionIf= expression ':' expressionElse = expression {$ast = new TernaryOperator($cond.start.getLine(), $cond.start.getCharPositionInLine()+1,$cond.ast,$expressionIf.ast,$expressionElse.ast);}
         | left = expression op = ('&&'| '||') right = expression {$ast = new Logical($left.start.getLine(), $left.start.getCharPositionInLine() + 1, $left.ast, $right.ast, $op.text);}
         ;
 

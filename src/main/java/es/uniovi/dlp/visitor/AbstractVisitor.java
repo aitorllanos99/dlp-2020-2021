@@ -125,6 +125,15 @@ public abstract class AbstractVisitor<ReturnType, ParamType> implements Visitor<
     }
 
     @Override
+    public ReturnType visit(TernaryOperator ternaryOperator, ParamType param) {
+        ternaryOperator.getCondition().accept(this,param);
+        ternaryOperator.getExpressionTrue().accept(this,param);
+        ternaryOperator.getExpressionFalse().accept(this,param);
+        ternaryOperator.setLvalue(false);
+        return null;
+    }
+
+    @Override
     public ReturnType visit(Assignment assignment, ParamType param) {
         ReturnType type = assignment.getLeftExpression().accept(this, param);
         ReturnType typeRight = assignment.getRightExpression().accept(this, param);

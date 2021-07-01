@@ -20,6 +20,8 @@ public enum ErrorReason {
     INVALID_RETURN_TYPE("Invalid return type"),
     INVALID_ARGS("Invalid arguments"),
     INVALID_INVOCATION("The expression is not a function"),
+    EXAM_TERNARY_OPERATOR_NOT_INT("The condition must be int"),
+    EXAM_TERNARY_OPERATOR_NOT_SAME_TYPE("The expressions must be the same type")
     ;
 
     private final String message;

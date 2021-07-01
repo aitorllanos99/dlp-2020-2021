@@ -75,7 +75,14 @@ public class IntType extends AbstractType implements Type {
     }
 
     @Override
+    public boolean isInteger() {
+        return true;
+    }
+
+    @Override
     public <ParamType, ReturnType> ReturnType accept(Visitor<ReturnType, ParamType> returnTypeParamTypeAbstractVisitor, ParamType param) {
         return returnTypeParamTypeAbstractVisitor.visit(this, param);
     }
+
+
 }
