@@ -72,4 +72,11 @@ public class RecordType extends AbstractType implements Type {
         }
         return name + ")";
     }
+
+    @Override
+    public Type assignment(Type type) {
+        if(type.getName().equals(this.getName()))
+            return type;
+        return null;
+    }
 }

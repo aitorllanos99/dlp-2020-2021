@@ -1,0 +1,10 @@
+Cadenas de caracteres (Enero)
+
+main() {
+  var c: char[10];
+
+  c = "Hola";
+  write c;
+
+  write "mundo";
+}

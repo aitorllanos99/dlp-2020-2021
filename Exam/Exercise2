@@ -1,0 +1,11 @@
+Inicializaci�n de Arrays (Junio)
+
+var i: int [] {1,2,3,4};
+//var i2: int [] {1,2,3,4.0}; // Error tipos no coinciden (4.0)
+
+var j: int [4] {1,2,3,4};
+// var j2: int [4] {1,2}; // Error, dimensiones y bloque de inicializaci�n de distinto tama�o.
+
+
+var k: float [4] {1.0, 1.1, 1.2, 1.3};
+// var k2: float [4] {a, 1.1, 1.2, 1.3}; // Error, la inicializaci�n solo puede ser con constantes

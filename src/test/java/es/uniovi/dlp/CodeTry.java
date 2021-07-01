@@ -46,5 +46,11 @@ public class CodeTry {
 
 
     }
+    @Test
+    void ex1() {
+        runCompiler("examples/exam/ex1.xana");
+
+
+    }
 
 }

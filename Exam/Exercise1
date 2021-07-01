@@ -1,0 +1,26 @@
+Asignaci�n de estructuras (Mayo)
+
+struct Punto {
+  x: float;
+  y: float;
+};
+
+struct Punto3D {
+  x: float;
+  y: float;
+  z: float;
+};
+
+main() {
+  Punto a;
+  Punto b;
+  Punto3D c;
+
+  a.x = 1.0;
+  a.y = 1.0;
+
+  b = a;
+
+  // c = b; // Error, tipos no coinciden.
+  // a = 0; // Error, tipos no coinciden.
+}

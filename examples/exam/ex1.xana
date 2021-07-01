@@ -1,0 +1,22 @@
+punto defstruct do
+    x :: double
+    y :: double
+  end
+
+ punto defstruct do
+     x :: double
+     y :: double
+   end
+
+punto3d defstruct do
+    x :: double
+    y :: double
+    z :: double
+  end
+
+def main() do
+  b = a
+
+  c = b #Error, tipos no coinciden.
+  a = 0 #Error, tipos no coinciden.
+end
