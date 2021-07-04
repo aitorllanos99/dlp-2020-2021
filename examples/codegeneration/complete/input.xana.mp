@@ -5,29 +5,28 @@
 ' c :: char( offset 6 )
 ' pair :: record((integer x int) x (character x char))( offset 7 )
 ' matrix :: [10 :: [10 :: int]]( offset 10 )
-' Invocation to the p function
-call p
+' Invocation to the main function
+call main
+halt
 #line 10
 p:
 ' Parameters
 ' Local variables
 	enter 0
 	ret 0,0,0
-' Invocation to the f function
-call f
 #line 13
 f:
 ' Parameters
-' r :: double( offset 4 )
-' e :: int( offset 8 )
+' r :: double( offset 6 )
+' e :: int( offset 4 )
 ' Local variables
 ' real :: double( offset -4 )
 ' c :: char( offset -5 )
 	enter 5
 #line 16
 	push	bp
-	pushf	-4
-	addf
+	pushi	-4
+	addi
 	pusha	7
 	pushi	2
 	addi
@@ -41,12 +40,12 @@ f:
 	i2f
 	addf
 	push	bp
-	pushf	4
-	addf
+	pushi	6
+	addi
 	loadf
 	addf
 	push	bp
-	pushi	8
+	pushi	4
 	addi
 	loadi
 	i2f
@@ -54,26 +53,24 @@ f:
 	storef
 #line 17
 	push	bp
-	pushb	-5
-	addb
+	pushi	-5
+	addi
 	pushb	48
 	storeb
 #line 18
 ' Return
 	push	bp
-	pushb	-5
-	addb
+	pushi	-5
+	addi
 	loadb
 	b2i
 	ret 2,5,6
-' Invocation to the fill function
-call fill
 #line 23
 fill:
 ' Parameters
-' row :: int( offset 4 )
+' row :: int( offset 8 )
 ' value :: int( offset 6 )
-' increment :: int( offset 8 )
+' increment :: int( offset 4 )
 ' Local variables
 ' i :: int( offset -2 )
 ' inc :: int( offset -4 )
@@ -89,7 +86,7 @@ fill:
 	pushi	-4
 	addi
 	push	bp
-	pushi	8
+	pushi	4
 	addi
 	loadi
 	storei
@@ -107,7 +104,7 @@ label0:
 #line 28
 	pusha	10
 	push	bp
-	pushi	4
+	pushi	8
 	addi
 	loadi
 	pushi	20
@@ -150,7 +147,7 @@ label0:
 	addi
 	loadi
 	push	bp
-	pushi	8
+	pushi	4
 	addi
 	loadi
 	addi
@@ -158,8 +155,6 @@ label0:
 	jmp	 label0
 label1:
 	ret 0,4,6
-' Invocation to the show function
-call show
 #line 34
 show:
 ' Parameters
@@ -248,9 +243,6 @@ label3:
 	pushb	10
 	outb
 	ret 0,2,2
-' Invocation to the main function
-call main
-halt
 #line 44
 main:
 ' Parameters
@@ -259,7 +251,6 @@ main:
 	enter 2
 #line 47
 call p
-	pop
 #line 48
 	push	bp
 	pushi	-2
@@ -280,18 +271,6 @@ call p
 	b2i
 	storei
 #line 51
-	push	bp
-	pushi	-2
-	addi
-	loadi
-	i2f
-	pusha	7
-	pushi	2
-	addi
-	loadb
-	b2i
-call f
-	pop
 ' Write
 	push	bp
 	pushi	-2
@@ -304,7 +283,7 @@ call f
 	loadb
 	b2i
 call f
-	outnull
+	outi
 ' Write
 	pushb	10
 	outb
@@ -343,14 +322,12 @@ label4:
 	loadi
 	pushi	1
 call fill
-	pop
 #line 59
 	push	bp
 	pushi	-2
 	addi
 	loadi
 call show
-	pop
 #line 60
 	push	bp
 	pushi	-2

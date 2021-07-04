@@ -4,8 +4,7 @@ r :: double
 
 def main() do
     a, i :: int
-
-    c = 'a'
+     c = 'a'
     puts c, '\n'
 
     a = 1

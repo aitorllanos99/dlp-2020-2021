@@ -35,6 +35,8 @@ def main() do
   # Array
   vector :: [10 :: [10 :: int]]
 
+
+  puts prueba
   i = 0
   j = 0
 

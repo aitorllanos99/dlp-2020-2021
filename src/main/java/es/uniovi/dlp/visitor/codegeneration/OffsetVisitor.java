@@ -2,6 +2,7 @@ package es.uniovi.dlp.visitor.codegeneration;
 
 import es.uniovi.dlp.ast.definitions.FuncDefinition;
 import es.uniovi.dlp.ast.definitions.VarDefinition;
+import es.uniovi.dlp.ast.types.ArrayType;
 import es.uniovi.dlp.ast.types.FuncType;
 import es.uniovi.dlp.ast.types.RecordType;
 import es.uniovi.dlp.visitor.AbstractVisitor;
@@ -35,12 +36,12 @@ public class OffsetVisitor extends AbstractVisitor<Object,Object> {
 
     @Override
     public Object visit(FuncType funcType, Object param) {
-        int offsetParams = funcType.getParameters().stream().mapToInt(c -> c.getType().getNumberOfBytes()).sum() + 2;
-
-        for(var paramByte : funcType.getParameters()){
-            paramByte.setOffset(offsetParams);
-            offsetParams -= paramByte.getType().getNumberOfBytes();
+        int desplazamiento = 4;
+        for (int i = funcType.getParameters().size() - 1; i >= 0; i--) {
+            funcType.getParameters().get(i).setOffset(desplazamiento);
+            desplazamiento += funcType.getParameters().get(i).getType().getNumberOfBytes();
         }
+        funcType.getReturnType().accept(this, param);
         return null;
     }
 
@@ -55,4 +56,5 @@ public class OffsetVisitor extends AbstractVisitor<Object,Object> {
         }
         return null;
     }
+
 }

@@ -32,11 +32,11 @@ public class ExecuteCGVisitor extends AbstractVisitor {
         for (var def : program.getDefinitions())
             if (def instanceof VarDefinition) def.accept(this, param);
 
+        generator.comment("' Invocation to the main function");
+        generator.call("main");
+        generator.halt();
         for (var def : program.getDefinitions()) {
             if (def instanceof FuncDefinition) {
-                generator.comment("' Invocation to the " + def.getName() + " function");
-                generator.call(def.getName());
-                if (def.getName().equals("main")) generator.halt();
                 def.accept(this, param);
             }
         }
@@ -57,7 +57,7 @@ public class ExecuteCGVisitor extends AbstractVisitor {
     public Object visit(Invocation invocation, Object param) {
         generator.line(invocation.getLine());
         valueVisitor.visit(invocation, param);
-        if (!(invocation.getType() instanceof VoidType))
+        if (!(((FuncType)invocation.getType()).getReturnType() instanceof VoidType))
             generator.pop(""); //Sino corrompe la memoria, no tiene tipo es void
         return null;
     }
@@ -104,7 +104,6 @@ public class ExecuteCGVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(Write write, Object param) {
-        super.visit(write, param);
         generator.line(write.getLine());
         generator.comment("' Write");
         write.getExpression().accept(valueVisitor, param); //Sacamos el valor a imprimir
