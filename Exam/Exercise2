@@ -1,5 +1,4 @@
-Inicializaci�n de Arrays (Junio)
-
+Inicializacion de Arrays
 var i: int [] {1,2,3,4};
 //var i2: int [] {1,2,3,4.0}; // Error tipos no coinciden (4.0)
 
