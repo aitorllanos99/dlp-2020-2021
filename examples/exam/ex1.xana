@@ -1,22 +1,39 @@
-punto defstruct do
+a :: defstruct do
     x :: double
     y :: double
   end
 
- punto defstruct do
-     x :: double
+ b :: defstruct do
      y :: double
+     x :: double
    end
 
-punto3d defstruct do
+c :: defstruct do
     x :: double
     y :: double
     z :: double
   end
-
+p :: double
 def main() do
-  b = a
 
-  c = b #Error, tipos no coinciden.
-  a = 0 #Error, tipos no coinciden.
+
+a.x = 0
+a.y = 1
+b.x = 4
+b.y = 5
+
+puts a.x
+puts a.y, '\n'
+puts b.x
+puts b.y, '\n'
+
+p = b.y
+
+
+b = a
+
+puts a.x
+puts a.y, '\n'
+puts b.x
+puts b.y, '\n'
 end

@@ -3,12 +3,10 @@ package es.uniovi.dlp.visitor.codegeneration;
 import es.uniovi.dlp.ast.Program;
 import es.uniovi.dlp.ast.definitions.FuncDefinition;
 import es.uniovi.dlp.ast.definitions.VarDefinition;
-import es.uniovi.dlp.ast.expressions.Arithmetic;
-import es.uniovi.dlp.ast.expressions.FieldAccess;
-import es.uniovi.dlp.ast.expressions.Indexing;
-import es.uniovi.dlp.ast.expressions.Invocation;
+import es.uniovi.dlp.ast.expressions.*;
 import es.uniovi.dlp.ast.statements.*;
 import es.uniovi.dlp.ast.types.FuncType;
+import es.uniovi.dlp.ast.types.RecordType;
 import es.uniovi.dlp.ast.types.VoidType;
 import es.uniovi.dlp.visitor.AbstractVisitor;
 
@@ -82,13 +80,36 @@ public class ExecuteCGVisitor extends AbstractVisitor {
 
     @Override
     public Object visit(Assignment assignment, Object param) {
-        super.visit(assignment, param);
         generator.line(assignment.getLine());
-        assignment.getLeftExpression().accept(addressVisitor, param); //Sacamos direccion de la izquierda
-        assignment.getRightExpression().accept(valueVisitor, param); // Sacamos valor de la derecha
-        generator.promoteTo(assignment.getLeftExpression().getType(), assignment.getRightExpression().getType());
-        generator.promoteTo(assignment.getRightExpression().getType(), assignment.getRightExpression().getType());
-        generator.store(assignment.getLeftExpression().getType().sufixCode());
+        //Exam ex1
+        if (assignment.getLeftExpression() instanceof Variable && assignment.getRightExpression() instanceof Variable &&
+                ((Variable) assignment.getLeftExpression()).getDefinition().getType() instanceof RecordType &&
+                ((Variable) assignment.getRightExpression()).getDefinition().getType() instanceof RecordType) {
+            RecordType address = (RecordType) ((Variable) assignment.getLeftExpression()).getDefinition().getType();
+            RecordType value = (RecordType) ((Variable) assignment.getRightExpression()).getDefinition().getType();
+
+            for (var f : address.getFields()) {
+                //Direction
+                FieldAccess left = new FieldAccess(assignment.getLine(), assignment.getColumn(), assignment.getLeftExpression(), f.getName());
+                left.setType(f.getType());
+                left.accept(addressVisitor, param);
+
+                //Value
+                FieldAccess right = new FieldAccess(assignment.getLine(), assignment.getColumn(), assignment.getRightExpression(), f.getName());
+                right.setType(f.getType());
+                right.accept(valueVisitor, param);
+
+
+                generator.promoteTo(left.getType(), right.getType());
+                generator.store(left.getType().sufixCode());
+            }
+
+        } else {
+            assignment.getLeftExpression().accept(addressVisitor, param); //Sacamos direccion de la izquierda
+            assignment.getRightExpression().accept(valueVisitor, param); // Sacamos valor de la derecha
+            generator.promoteTo(assignment.getLeftExpression().getType(), assignment.getRightExpression().getType());
+            generator.store(assignment.getLeftExpression().getType().sufixCode());
+        }
         return null;
     }
 

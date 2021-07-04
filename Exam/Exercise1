@@ -1,10 +1,10 @@
-Asignaci�n de estructuras (Mayo)
+Asignacion de estructuras
 
 struct Punto {
   x: float;
   y: float;
 };
-
+//Mismo tamaño, mismos tipos
 struct Punto3D {
   x: float;
   y: float;

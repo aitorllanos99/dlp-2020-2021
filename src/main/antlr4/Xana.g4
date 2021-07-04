@@ -112,7 +112,7 @@ complexType returns [Type t]: id = 'defstruct' 'do' vd += varDefinition* 'end' {
                                                                                 for(var v: $vd) vds.addAll(v.ast);
                                                                                 for(var v: vds) rec.add(new RecordField(v.getLine(),v.getColumn(),v.getName(),v.getType()));
                                                                                 $t = new RecordType($id.getLine(), $id.getCharPositionInLine()+1, rec);}
-             |'['i = INT_CONSTANT '::' tp = type ']' {$t = new ArrayType($i.getLine(), $i.getCharPositionInLine()+1,$tp.t,LexerHelper.lexemeToInt($i.text));}
+             |'['i = INT_CONSTANT '::' tp = type ']'{$t = new ArrayType($i.getLine(), $i.getCharPositionInLine()+1,$tp.t,LexerHelper.lexemeToInt($i.text));}
              ;
 //*******LEXER******
 WHITESPACE: [ \n\t\r]+ -> skip

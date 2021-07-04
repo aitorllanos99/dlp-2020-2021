@@ -13,32 +13,18 @@ main:
 ' i :: int( offset -4 )
 	enter 4
 #line 8
-	pusha	0
-	pushb	97
 	storeb
 #line 9
 ' Write
 	pusha	0
 	loadb
 	outb
-#line 9
 ' Write
 	pushb	10
 	outb
 #line 11
-	push	bp
-	pushi	-2
-	addi
-	pushi	1
 	storei
 #line 12
-	push	bp
-	pushi	-4
-	addi
-	pushb	48
-	b2i
-	pushi	3
-	muli
 	storei
 #line 13
 ' Write
@@ -47,18 +33,15 @@ main:
 	addi
 	loadi
 	outi
-#line 13
 ' Write
 	pushb	32
 	outb
-#line 13
 ' Write
 	push	bp
 	pushi	-4
 	addi
 	loadi
 	outi
-#line 13
 ' Write
 	pushb	10
 	outb
@@ -75,7 +58,6 @@ main:
 	loadf
 	mulf
 	outf
-#line 16
 ' Write
 	pushb	10
 	outb
@@ -86,11 +68,9 @@ main:
 	pushf	4.5
 	subf
 	outf
-#line 18
 ' Write
 	pushb	32
 	outb
-#line 18
 ' Write
 	pushb	48
 	b2i
@@ -98,11 +78,9 @@ main:
 	pushf	48.0
 	divf
 	outf
-#line 18
 ' Write
 	pushb	32
 	outb
-#line 18
 ' Write
 	pushb	48
 	b2i
@@ -110,11 +88,9 @@ main:
 	b2i
 	modi
 	outi
-#line 18
 ' Write
 	pushb	32
 	outb
-#line 18
 ' Write
 	pushb	48
 	b2i
@@ -122,7 +98,6 @@ main:
 	b2i
 	addi
 	outi
-#line 18
 ' Write
 	pushb	10
 	outb
@@ -132,56 +107,45 @@ main:
 	pushi	2
 	lti
 	outi
-#line 20
 ' Write
 	pushb	32
 	outb
-#line 20
 ' Write
 	pushi	4
 	pushi	3
 	gei
 	outi
-#line 20
 ' Write
 	pushb	32
 	outb
-#line 20
 ' Write
 	pushi	5
 	pushi	5
 	eqi
 	outi
-#line 20
 ' Write
 	pushb	32
 	outb
-#line 20
 ' Write
 	pushi	1
 	pushi	2
 	and
 	outi
-#line 20
 ' Write
 	pushb	32
 	outb
-#line 20
 ' Write
 	pushi	0
 	pushi	3
 	or
 	outi
-#line 20
 ' Write
 	pushb	32
 	outb
-#line 20
 ' Write
 	pushi	0
 	not
 	outi
-#line 20
 ' Write
 	pushb	10
 	outb

@@ -1,4 +1,4 @@
-Cadenas de caracteres (Enero)
+Cadenas de caracteres
 
 main() {
   var c: char[10];

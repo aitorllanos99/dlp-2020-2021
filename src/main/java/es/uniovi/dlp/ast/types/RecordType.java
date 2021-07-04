@@ -75,8 +75,16 @@ public class RecordType extends AbstractType implements Type {
 
     @Override
     public Type assignment(Type type) {
-        if(type.getName().equals(this.getName()))
+        if(type instanceof RecordType){
+            RecordType r = (RecordType) type;
+            if(r.getFields().size() != getFields().size())
+                return null;
+            //Fields can be not organized but they have to be named and typed equally
+            for(var f: fields)
+                if(r.getFields().stream().noneMatch(f2 -> f.getName().equals(f2.getName()) && f.getType().getClass() ==  f2.getType().getClass()))
+                    return null;
             return type;
+        }
         return null;
     }
 }

@@ -21,7 +21,6 @@ public class AddressCGVisitor extends AbstractVisitor {
     @Override
     public Object visit(FieldAccess fieldAccess, Object param) {
         super.visit(fieldAccess, param);
-        fieldAccess.getExpression1().getType().propertyOffset(fieldAccess.getProperty());
         generator.push( "i", fieldAccess.getExpression1().getType().propertyOffset(fieldAccess.getProperty()));
         generator.add("i");
         return null;
