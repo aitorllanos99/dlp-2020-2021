@@ -4,6 +4,7 @@ import es.uniovi.dlp.ast.Program;
 import es.uniovi.dlp.ast.definitions.FuncDefinition;
 import es.uniovi.dlp.ast.definitions.VarDefinition;
 import es.uniovi.dlp.ast.expressions.*;
+import es.uniovi.dlp.ast.expressions.String;
 import es.uniovi.dlp.ast.statements.*;
 import es.uniovi.dlp.ast.types.*;
 
@@ -121,6 +122,12 @@ public abstract class AbstractVisitor<ReturnType, ParamType> implements Visitor<
     @Override
     public ReturnType visit(Variable variable, ParamType param) {
         variable.setLvalue(true);
+        return null;
+    }
+
+    @Override
+    public ReturnType visit(String string, ParamType param) {
+        string.setLvalue(false);
         return null;
     }
 

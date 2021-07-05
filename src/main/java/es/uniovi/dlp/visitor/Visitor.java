@@ -4,6 +4,7 @@ import es.uniovi.dlp.ast.Program;
 import es.uniovi.dlp.ast.definitions.FuncDefinition;
 import es.uniovi.dlp.ast.definitions.VarDefinition;
 import es.uniovi.dlp.ast.expressions.*;
+import es.uniovi.dlp.ast.expressions.String;
 import es.uniovi.dlp.ast.statements.*;
 import es.uniovi.dlp.ast.types.*;
 
@@ -28,6 +29,7 @@ public interface Visitor<ReturnType, ParamType> {
     ReturnType visit(UnaryMinus unaryMinus, ParamType param);
     ReturnType visit(UnaryNot unaryNot, ParamType param);
     ReturnType visit(Variable variable, ParamType param);
+    ReturnType visit(String string, ParamType param);
 
     ReturnType visit(Assignment assignment, ParamType param);
     ReturnType visit(IfElse ifElse, ParamType param);

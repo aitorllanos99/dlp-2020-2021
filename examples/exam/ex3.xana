@@ -1,0 +1,10 @@
+c :: [5 :: char]
+def main() do
+c[0] = 'A'
+c[1] = 'i'
+c[2] = 't'
+c[3] = 'o'
+c[4] = 'r'
+
+puts c
+end

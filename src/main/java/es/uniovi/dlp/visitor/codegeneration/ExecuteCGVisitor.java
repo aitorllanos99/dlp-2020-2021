@@ -5,9 +5,7 @@ import es.uniovi.dlp.ast.definitions.FuncDefinition;
 import es.uniovi.dlp.ast.definitions.VarDefinition;
 import es.uniovi.dlp.ast.expressions.*;
 import es.uniovi.dlp.ast.statements.*;
-import es.uniovi.dlp.ast.types.FuncType;
-import es.uniovi.dlp.ast.types.RecordType;
-import es.uniovi.dlp.ast.types.VoidType;
+import es.uniovi.dlp.ast.types.*;
 import es.uniovi.dlp.visitor.AbstractVisitor;
 
 public class ExecuteCGVisitor extends AbstractVisitor {
@@ -103,13 +101,13 @@ public class ExecuteCGVisitor extends AbstractVisitor {
                 generator.promoteTo(left.getType(), right.getType());
                 generator.store(left.getType().sufixCode());
             }
-
-        } else {
-            assignment.getLeftExpression().accept(addressVisitor, param); //Sacamos direccion de la izquierda
-            assignment.getRightExpression().accept(valueVisitor, param); // Sacamos valor de la derecha
-            generator.promoteTo(assignment.getLeftExpression().getType(), assignment.getRightExpression().getType());
-            generator.store(assignment.getLeftExpression().getType().sufixCode());
+            return null;
         }
+        assignment.getLeftExpression().accept(addressVisitor, param); //Sacamos direccion de la izquierda
+        assignment.getRightExpression().accept(valueVisitor, param); // Sacamos valor de la derecha
+        generator.promoteTo(assignment.getLeftExpression().getType(), assignment.getRightExpression().getType());
+        generator.store(assignment.getLeftExpression().getType().sufixCode());
+
         return null;
     }
 
@@ -128,6 +126,22 @@ public class ExecuteCGVisitor extends AbstractVisitor {
         super.visit(write, param);
         generator.line(write.getLine());
         generator.comment("' Write");
+        //Exam ex3
+        if(write.getExpression() instanceof Variable &&
+                ((Variable) write.getExpression()).getDefinition().getType() instanceof ArrayType &&
+                ((ArrayType)((Variable) write.getExpression()).getDefinition().getType()).getArrayOf() instanceof CharType){
+            for(int i=0; i<((ArrayType)((Variable) write.getExpression()).getDefinition().getType()).getSize();i++){
+                IntLiteral index = new IntLiteral(write.getLine(), write.getColumn(), i);
+                index.setType(new IntType(write.getLine(), write.getColumn()));
+
+                Indexing ind = new Indexing(write.getLine(),write.getColumn(), write.getExpression(), index);
+                ind.setType(new CharType(write.getLine(), write.getColumn()));
+                ind.accept(valueVisitor,param);
+
+                generator.out(ind.getType().sufixCode());
+            }
+            return null;
+        }
         write.getExpression().accept(valueVisitor, param); //Sacamos el valor a imprimir
         generator.out(write.getExpression().getType().sufixCode());
         return null;

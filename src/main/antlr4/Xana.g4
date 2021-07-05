@@ -71,6 +71,7 @@ expression returns [Expression ast]
         | i = INT_CONSTANT {$ast = new IntLiteral($i.getLine(), $i.getCharPositionInLine() + 1, LexerHelper.lexemeToInt($i.text));}
         | c = CHAR_CONSTANT {$ast = new CharLiteral($c.getLine(), $c.getCharPositionInLine() + 1, LexerHelper.lexemeToChar($c.text));}
         | r = REAL_CONSTANT {$ast = new DoubleLiteral($r.getLine(), $r.getCharPositionInLine() + 1, LexerHelper.lexemeToReal($r.text));}
+        | s = STRING  {$ast = new String($s.getLine(), $s.getCharPositionInLine() + 1, $s.text);}
         | id = ID {$ast = new Variable($id.getLine(), $id.getCharPositionInLine() + 1, $id.text);}
         | '(' expression ')' {$ast = $expression.ast;}
         | '[' expression ']' {$ast = $expression.ast;}
@@ -119,7 +120,8 @@ WHITESPACE: [ \n\t\r]+ -> skip
         ;
 INT_CONSTANT: [0-9]+
             ;
-
+STRING : '"'CHAR_CONSTANT* '"'
+;
 REAL_CONSTANT: DECIMALPOINT
             | ELEVATION
             | EXPONENTIAL

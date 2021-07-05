@@ -52,5 +52,11 @@ public class CodeTry {
 
 
     }
+    @Test
+    void ex3() {
+        runCompiler("examples/exam/ex3.xana");
+
+
+    }
 
 }

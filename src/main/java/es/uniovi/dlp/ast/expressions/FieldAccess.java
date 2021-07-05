@@ -18,7 +18,7 @@ public class FieldAccess extends AbstractExpression implements Expression{
         return expression1;
     }
 
-    public String getProperty() {
+    public java.lang.String getProperty() {
         return property;
     }
 

@@ -166,6 +166,9 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         return null;
     }
 
+
+
+
     @Override
     public Type visit(Arithmetic arithmetic, Type param) {
         super.visit(arithmetic, param);
