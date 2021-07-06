@@ -58,6 +58,8 @@ statements returns [List<Statement> st = new ArrayList<Statement>()]
         | 'in' me = moreExpressions {$me.ast.forEach(e-> $st.add(new Read($me.start.getLine(), $me.start.getCharPositionInLine() +1, e)));}
         | 'puts' me = moreExpressions {$me.ast.forEach(e-> $st.add(new Write($me.start.getLine(), $me.start.getCharPositionInLine() +1, e)));}
         | left = expression '=' right=expression {$st.add(new Assignment($left.start.getLine(), $left.start.getCharPositionInLine() +1 , $left.ast ,  $right.ast));}
+        | left = expression '<<' right=expression {$st.add(new RegisterAssignment($left.start.getLine(), $left.start.getCharPositionInLine() +1 , $left.ast ,  $right.ast));}
+
         ;
 moreExpressions returns[List<Expression> ast = new ArrayList<Expression>()]
         : e1 = expression {$ast.add($e1.ast);} (',' e2 = expression{$ast.add($e2.ast);})*

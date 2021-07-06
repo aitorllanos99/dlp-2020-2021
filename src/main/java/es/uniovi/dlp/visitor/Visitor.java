@@ -30,11 +30,13 @@ public interface Visitor<ReturnType, ParamType> {
     ReturnType visit(Variable variable, ParamType param);
 
     ReturnType visit(Assignment assignment, ParamType param);
+    ReturnType visit(RegisterAssignment registerAssignment, ParamType param);
     ReturnType visit(IfElse ifElse, ParamType param);
     ReturnType visit(Read read, ParamType param);
     ReturnType visit(Return returnStatement, ParamType param);
     ReturnType visit(While whileStatement, ParamType param);
     ReturnType visit(Write write, ParamType param);
+
 
     ReturnType visit(ArrayType arrayType, ParamType param);
     ReturnType visit(CharType charType, ParamType param);

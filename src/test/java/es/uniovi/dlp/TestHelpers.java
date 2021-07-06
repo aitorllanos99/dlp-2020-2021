@@ -84,7 +84,7 @@ public class TestHelpers {
     public static void runCompiler(String file) {
         try {
             var compiler = new Compiler(file, new OutputStreamWriter(System.out));
-            compiler.setReportErrors(false);
+            compiler.setReportErrors(true);
             compiler.run();
         } catch (IOException e) {
             fail(e);

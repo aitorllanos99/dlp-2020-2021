@@ -1,0 +1,69 @@
+reg1 :: defstruct do
+    a :: char
+    b :: int
+    c :: double
+  end
+reg2 :: [5 :: defstruct do
+           a:: char
+           b :: int
+           c:: double end]
+reg3 :: defstruct do
+   b :: int
+end
+
+reg4 :: defstruct do
+    a :: [10 :: char]
+    b :: int
+    c :: defstruct do
+        a ::int
+    end
+end
+reg5 :: defstruct do
+   a :: int
+   b :: defstruct do
+        x :: double
+        y :: char
+        z :: char
+   end
+   c :: double
+end
+
+reg6 :: defstruct do
+   b :: defstruct do
+        y :: char
+   end
+end
+
+def init() :: void do
+reg2[0].a = 'a'
+reg2[0].b = 1
+reg2[0].c = 2.2
+
+reg3.b = 3
+reg6.b.y = 'b'
+
+
+reg1.a = 'b'
+reg1.b = 2
+reg1.c = 4.4
+end
+
+def main() do
+init()
+
+reg1 << reg2[0]
+reg2[0] << reg1
+puts reg1.a, ' ', reg1.b, ' ', reg1.c, ' ', '\n'
+
+reg1 << reg3
+reg2[1] << reg3
+puts reg1.b, ' ', reg2[1].b, '\n'
+
+reg4 << reg3
+puts reg4.b, '\n'
+
+reg5.b << reg6.b
+puts reg5.b.y, '\n'
+
+
+end

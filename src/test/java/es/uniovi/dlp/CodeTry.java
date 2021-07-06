@@ -46,5 +46,17 @@ public class CodeTry {
 
 
     }
+    @Test
+    void examen() {
+        runCompiler("examples/JuneExam/correcto.xana");
+
+
+    }
+
+    @Test
+    void examenInvalido() {
+        runCompiler("examples/JuneExam/incorrecto.xana");
+    }
+
 
 }

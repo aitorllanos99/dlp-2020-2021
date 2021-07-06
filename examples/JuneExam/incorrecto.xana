@@ -1,0 +1,63 @@
+reg1 :: defstruct do
+    a :: char
+    b :: int
+    c :: double
+  end
+reg2 :: [5 :: defstruct do
+           a:: char
+           b :: int
+           c:: double end]
+reg3 :: defstruct do
+   b :: int
+end
+
+reg4 :: defstruct do
+    a :: [10 :: char]
+    b :: int
+    c :: defstruct do
+        a ::int
+    end
+end
+reg5 :: defstruct do
+   a :: int
+   b :: defstruct do
+        x :: double
+        y :: char
+        z :: char
+   end
+   c :: double
+end
+
+reg6 :: defstruct do
+   b :: defstruct do
+        y :: char
+   end
+end
+
+def init() :: void do
+reg2[0].a = 'a'
+reg2[0].b = 1
+reg2[0].c = 2.2
+
+reg3.b = 3
+reg6.b.y = 'b'
+end
+
+def main() do
+reg7 :: defstruct do
+    c :: int
+    b :: double
+end
+
+init()
+
+reg2 << reg2 #No valido para arrays
+reg1.a << reg2[0].a #No valido para tipos simples
+reg3 << reg1 #No valido campos de reg1 no se puede guardar en reg3
+reg3 << reg4 #No valido campos de reg4 no se puede guardar en reg3
+reg5 << reg6 #Campo b no es tipo simple
+reg6 << reg5 #No valido campos de reg5 no se puede guardar en reg6
+reg7 << reg3 #No valido porqe reg3.b y reg7.b no tienen tipos equivalentes
+
+
+end

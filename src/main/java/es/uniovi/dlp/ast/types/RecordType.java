@@ -72,4 +72,35 @@ public class RecordType extends AbstractType implements Type {
         }
         return name + ")";
     }
+
+    @Override
+    public Type registerAssignment(Type type) {
+        if (type instanceof RecordType)
+            return type;
+        return null;
+    }
+
+    @Override
+    public boolean hasDifferentFields(Type type) {
+        if (type instanceof RecordType) {
+            RecordType r = (RecordType) type;
+            for (var f : r.getFields())
+                if (this.fields.stream().noneMatch(f2 -> f.getName().equals(f2.getName()) && f.getType().getClass() == f2.getType().getClass()))
+                    return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean areSimpleType(Type type) {
+        if (type instanceof RecordType) {
+            RecordType r = (RecordType) type;
+            for (var f : r.getFields())
+                if (!(f.getType() instanceof IntType ||
+                        f.getType() instanceof CharType ||
+                        f.getType() instanceof DoubleType))
+                    return false;
+        }
+            return true;
+    }
 }

@@ -20,6 +20,9 @@ public enum ErrorReason {
     INVALID_RETURN_TYPE("Invalid return type"),
     INVALID_ARGS("Invalid arguments"),
     INVALID_INVOCATION("The expression is not a function"),
+    EXAM_INVALID_REGISTER_ASSIGNMENT("The expression is not a register"),
+    EXAM_NO_SUCH_FIELD("The field of r doesnt exist in s"),
+    EXAM_NO_SIMPLE_TYPE("The register r has a field that are not got a simple type field"),
     ;
 
     private final String message;

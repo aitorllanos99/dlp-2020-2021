@@ -9,9 +9,23 @@ import es.uniovi.dlp.ast.expressions.Indexing;
 import es.uniovi.dlp.ast.expressions.Invocation;
 import es.uniovi.dlp.ast.statements.*;
 import es.uniovi.dlp.ast.types.FuncType;
+import es.uniovi.dlp.ast.types.RecordField;
+import es.uniovi.dlp.ast.types.RecordType;
 import es.uniovi.dlp.ast.types.VoidType;
 import es.uniovi.dlp.visitor.AbstractVisitor;
 
+/* -------Comentario Examen --------
+Se ha añadido una plantilla de codigo en el ejecutar visitor, para la sentencia añadida previamente RegisterAssignment.
+Esta hace las siguientes funciones:
+  - Inlcuye la linea en la que se encuentra
+  - Añade un comentario diciendo que se va a hacer un registerAssignment (para verlo en el mp mas facilmente, se puede eliminar)
+  - Para cada campo que debe igualar, es decir para cada campo que tiene que poner el valor de otra estructura:
+     - Hace un acceso a ese campo de donde obtiene la direccion a la cual acceder, estructura s
+     - Hace un acceso al campo de la estructura r para obtener el valor a almacenar
+     - Almacena el valor de r en s
+
+
+ */
 public class ExecuteCGVisitor extends AbstractVisitor {
     private AddressCGVisitor addressVisitor;
     private ValueCGVisitor valueVisitor;
@@ -137,6 +151,8 @@ public class ExecuteCGVisitor extends AbstractVisitor {
         return null;
     }
 
+
+
     @Override
     public Object visit(While whileStatement, Object param) {
         generator.line(whileStatement.getLine());
@@ -162,11 +178,35 @@ public class ExecuteCGVisitor extends AbstractVisitor {
         generator.line(returnStatement.getLine());
         generator.comment("' Return");
 
+
         returnStatement.getExpression().accept(valueVisitor, param);
 
         FuncType f = (FuncType) param; //Hay que ver si hay que hacer conversion implicita
         generator.promoteTo(f.getReturnType(), returnStatement.getExpression().getType());
 
+        return null;
+    }
+
+    @Override
+    public Object visit(RegisterAssignment assignment, Object param) {
+        generator.line(assignment.getLine());
+        generator.comment("' Register Assignment");
+
+        RecordType r = (RecordType) assignment.getRightExpression().getType();
+
+        for(var fieldToSeek: r.getFields()){
+            //Direction
+            FieldAccess left = new FieldAccess(assignment.getLine(), assignment.getColumn(), assignment.getLeftExpression(), fieldToSeek.getName());
+            left.setType(fieldToSeek.getType());
+            left.accept(addressVisitor, param);
+
+            //Value
+            FieldAccess right = new FieldAccess(assignment.getLine(), assignment.getColumn(), assignment.getRightExpression(), fieldToSeek.getName());
+            right.setType(fieldToSeek.getType());
+            right.accept(valueVisitor, param);
+
+            generator.store(left.getType().sufixCode());
+        }
         return null;
     }
 }

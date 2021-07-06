@@ -28,4 +28,8 @@ public interface Type {
     String sufixCode();
     String getName();
     int propertyOffset(String property);
+    Type registerAssignment(Type type);
+    boolean hasDifferentFields(Type type);
+    boolean areSimpleType(Type type);
+
 }

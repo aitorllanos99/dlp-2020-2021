@@ -94,4 +94,19 @@ public abstract class AbstractType extends AbstractASTNode implements Type {
     public int propertyOffset(String property) {
         return -1024;
     }
+
+    @Override
+    public Type registerAssignment(Type type) {
+        return null;
+    }
+
+    @Override
+    public boolean hasDifferentFields(Type type) {
+        return false;
+    }
+
+    @Override
+    public boolean areSimpleType(Type type) {
+        return false;
+    }
 }

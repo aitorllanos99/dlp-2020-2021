@@ -134,6 +134,15 @@ public abstract class AbstractVisitor<ReturnType, ParamType> implements Visitor<
     }
 
     @Override
+    public ReturnType visit(RegisterAssignment assignment, ParamType param) {
+        ReturnType type = assignment.getLeftExpression().accept(this, param);
+        ReturnType typeRight = assignment.getRightExpression().accept(this, param);
+        if (type instanceof ErrorType) return type;
+        if (typeRight instanceof ErrorType) return typeRight;
+        return null;
+    }
+
+    @Override
     public ReturnType visit(IfElse ifElse, ParamType param) {
         ifElse.getIfStatements().forEach(i -> i.accept(this, param));
         ifElse.getElseStatements().forEach(i -> i.accept(this, param));
